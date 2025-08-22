@@ -1,0 +1,43 @@
+<!-- Influencer Finder Section -->
+    <section class="container mx-auto px-6 py-12 lg:py-24">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-12">
+            Find Your Perfect Influencer
+        </h2>
+
+        <!-- Search and Filter Bar -->
+        <%= form_with url: business_owners_path, method: :get, class: "flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-12" do %>
+
+        <!-- Search box -->
+        <div class="relative w-full max-w-md">
+            <%= text_field_tag :q, params[:q], placeholder: "Search by name or keyword...", class: "w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500" %>
+            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" ...></svg>
+        </div>
+
+        <!-- Influencer type -->
+        <div class="relative w-full sm:w-auto">
+            <%= select_tag :type, options_for_select(["Influencer Type", "Fashion", "Tech", "Food", "Gaming", "Travel", "Lifestyle"], params[:type]), class: "block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-full leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">...</div>
+        </div>
+
+        <!-- City -->
+        <div class="relative w-full sm:w-auto">
+            <%= select_tag :city, options_for_select(["Select City", "Ahmedabad", "Rajkot", "Jamnagar"], params[:city]), class: "block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-full leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">...</div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex space-x-2 w-full sm:w-auto">
+            <%= submit_tag "Search", class: "bg-indigo-600 text-white font-semibold py-3 px-6 rounded-full shadow hover:bg-indigo-700 transition" %>
+            <%= link_to "Reset", business_owners_path, class: "bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-full shadow hover:bg-gray-400 transition" %>
+        </div>
+
+        <% end %>
+
+
+
+        <!-- Placeholder Influencer Cards -->
+        <div id="results" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <%= render partial: "influencer_card", collection: @influencers, as: :influencer %>
+        </div>
+
+    </section>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
+  root "landing_pages#index"
   resource :session
   resources :passwords, param: :token
- root "landing_pages#index"
+  resources :business_owners
 end

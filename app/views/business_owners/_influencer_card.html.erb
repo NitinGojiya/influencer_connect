@@ -1,0 +1,46 @@
+<div class="bg-gray-100 rounded-3xl p-6 flex flex-col items-center text-center shadow-lg w-full sm:w-80 md:w-3xs lg:w-[350px] mx-auto mb-6">
+  <!-- Profile Image -->
+  <img src="<%= influencer.photo_url %>" alt="<%= influencer.name %>"
+       class="w-32 h-32 rounded-full mb-4 border-4 border-indigo-500">
+
+  <!-- Name & Username -->
+  <h3 class="text-xl font-bold text-gray-800"><%= influencer.name %></h3>
+  <p class="text-gray-500 mb-2">@<%= influencer.username || influencer.name.parameterize(separator: "_") %></p>
+
+  <!-- Description -->
+  <p class="mt-2 text-sm text-gray-600"><%= influencer.bio %></p>
+
+  <!-- Social Media Links -->
+  <div class="flex flex-col space-y-2 mt-3 text-gray-700 w-full">
+    <div class="flex items-center justify-center space-x-2">
+      <i class="fab fa-instagram text-pink-500 fa-lg"></i>
+      <a href="<%= influencer.ig_link %>" target="_blank" class="font-medium"><%= influencer.instagram_followers || "N/A" %> Followers</a>
+    </div>
+    <div class="flex items-center justify-center space-x-2">
+      <i class="fab fa-youtube text-red-600 fa-lg"></i>
+      <a href="<%= influencer.youtube_link %>" target="_blank" class="font-medium"><%= influencer.youtube_subscribers || "N/A" %> Subscribers</a>
+    </div>
+    <div class="flex items-center justify-center space-x-2">
+      <i class="fab fa-twitter text-blue-500 fa-lg"></i>
+      <a href="<%= influencer.twitter_link %>" target="_blank" class="font-medium"><%= influencer.twitter_followers || "N/A" %> Followers</a>
+    </div>
+  </div>
+
+  <!-- Details -->
+  <div class="mt-4 w-full text-left space-y-2 text-gray-700 text-sm">
+    <p><span class="font-semibold">Content Quality:</span> <%= influencer.content_quality %></p>
+    <p><span class="font-semibold">Language:</span> <%= influencer.language %></p>
+    <p><span class="font-semibold">Category:</span> <%= influencer.category %></p>
+    <p><span class="font-semibold">Mobile:</span> <%= influencer.mobile_number %></p>
+  </div>
+
+  <!-- Buttons -->
+  <div class="mt-4 flex flex-col gap-2 w-full">
+    <button class="bg-indigo-500 text-white px-6 py-2 rounded-full hover:bg-indigo-600 transition-colors duration-300 w-full">
+      Get Contact
+    </button>
+    <button class="bg-gray-200 text-gray-800 px-6 py-2 rounded-full hover:bg-gray-300 transition-colors duration-300 w-full">
+      FAQ
+    </button>
+  </div>
+</div>
