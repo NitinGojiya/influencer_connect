@@ -1,10 +1,21 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f8f8;
+            color: #1a202c;
+            overflow-x: hidden;
+        }
+
+        .hero-bg {
+             /* Create a similar background gradient and pattern effect */
+           /* background-image: linear-gradient(to top right, #fefefe, #fcfcfc); */
+            position: relative;
+        }
+
+        .rotated-box {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: #ff914d;
+            border-radius: 12px;
+            transform: rotate(-10deg);
+        }
