@@ -5,7 +5,10 @@
         </h2>
 
         <!-- Search and Filter Bar -->
-        <%= form_with url: business_owners_path, method: :get, class: "flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-12" do %>
+        <%= form_with url: business_owners_path,
+              method: :get,
+              class: "flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-12",
+             data: { turbo_frame: "_top", turbo_action: "replace" } do %>
 
         <!-- Search box -->
         <div class="relative w-full max-w-md">
@@ -27,14 +30,11 @@
 
         <!-- Buttons -->
         <div class="flex space-x-2 w-full sm:w-auto">
-            <%= submit_tag "Search", class: "bg-indigo-600 text-white font-semibold py-3 px-6 rounded-full shadow hover:bg-indigo-700 transition" %>
-            <%= link_to "Reset", business_owners_path, class: "bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-full shadow hover:bg-gray-400 transition" %>
+            <%= submit_tag "Search", class: "bg-indigo-600 text-white font-semibold py-3 px-6 rounded-full shadow hover:bg-indigo-700 transition",data: { turbo_stream: true }  %>
+            <%= link_to "Reset", business_owners_path, class: "bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-full shadow hover:bg-gray-400 transition",data: { turbo_stream: true } %>
         </div>
 
         <% end %>
-
-
-
         <!-- Placeholder Influencer Cards -->
         <div id="results" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         <%= render partial: "influencer_card", collection: @influencers, as: :influencer %>
