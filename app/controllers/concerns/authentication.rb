@@ -13,7 +13,7 @@ module Authentication
   end
 
   private
-   def current_user
+    def current_user
       Current.session&.user
     end
 

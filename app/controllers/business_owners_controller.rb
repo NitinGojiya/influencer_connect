@@ -1,6 +1,6 @@
 class BusinessOwnersController < ApplicationController
   require 'ostruct'
-  before_action :require_business_owner,only: [:index]
+  before_action :require_business_owner, only: [ :index ]
   def index
     @user = Current.session.user
 

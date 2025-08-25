@@ -1,0 +1,31 @@
+ .line-graph {
+     height: 150px;
+     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 700 150' preserveAspectRatio='none'%3E%3Cpath d='M0 100 Q 100 20, 200 80 T 400 60 Q 500 40, 600 90 T 700 100' fill='none' stroke='%233B82F6' stroke-width='3' /%3E%3Cpath d='M0 120 Q 100 80, 200 140 T 400 110 Q 500 90, 600 130 T 700 120' fill='none' stroke='%23D1D5DB' stroke-width='3' stroke-dasharray='5,5' /%3E%3C/svg%3E");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+ }
+
+ /* Custom CSS to create the fake donut chart */
+ .donut-chart {
+     width: 150px;
+     height: 150px;
+     background: conic-gradient(#3B82F6 0% 50%,
+             #EF4444 50% 65%,
+             #F59E0B 65% 85%,
+             #10B981 85% 95%,
+             #9CA3AF 95% 100%);
+     border-radius: 50%;
+     position: relative;
+ }
+
+ .donut-chart::after {
+     content: '';
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     width: 70px;
+     height: 70px;
+     background-color: white;
+     border-radius: 50%;
+ }

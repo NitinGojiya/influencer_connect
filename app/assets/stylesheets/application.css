@@ -20,3 +20,14 @@
             border-radius: 12px;
             transform: rotate(-10deg);
         }
+
+               @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .sidebar {
+            background-image: linear-gradient(135deg, #a7b7ff, #4e88ff);
+            /* This is a placeholder for the gradient from the image */
+            box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+        }

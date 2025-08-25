@@ -29,7 +29,7 @@
             <%= button_to "Find Influencers", business_owners_path,method: :get, class:"bg-blue-600 text-white px-3 py-2 rounded-full hover:bg-blue-700 transition-colors duration-300" if authenticated? %>
         <%end%>
         <% if @user.has_role?(:influencer) %>
-            <%= button_to "Find brand advertising", business_owners_path,method: :get, class:"bg-blue-600 text-white px-3 py-2 rounded-full hover:bg-blue-700 transition-colors duration-300" if authenticated? %>
+            <%= button_to "Dashboard", dashboard_path,method: :get, class:"bg-blue-600 text-white px-3 py-2 rounded-full hover:bg-blue-700 transition-colors duration-300" if authenticated? %>
         <%end%>
     </div>
     <%end%>
