@@ -3,7 +3,7 @@ module Authentication
 
   included do
     before_action :require_authentication
-    helper_method :authenticated?
+    helper_method :authenticated?, :current_user
   end
 
   class_methods do
@@ -13,6 +13,22 @@ module Authentication
   end
 
   private
+   def current_user
+      Current.session&.user
+    end
+
+    def require_business_owner
+      unless current_user&.has_role?(:business_owner)
+        redirect_to root_path, alert: "Access denied"
+      end
+    end
+
+    def require_influencer
+      unless current_user&.has_role?(:influencer)
+        redirect_to root_path, alert: "Access denied"
+      end
+    end
+
     def authenticated?
       resume_session
     end
