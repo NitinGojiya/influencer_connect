@@ -6,4 +6,8 @@ Rails.application.routes.draw do
   # resources :influencers
   get "dashboard", to: "influencers#index", as: :dashboard
   get "profile", to: "influencers#profile", as: :profile
+
+  patch "profile_create", to: "profiles#create", as: :profile_create
+  delete "/user/delete", to: "users#user_delete", as: :user_delete
+
 end

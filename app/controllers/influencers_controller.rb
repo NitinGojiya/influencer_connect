@@ -7,5 +7,6 @@ class InfluencersController < ApplicationController
 
   def profile
     @user = Current.session.user
+    @profile = @user.profile || @user.build_profile
   end
 end
