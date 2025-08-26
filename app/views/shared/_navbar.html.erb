@@ -24,9 +24,9 @@
     </div>
     <%else%>
     <div class="hidden lg:flex items-center space-x-4 font-medium">
-        <%= button_to "Log out", session_path, method: :delete, class:"bg-blue-600 text-white px-3 py-2 rounded-full hover:bg-blue-700 transition-colors duration-300" if authenticated? %>
+        <%= button_to "Log out", session_path, method: :delete, class:"cursor-pointer  bg-blue-600 text-white px-3 py-2 rounded-full hover:bg-blue-700 transition-colors duration-300" if authenticated? %>
         <% if @user.has_role?(:business_owner) %>
-            <%= button_to "Find Influencers", business_owners_path,method: :get, class:"bg-blue-600 text-white px-3 py-2 rounded-full hover:bg-blue-700 transition-colors duration-300" if authenticated? %>
+            <%= button_to "Find Influencers", business_owners_path,method: :get, class:"cursor-pointer bg-blue-600 text-white px-3 py-2 rounded-full hover:bg-blue-700 transition-colors duration-300" if authenticated? %>
         <%end%>
         <% if @user.has_role?(:influencer) %>
             <%= button_to "Dashboard", dashboard_path,method: :get, class:"bg-blue-600 text-white px-3 py-2 rounded-full hover:bg-blue-700 transition-colors duration-300" if authenticated? %>
