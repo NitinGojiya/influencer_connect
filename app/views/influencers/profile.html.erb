@@ -50,6 +50,15 @@
                         class: "mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 py-3 px-4 placeholder-gray-400" %>
                 </div>
 
+                <!-- bio -->
+                <div>
+                    <%= f.label :bio, "Bio", class: "block text-sm font-medium text-gray-700" %>
+                    <%= f.text_area :bio,
+                        placeholder: "Your bio",
+                        value: @profile.bio,
+                        class: "mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 py-3 px-4 placeholder-gray-400" %>
+                </div>
+
                 <!-- Gender -->
                 <div>
                     <%= f.label :gender, "Gender", class: "block text-sm font-medium text-gray-700" %>
@@ -101,6 +110,15 @@
                     <%= f.text_field :content_type,
                         placeholder: "Your Content Type",
                         value: @profile.content_type,
+                        class: "mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 py-3 px-4 placeholder-gray-400" %>
+                </div>
+
+                <!-- Mobile Number -->
+                <div>
+                    <%= f.label :mobile, "Mobile Number", class: "block text-sm font-medium text-gray-700" %>
+                    <%= f.text_field :mobile,
+                        placeholder: "Your Mobile Type",
+                        value: @profile.mobile,
                         class: "mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 py-3 px-4 placeholder-gray-400" %>
                 </div>
 
