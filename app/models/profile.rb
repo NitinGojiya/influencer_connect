@@ -7,6 +7,7 @@ class Profile < ApplicationRecord
 
   before_validation :assign_city
 
+
   private
 
   def assign_city
@@ -16,4 +17,5 @@ class Profile < ApplicationRecord
     found_city = City.find_or_create_by!(name: city_name.strip.titleize)
     self.city = found_city
   end
+
 end

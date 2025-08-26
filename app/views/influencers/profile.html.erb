@@ -22,7 +22,7 @@
             <hr class="border-t border-gray-200 my-8">
 
             <!-- Form Section -->
-            <%= form_with model: @profile, url: profile_create_path,method: :patch, local: true, class: "grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6" do |f| %>
+             <%= form_with model: @profile,local: true, class: "grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6" do |f| %>
                 <!-- Profile Picture -->
                 <div>
                 <%= f.label :profile_pic, "Profile Picture", class: "block text-sm font-medium text-gray-700" %>
