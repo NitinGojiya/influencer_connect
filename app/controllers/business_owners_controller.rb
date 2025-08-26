@@ -22,7 +22,10 @@ class BusinessOwnersController < ApplicationController
             name: profile&.full_name,
             bio: profile&.bio,
             ig_link: social&.ig_link,
-            youtube_link: social&.youtube_link,
+            instagram_followers: social&.ig_followers ,
+            youtube_subscribers: social&.youtube_subscriber,
+            twitter_followers:social&.youtube_subscriber ,
+            youtube_link: social&.twitter_followers,
             twitter_link: social&.twitter_link,
             content_quality: "9", # You can calculate this later if needed
             language: profile&.language,
