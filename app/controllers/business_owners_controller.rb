@@ -1,120 +1,42 @@
 class BusinessOwnersController < ApplicationController
-  require 'ostruct'
-  before_action :require_business_owner, only: [ :index ]
+  before_action :require_business_owner, only: [:index]
+
   def index
     @user = Current.session.user
 
-    influencers_data =
-    [
-      {
-        "photo_url": "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=687&auto=format&fit=crop",
-        "name": "Alice Johnson",
-        "bio": "Travel enthusiast and food blogger.",
-        "ig_link": "https://instagram.com/alicejohnson",
-        "youtube_link": "https://youtube.com/alicevlogs",
-        "twitter_link": "https://twitter.com/alicejohnson",
-        "content_quality": 9,
-        "language": "English",
-        "category": "Travel",
-        "mobile": true,
-        "mobile_number": "+12345678901",
-        "city": "Ahmedabad"
-      },
-      {
-        "photo_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=687&auto=format&fit=crop",
-        "name": "Brian Smith",
-        "bio": "Tech reviewer and gadget guru.",
-        "ig_link": "https://instagram.com/briansmith",
-        "youtube_link": "https://youtube.com/techwithbrian",
-        "twitter_link": "https://twitter.com/briansmith",
-        "content_quality": 8,
-        "language": "English",
-        "category": "Tech",
-        "mobile": false,
-        "mobile_number": "+19876543210",
-        "city": "Rajkot"
-      },
-      {
-        "photo_url": "https://plus.unsplash.com/premium_photo-1669882305273-674eff6567af?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "name": "Clara Lee",
-        "bio": "Fitness coach and lifestyle influencer.",
-        "ig_link": "https://instagram.com/claralee",
-        "youtube_link": "https://youtube.com/clarafit",
-        "twitter_link": "https://twitter.com/claralee",
-        "content_quality": 9,
-        "language": "English",
-        "category": "Fitness",
-        "mobile": true,
-        "mobile_number": "+11234567890",
-        "city": "Jamnagar"
-      },
-      {
-        "photo_url": "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=687&auto=format&fit=crop",
-        "name": "Sophia Brown",
-        "bio": "Fashion model and style inspiration.",
-        "ig_link": "https://instagram.com/sophiabrown",
-        "youtube_link": "https://youtube.com/sophiabstyle",
-        "twitter_link": "https://twitter.com/sophiabrown",
-        "content_quality": 9,
-        "language": "English",
-        "category": "Fashion",
-        "mobile": true,
-        "mobile_number": "+19873456789",
-        "city": "Ahmedabad"
-      },
-      {
-        "photo_url": "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?q=80&w=687&auto=format&fit=crop",
-        "name": "Raj Patel",
-        "bio": "Food vlogger exploring street food culture.",
-        "ig_link": "https://instagram.com/rajpatel",
-        "youtube_link": "https://youtube.com/rajfoodie",
-        "twitter_link": "https://twitter.com/rajpatel",
-        "content_quality": 8,
-        "language": "Gujarati",
-        "category": "Food",
-        "mobile": true,
-        "mobile_number": "+919876543210",
-        "city": "Rajkot"
-      },
-      {
-        "photo_url": "https://images.unsplash.com/photo-1525182008055-f88b95ff7980?q=80&w=687&auto=format&fit=crop",
-        "name": "Emily Davis",
-        "bio": "Lifestyle influencer sharing daily routines and positivity.",
-        "ig_link": "https://instagram.com/emilydavis",
-        "youtube_link": "https://youtube.com/emilylifestyle",
-        "twitter_link": "https://twitter.com/emilydavis",
-        "content_quality": 9,
-        "language": "English",
-        "category": "Lifestyle",
-        "mobile": false,
-        "mobile_number": "+14443332222",
-        "city": "Jamnagar"
-      },
-      {
-        "photo_url": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "name": "Kevin Wright",
-        "bio": "Gamer and streamer bringing esports content.",
-        "ig_link": "https://instagram.com/kevinwright",
-        "youtube_link": "https://youtube.com/kevplays",
-        "twitter_link": "https://twitter.com/kevinwright",
-        "content_quality": 10,
-        "language": "English",
-        "category": "Gaming",
-        "mobile": true,
-        "mobile_number": "+17778889999",
-        "city": "Ahmedabad"
-      }
-    ]
+    # --- 🔹 Base Query: Influencers with Profiles and Cities ---
+    influencers = User.with_role(:influencer).includes(profile: :city)
 
 
-    # Convert to OpenStructs
-    @influencers = influencers_data.map { |hash| OpenStruct.new(hash) }
 
-    # --- 🔍 Apply Filters ---
+    # --- 🔹 Build OpenStructs for View ---
+    # Load influencers into OpenStructs first
+    @influencers = User.with_role(:influencer).includes(profile: :city).map do |inf|
+      profile = inf.profile
+      OpenStruct.new(
+        photo_url: profile&.profile_pic&.attached? ? url_for(profile.profile_pic) : nil,
+        name: profile&.full_name,
+        bio: "bio here",
+        ig_link: "ig.com",
+        youtube_link: "youtube.com",
+        twitter_link: "twitter.com",
+        content_quality: "9",
+        language: profile&.language,
+        category: profile&.content_type,
+        mobile: true,
+        mobile_number: "9313295400",
+        city: profile&.city&.id.to_s  # use city ID as string
+      )
+    end
+
+    # Apply filters
     if params[:q].present?
       query = params[:q].downcase
       @influencers = @influencers.select do |inf|
-        inf.name.downcase.include?(query) || inf.bio.downcase.include?(query) || inf.city.downcase.include?(query)
+        inf.name.to_s.downcase.include?(query) ||
+        inf.bio.to_s.downcase.include?(query) ||
+        inf.city.to_s.downcase.include?(query) ||
+        inf.language.to_s.downcase.include?(query)
       end
     end
 
@@ -122,9 +44,10 @@ class BusinessOwnersController < ApplicationController
       @influencers = @influencers.select { |inf| inf.category == params[:type] }
     end
 
-    if params[:city].present? && params[:city] != "Select City"
-      @influencers = @influencers.select { |inf| inf.city == params[:city] }
+    if params[:city_id].present?
+      @influencers = @influencers.select { |inf| inf.city == params[:city_id] }
     end
+
 
     respond_to do |format|
       format.html

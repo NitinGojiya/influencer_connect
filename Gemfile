@@ -69,3 +69,5 @@ gem "tailwindcss-rails", "~> 4.3"
 gem 'dotenv-rails'
 gem "httparty"   # for API calls
 gem 'rolify'
+gem "faker", "~> 3.3"
+

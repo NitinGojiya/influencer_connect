@@ -24,7 +24,7 @@
 
         <!-- City -->
         <div class="relative w-full sm:w-auto">
-            <%= select_tag :city, options_for_select(["Select City", "Ahmedabad", "Rajkot", "Jamnagar"], params[:city]), class: "block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-full leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+            <%=render 'shared/city_dropdown'%>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">...</div>
         </div>
 
