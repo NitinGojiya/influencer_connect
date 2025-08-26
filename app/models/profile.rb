@@ -2,7 +2,7 @@ class Profile < ApplicationRecord
   belongs_to :user
   belongs_to :city, optional: true  # optional for initial creation
   has_one_attached :profile_pic
-
+  has_one :social_platform
   attr_accessor :city_name
 
   before_validation :assign_city

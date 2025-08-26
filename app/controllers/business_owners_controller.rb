@@ -11,23 +11,28 @@ class BusinessOwnersController < ApplicationController
 
     # --- 🔹 Build OpenStructs for View ---
     # Load influencers into OpenStructs first
-    @influencers = User.with_role(:influencer).includes(profile: :city).map do |inf|
-      profile = inf.profile
-      OpenStruct.new(
-        photo_url: profile&.profile_pic&.attached? ? url_for(profile.profile_pic) : nil,
-        name: profile&.full_name,
-        bio: "bio here",
-        ig_link: "ig.com",
-        youtube_link: "youtube.com",
-        twitter_link: "twitter.com",
-        content_quality: "9",
-        language: profile&.language,
-        category: profile&.content_type,
-        mobile: true,
-        mobile_number: "9313295400",
-        city: profile&.city&.id.to_s  # use city ID as string
-      )
-    end
+    @influencers = User.with_role(:influencer)
+                   .includes(profile: [:city, :social_platform])
+                   .map do |inf|
+          profile = inf.profile
+          social  = profile&.social_platform
+
+          OpenStruct.new(
+            photo_url: profile&.profile_pic&.attached? ? url_for(profile.profile_pic) : nil,
+            name: profile&.full_name,
+            bio: profile&.bio,
+            ig_link: social&.ig_link,
+            youtube_link: social&.youtube_link,
+            twitter_link: social&.twitter_link,
+            content_quality: "9", # You can calculate this later if needed
+            language: profile&.language,
+            category: profile&.content_type,
+            mobile: profile&.mobile.present?,   # true/false depending on if number exists
+            mobile_number: profile&.mobile,
+            city: profile&.city&.id&.to_s
+          )
+        end
+
 
     # Apply filters
     if params[:q].present?

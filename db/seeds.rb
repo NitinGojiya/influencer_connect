@@ -27,10 +27,12 @@ business_owner.add_role :business_owner
     nickname: Faker::Internet.username(specifier: nil, separators: %w[_]),
     gender: %w[male female other].sample,
     country: Faker::Address.country,
-    dist: city.name,               # optional, can display city name
+    dist: city.name,
     language: Faker::Nation.language,
     content_type: %w[Fashion Tech Food Gaming Travel Lifestyle].sample,
-    city: city                     # associate profile with city
+    city: city,
+    bio: Faker::Lorem.paragraph(sentence_count: 2),
+    mobile: Faker::PhoneNumber.cell_phone_in_e164
   )
 
   # Attach profile picture if not already attached
@@ -44,4 +46,19 @@ business_owner.add_role :business_owner
   end
 
   profile.save!
+
+  # Create Social Platform for this profile if not already present
+  unless profile.social_platform.present?
+    profile.create_social_platform!(
+      ig_id: Faker::Internet.username(specifier: 5..10),
+      ig_link: "https://instagram.com/#{Faker::Internet.username}",
+      ig_followers: rand(1_000..100_000),
+      youtube_id: Faker::Alphanumeric.alphanumeric(number: 8),
+      youtube_link: "https://youtube.com/channel/#{Faker::Alphanumeric.alphanumeric(number: 12)}",
+      youtube_subscriber: rand(500..50_000),
+      twitter_id: Faker::Internet.username(specifier: 5..10),
+      twitter_link: "https://twitter.com/#{Faker::Internet.username}",
+      twitter_followers: rand(1_000..50_000)
+    )
+  end
 end

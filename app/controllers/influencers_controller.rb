@@ -1,5 +1,5 @@
 class InfluencersController < ApplicationController
-  before_action :require_influencer, only: [ :index ]
+  before_action :require_influencer, only: [ :index, :profile ]
   layout "influencer"
   def index
     @user = Current.session.user

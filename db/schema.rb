@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_26_072949) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_26_094834) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -57,6 +57,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_072949) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "city_id"
+    t.string "bio"
+    t.string "mobile"
     t.index ["city_id"], name: "index_profiles_on_city_id"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
@@ -81,6 +83,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_072949) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "social_platforms", force: :cascade do |t|
+    t.string "ig_id"
+    t.string "ig_link"
+    t.string "youtube_id"
+    t.string "youtube_link"
+    t.string "ig_followers"
+    t.string "youtube_subscriber"
+    t.string "twitter_id"
+    t.string "twitter_followers"
+    t.string "twitter_link"
+    t.integer "profile_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_social_platforms_on_profile_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email_address", null: false
     t.string "password_digest", null: false
@@ -102,4 +120,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_072949) do
   add_foreign_key "profiles", "cities"
   add_foreign_key "profiles", "users"
   add_foreign_key "sessions", "users"
+  add_foreign_key "social_platforms", "profiles"
 end
