@@ -16,7 +16,13 @@
                     <i class="fa-brands fa-instagram text-xl"></i>
                 </div>
                 <div class="flex items-end">
-                    <span class="text-3xl font-bold text-gray-800 mr-2">6,154</span>
+                    <span class="text-3xl font-bold text-gray-800 mr-2">
+                        <% if @profile.social_platform&.ig_followers.present? %>
+                            <%= human_count(@profile.social_platform.ig_followers) %>
+                        <% else %>
+                            N/A
+                        <% end %>
+                    </span>
                     <span class="text-xs font-semibold text-green-500 bg-green-100 px-2 py-1 rounded-full">+11.02%</span>
                 </div>
             </div>
@@ -28,7 +34,13 @@
                     <i class="fa-brands fa-youtube text-purple-500 text-xl hover:text-red-500"></i>
                 </div>
                 <div class="flex items-end">
-                    <span class="text-3xl font-bold text-gray-800 mr-2">3,526</span>
+                    <span class="text-3xl font-bold text-gray-800 mr-2">
+                       <% if @profile.social_platform&.youtube_subscriber.present? %>
+                            <%= human_count(@profile.social_platform.youtube_subscriber) %>
+                        <% else %>
+                            N/A
+                        <% end %>
+                    </span>
                     <span class="text-xs font-semibold text-red-500 bg-red-100 px-2 py-1 rounded-full">-0.56%</span>
                 </div>
             </div>
@@ -40,7 +52,9 @@
                     <i class="fa-solid fa-code-branch text-yellow-500 text-xl"></i>
                 </div>
                 <div class="flex items-end">
-                    <span class="text-3xl font-bold text-gray-800 mr-2">615</span>
+                    <span class="text-3xl font-bold text-gray-800 mr-2">
+                        <%=@business_new.count%>
+                    </span>
                     <span class="text-xs font-semibold text-green-500 bg-green-100 px-2 py-1 rounded-full">+15.02%</span>
                 </div>
             </div>
@@ -52,7 +66,9 @@
                     <i class="fas fa-chart-line text-green-500 text-xl"></i>
                 </div>
                 <div class="flex items-end">
-                    <span class="text-3xl font-bold text-gray-800 mr-2">2,607</span>
+                    <span class="text-3xl font-bold text-gray-800 mr-2">
+                        <%= @campaigns.count %>
+                    </span>
                     <span class="text-xs font-semibold text-green-500 bg-green-100 px-2 py-1 rounded-full">+6.07%</span>
                 </div>
             </div>
