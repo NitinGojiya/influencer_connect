@@ -50,7 +50,7 @@ class YoutubeChannelFetcherService
       about_bio    = item.dig("brandingSettings", "channel", "description").to_s
       profile_img  = item.dig("snippet", "thumbnails", "default", "url")
 
-      combined_text = [description, about_bio].join(" ")
+      combined_text = [ description, about_bio ].join(" ")
 
       links_array = item.dig("brandingSettings", "channel", "links") || []
 

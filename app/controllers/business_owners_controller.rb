@@ -1,5 +1,5 @@
 class BusinessOwnersController < ApplicationController
-  before_action :require_business_owner, only: [:index]
+  before_action :require_business_owner, only: [ :index ]
   require "ostruct"
   def index
     @user = Current.session.user
@@ -12,7 +12,7 @@ class BusinessOwnersController < ApplicationController
     # --- 🔹 Build OpenStructs for View ---
     # Load influencers into OpenStructs first
     @influencers = User.with_role(:influencer)
-                   .includes(profile: [:city, :social_platform])
+                   .includes(profile: [ :city, :social_platform ])
                    .map do |inf|
           profile = inf.profile
           social  = profile&.social_platform

@@ -13,5 +13,4 @@ class User < ApplicationRecord
   # def create_profile_record
   #   create_profile unless profile.present?
   # end
-
 end

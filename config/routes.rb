@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   get "dashboard", to: "influencers#index", as: :dashboard
   get "influencer/profile", to: "influencers#profile", as: :influencer_profile
 
-  resources :profiles, only: [:create, :update, :show]
+  resources :profiles, only: [ :create, :update, :show ]
   delete "/user/delete", to: "users#user_delete", as: :user_delete
 
+
+  get "/meta_connects/connect", to: "meta_connects#connect"       # Step 1: redirect to Meta OAuth
+  get "/meta_connects/callback", to: "meta_connects#callback"     # Step 2: handle callback
+  get "/meta_connects/profile", to: "meta_connects#profile"       # Step 3: fetch IG profile
 end
