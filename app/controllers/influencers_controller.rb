@@ -3,6 +3,7 @@ class InfluencersController < ApplicationController
   layout "influencer"
   def index
     @user = Current.session.user
+    @campaigns = Campaign.all
   end
 
   def profile

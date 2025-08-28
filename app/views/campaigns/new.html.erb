@@ -1,0 +1,69 @@
+  <header class="sticky top-0 z-10 backdrop-blur bg-white/70 dark:bg-gray-900/70 border-b border-gray-200 dark:border-gray-800">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <h1 class="text-xl sm:text-2xl font-semibold">Influencer Campaign – Content Requirements</h1>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 py-6">
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- Form Card -->
+      <section class="md:col-span-2 p-5 sm:p-7">
+        <%= form_with(model: @campaign, local: true, class: "space-y-6") do |f| %>
+
+
+            <!-- Content Type -->
+            <div>
+                <%= f.label :content_type, "Content Type", class: "block text-sm font-medium mb-1" %>
+                <%= f.select :content_type,
+                    ["Instagram Reel", "Instagram Story", "Instagram Carousel", "TikTok Video", "YouTube: Dedicated Review", "YouTube: Integrated Mention", "Blog Post", "Podcast Ad Read", "Other"],
+                    { prompt: "Select a content type" },
+                    class: "w-full rounded-2xl border-gray-300 dark:border-gray-700 px-4 py-2.5" %>
+            </div>
+
+            <!-- Deliverable Details -->
+            <div>
+                <%= f.label :deliverable_details, "Deliverable Details", class: "block text-sm font-medium mb-1" %>
+                <%= f.text_field :deliverable_details, class: "w-full rounded-2xl border-gray-300 dark:border-gray-700 px-4 py-2.5", placeholder: "e.g., 1 Reel + 2 Stories" %>
+            </div>
+
+            <!-- Key Messages -->
+            <div>
+                <%= f.label :key_messages, "Key Messages", class: "block text-sm font-medium mb-1" %>
+                <%= f.text_area :key_messages, rows: 4, class: "w-full rounded-2xl border-gray-300 dark:border-gray-700 px-4 py-2.5", placeholder: "Comma-separated points, e.g., 100% organic, safe for sensitive skin, use code SKIN15" %>
+            </div>
+
+            <!-- Tags Required -->
+            <div>
+                <%= f.label :tags_require, "Tags Required (handles & hashtags)", class: "block text-sm font-medium mb-1" %>
+                <%= f.text_field :tags_require, class: "w-full rounded-2xl border-gray-300 dark:border-gray-700 px-4 py-2.5", placeholder: "e.g., @BrandName, #GlowWithNature, #OrganicBeauty" %>
+            </div>
+
+            <!-- Creative Guidelines -->
+            <div>
+                <%= f.label :creative_guidelines, "Creative Guidelines", class: "block text-sm font-medium mb-1" %>
+                <%= f.text_area :creative_guidelines, rows: 4, class: "w-full rounded-2xl border-gray-300 dark:border-gray-700 px-4 py-2.5", placeholder: "Tone, aesthetic, do’s & don’ts" %>
+            </div>
+
+            <!-- Approval Deadline & Posting Start Date -->
+            <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                <%= f.label :approval_deadline, "Approval Deadline", class: "block text-sm font-medium mb-1" %>
+                <%= f.datetime_local_field :approval_deadline, class: "w-full rounded-2xl border-gray-300 dark:border-gray-700 px-4 py-2.5" %>
+                </div>
+                <div>
+                <%= f.label :posting_start_date, "Posting Start Date", class: "block text-sm font-medium mb-1" %>
+                <%= f.datetime_local_field :posting_start_date, class: "w-full rounded-2xl border-gray-300 dark:border-gray-700 px-4 py-2.5" %>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex gap-3 pt-2">
+                <%= f.submit "Save", class: "inline-flex items-center justify-center rounded-2xl bg-blue-600 hover:bg-blue-700 px-5 py-2.5 text-white font-medium shadow-soft" %>
+                <%= link_to "Reset", new_campaign_path, class: "inline-flex items-center justify-center rounded-2xl border border-gray-300 dark:border-gray-700 px-5 py-2.5 font-medium hover:bg-gray-100 dark:hover:bg-gray-700/50" %>
+            </div>
+
+            <% end %>
+
+      </section>
+    </div>
+  </main>

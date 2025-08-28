@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
   has_one :profile, dependent: :destroy
   has_one :city
+  has_many :campaigns
   belongs_to :city, optional: true
   normalizes :email_address, with: ->(e) { e.strip.downcase }
   # after_create :create_profile_record

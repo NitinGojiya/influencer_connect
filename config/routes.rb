@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
   resources :users, only: [ :new, :create ]
   resources :business_owners
+  resources :campaigns
   # resources :influencers
   get "dashboard", to: "influencers#index", as: :dashboard
   get "influencer/profile", to: "influencers#profile", as: :influencer_profile

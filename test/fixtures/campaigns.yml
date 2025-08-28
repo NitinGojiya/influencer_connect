@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content_type: MyString
+  deliverable_details: MyString
+  key_messages: MyText
+  tags_require: MyString
+  creative_guidelines: MyText
+  approval_deadline: 2025-08-28 15:46:56
+  posting_start_date: 2025-08-28 15:46:56
+  user: one
+
+two:
+  content_type: MyString
+  deliverable_details: MyString
+  key_messages: MyText
+  tags_require: MyString
+  creative_guidelines: MyText
+  approval_deadline: 2025-08-28 15:46:56
+  posting_start_date: 2025-08-28 15:46:56
+  user: two
