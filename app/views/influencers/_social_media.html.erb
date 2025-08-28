@@ -19,7 +19,7 @@
     </div>
 
     <!-- Facebook Item -->
-    <div class="p-4  flex items-center justify-between">
+    <!-- <div class="p-4  flex items-center justify-between">
         <div class="flex items-center space-x-4">
             <i class="fab fa-facebook-f text-4xl text-facebook"></i>
             <span class="text-lg font-medium text-gray-800">Facebook</span>
@@ -28,7 +28,7 @@
             class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-full transition duration-200">
             Connect
         </button>
-    </div>
+    </div> -->
 
     <!-- X (Twitter) Item -->
     <div class=" p-4  flex items-center justify-between">
@@ -36,10 +36,18 @@
             <i class="fab fa-x-twitter text-4xl text-x"></i>
             <span class="text-lg font-medium text-gray-800">X (Twitter)</span>
         </div>
-        <button
-            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-full transition duration-200">
-            Connect
-        </button>
+           <div>
+            <h1 class="text-xl">
+                <% if @profile.social_platform&.twitter_followers.present? %>
+                    <%= human_count(@profile.social_platform.twitter_followers) %> Followers
+                        <% else %>
+                            N/A
+                            <% end %>
+            </h1>
+        </div>
+        <%= link_to "Connect Twiiter" , connect_twitter_connects_path,
+            class: "bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-full transition duration-200"
+            %>
     </div>
 
     <!-- YouTube Item -->

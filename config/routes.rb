@@ -19,4 +19,13 @@ Rails.application.routes.draw do
   get "youtube_connects/connect", to: "youtube_connects#connect"
   get "youtube_connects/callback", to: "youtube_connects#callback"
   get "youtube_connects/profile", to: "youtube_connects#profile"
+
+  resources :twitter_connects, only: [] do
+  collection do
+    get :connect
+    get :callback
+    get :profile
+  end
+end
+
 end
