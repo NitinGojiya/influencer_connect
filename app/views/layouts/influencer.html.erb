@@ -32,6 +32,8 @@
   <body class="bg-gray-100 min-h-screen flex">
     <%=render 'shared/influencer_navbar'%>
       <%= yield %>
-
+        <div class="fixed right-0 bottom-8 flex justify-end z-50">
+      <%= render "shared/up_scroll" %>
+    </div>
   </body>
 </html>
