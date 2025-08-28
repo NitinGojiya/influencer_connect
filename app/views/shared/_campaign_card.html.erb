@@ -65,9 +65,12 @@
 
   <!-- right: actions -->
   <div class="flex-shrink-0 self-stretch flex flex-col items-end justify-between">
+
     <div class="flex flex-col gap-2">
+       <% if local_assigns[:owner] %>
       <%= link_to "View", campaign_path(campaign), class: "inline-flex items-center px-3 py-1.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700/50" %>
       <%= link_to "Edit", edit_campaign_path(campaign), class: "inline-flex items-center px-3 py-1.5 rounded-xl bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700" %>
+      <%end%>
     </div>
 
     <div class="text-xs text-gray-400 mt-2">
