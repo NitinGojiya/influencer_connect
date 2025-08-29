@@ -1,0 +1,16 @@
+<div class="h-screen bg-gray-900 text-white flex items-center justify-center">
+  <div class="bg-gray-800 p-6 rounded-2xl shadow-xl w-96">
+    <h2 class="text-lg font-semibold mb-4">Start New Conversation</h2>
+
+    <%= form_with model: @conversation, url: conversations_path, class: "space-y-4" do |f| %>
+      <div>
+        <%= f.label :receiver_id, "Choose a user", class: "block text-sm mb-1" %>
+        <%= f.collection_select :receiver_id, @users, :id, :email_address,
+          { prompt: "Select a user" },
+          { class: "w-full bg-gray-700 text-white rounded-lg px-3 py-2" } %>
+      </div>
+
+      <%= f.submit "Start Chat", class: "w-full bg-blue-500 py-2 rounded-lg hover:bg-blue-600" %>
+    <% end %>
+  </div>
+</div>

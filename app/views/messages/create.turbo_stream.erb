@@ -1,0 +1,11 @@
+<%# app/views/messages/create.turbo_stream.erb %>
+<%= turbo_stream.append "messages" do %>
+  <%= render partial: "messages/message", locals: { message: @message } %>
+<% end %>
+
+<%= turbo_stream.replace dom_id(Message.new) do %>
+  <%= form_with model: [@conversation, Message.new], data: { turbo_stream: true }, class: "p-4 border-t border-gray-700 flex space-x-2" do |f| %>
+    <%= f.text_field :content, placeholder: "Type a message...", class: "flex-1 rounded-lg bg-gray-800 text-white px-3 py-2" %>
+    <%= f.submit "Send", class: "bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600" %>
+  <% end %>
+<% end %>

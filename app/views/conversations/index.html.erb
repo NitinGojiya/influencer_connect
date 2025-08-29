@@ -1,0 +1,31 @@
+<div class="text-black h-screen w-full p-8">
+  <div class="p-4 flex justify-between items-center border-b border-gray-700">
+    <div class="flex space-x-4">
+      <button class="text-sm font-medium">All</button>
+      <button class="text-sm font-medium">Unread</button>
+      <button class="text-sm font-medium">Archived</button>
+    </div>
+    <%# link_to "New Chat", new_conversation_path, class: "bg-blue-500 px-3 py-2 rounded-lg hover:bg-blue-600 text-sm" %>
+  </div>
+
+  <ul class="divide-y divide-gray-700">
+    <% @conversations.each do |conv| %>
+      <% last_msg = conv.messages.last %>
+      <% other_user = (conv.sender == @user) ? conv.receiver : conv.sender %>
+
+      <%= link_to conversation_path(conv), class: "block hover:bg-gray-800" do %>
+        <li class="flex items-center p-4">
+          <img src="https://ui-avatars.com/api/?name=<%= other_user.email_address %>"
+               class="w-10 h-10 rounded-full mr-3">
+          <div class="flex-1 min-w-0">
+            <p class="font-semibold truncate"><%= other_user.email_address %></p>
+            <p class="text-sm text-gray-400 truncate"><%= last_msg&.content %></p>
+          </div>
+          <span class="text-xs text-gray-400 whitespace-nowrap">
+            <%= time_ago_in_words(last_msg&.created_at || Time.current) %> ago
+          </span>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

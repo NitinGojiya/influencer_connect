@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "messages/create"
+  get "conversations/index"
+  get "conversations/show"
   root "landing_pages#index"
   resource :session
   resources :passwords, param: :token
@@ -29,5 +32,11 @@ Rails.application.routes.draw do
     get :profile
   end
 end
+
+  resources :conversations, only: [:index, :show, :new, :create] do
+    resources :messages, only: [:create]
+  end
+
+  get "chat", to: "conversations#index", as: :chat
 
 end

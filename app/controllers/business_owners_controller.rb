@@ -3,7 +3,7 @@ class BusinessOwnersController < ApplicationController
   require "ostruct"
   def index
     @user = Current.session.user
-
+     @conversation = Conversation.new
     # --- 🔹 Base Query: Influencers with Profiles and Cities ---
     influencers = User.with_role(:influencer).includes(profile: :city)
 
@@ -18,6 +18,7 @@ class BusinessOwnersController < ApplicationController
           social  = profile&.social_platform
 
           OpenStruct.new(
+            receiver_id: profile&.user.id,
             photo_url: profile&.profile_pic&.attached? ? url_for(profile.profile_pic) : nil,
             name: profile&.full_name,
             bio: profile&.bio,
