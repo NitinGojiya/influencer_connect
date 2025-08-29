@@ -1,0 +1,65 @@
+<!-- app/views/campaigns/show.html.erb -->
+<div class="max-w-4xl mx-auto p-6">
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-gray-800"><%= @campaign.content_type %></h1>
+    <span class="bg-green-100 text-green-700 text-sm font-medium px-3 py-1 rounded-full">
+      <%= @campaign.created_at.strftime("%b %d, %Y") %>
+    </span>
+  </div>
+
+  <!-- Main Card -->
+  <div class="bg-white rounded-2xl shadow-md p-6 space-y-6">
+    <!-- Deliverable Details -->
+    <div>
+      <h2 class="text-lg font-semibold text-gray-700">Details</h2>
+      <p class="text-gray-600 mt-1"><%= @campaign.deliverable_details %></p>
+    </div>
+
+    <!-- Messages & Guidelines -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <h2 class="text-lg font-semibold text-gray-700">Key Messages</h2>
+        <p class="text-gray-600 mt-1"><%= @campaign.key_messages %></p>
+      </div>
+      <div>
+        <h2 class="text-lg font-semibold text-gray-700">Creative Guidelines</h2>
+        <p class="text-gray-600 mt-1"><%= @campaign.creative_guidelines %></p>
+      </div>
+    </div>
+
+    <!-- Tags -->
+    <% if @campaign.tags_require.present? %>
+      <div>
+        <h2 class="text-lg font-semibold text-gray-700">Tags</h2>
+        <div class="flex flex-wrap gap-2 mt-2">
+          <% @campaign.tags_require.split(",").each do |tag| %>
+            <span class="bg-gray-100 text-gray-700 text-sm px-3 py-1 rounded-full">#<%= tag.strip %></span>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <!-- Dates & Contact -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <h2 class="text-sm font-medium text-gray-500">Approval Deadline</h2>
+        <p class="text-gray-700"><%= @campaign.approval_deadline.strftime("%b %d, %Y %I:%M %p") if @campaign.approval_deadline %></p>
+      </div>
+      <div>
+        <h2 class="text-sm font-medium text-gray-500">Posting Start</h2>
+        <p class="text-gray-700"><%= @campaign.posting_start_date.strftime("%b %d, %Y %I:%M %p") if @campaign.posting_start_date %></p>
+      </div>
+      <div>
+        <h2 class="text-sm font-medium text-gray-500">Email</h2>
+        <p class="text-gray-700"><%= @campaign.user.email_address %></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="flex justify-end gap-3 mt-6">
+    <%= link_to "Back", campaigns_path, class: "px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200" %>
+    <%= link_to "Edit", edit_campaign_path(@campaign), class: "px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700" %>
+  </div>
+</div>

@@ -34,6 +34,12 @@ class CampaignsController < ApplicationController
     end
   end
 
+  def show
+    @user = Current.session.user
+    @campaign = @user.campaigns.find(params[:id])
+  end
+
+
   private
 
   def campaign_params
