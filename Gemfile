@@ -71,3 +71,6 @@ gem "httparty"   # for API calls
 gem "rolify"
 gem "faker", "~> 3.3"
 
+
+gem 'omniauth'
+gem 'omniauth-google-oauth2'

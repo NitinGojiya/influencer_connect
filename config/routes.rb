@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  root "landing_pages#index"
   get "messages/create"
   get "conversations/index"
   get "conversations/show"
-  root "landing_pages#index"
   resource :session
+  get "/auth/:provider/callback", to: "sessions#omniauth"
+   get "/auth/failure", to: redirect("/")
   resources :passwords, param: :token
   resources :users, only: [ :new, :create ]
   resources :business_owners
