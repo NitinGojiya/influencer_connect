@@ -19,6 +19,21 @@ class CampaignsController < ApplicationController
     end
   end
 
+  def edit
+    @user = Current.session.user
+    @campaign = Current.session.user.campaigns.find(params[:id])
+  end
+
+  def update
+    @campaign = Current.session.user.campaigns.find(params[:id])
+
+    if @campaign.update(campaign_params)
+      redirect_to campaigns_path, notice: "Campaign updated successfully."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def campaign_params
