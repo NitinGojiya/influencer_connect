@@ -18,6 +18,7 @@ class BusinessOwnersController < ApplicationController
           social  = profile&.social_platform
 
           OpenStruct.new(
+            email: profile&.user.email_address,
             receiver_id: profile&.user.id,
             photo_url: profile&.profile_pic&.attached? ? url_for(profile.profile_pic) : nil,
             name: profile&.full_name,

@@ -4,7 +4,7 @@ class ConversationsController < ApplicationController
     @user = Current.session.user
     @conversations = Conversation
       .includes(:messages, :sender, :receiver)
-      .where("sender_id = :user_id OR receiver_id = :user_id", user_id: @user.id)
+      .where("sender_id = :user_id OR receiver_id = :user_id", user_id: @user.id).order_by_last_message
   end
 
   def show
