@@ -1,31 +1,47 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
-  hello: "Hello world"
+  alerts:
+    user:
+      deleted: "Your account has been permanently deleted."
+      delete_failed: "There was a problem deleting your account."
+      created: "Welcome new user, %{email}!"
+      create_failed: "Create account failed."
+    passwords:
+      reset_instructions: "Password reset instructions sent (if user with that email address exists)."
+      reset_success: "Password has been reset."
+      reset_failed: "Passwords did not match."
+      invalid_token: "Password reset link is invalid or has expired."
+    profiles:
+      created: "Profile created successfully."
+      updated: "Profile updated successfully."
+      create_failed: "Profile could not be created."
+      update_failed: "Profile could not be updated."
+    campaigns:
+      created: "Campaign created successfully."
+      updated: "Campaign updated successfully."
+      create_failed: "Campaign could not be created."
+      update_failed: "Campaign could not be updated."
+    meta_connects:
+      access_token_failed: "Failed to get access token."
+      no_token: "No access token found. Please connect again."
+      pages_failed: "Failed to fetch Facebook pages."
+      no_pages: "No Facebook pages found or insufficient permissions."
+      page_details_failed: "Failed to fetch page details."
+      no_instagram: "No Instagram account linked to this Facebook page."
+      ig_profile_failed: "Failed to fetch Instagram profile."
+      success: "Instagram account connected successfully!"
+    twitter_connects:
+      access_token_failed: "Failed to get Twitter access token."
+      no_token: "No Twitter access token found. Please connect again."
+      profile_failed: "Failed to fetch Twitter profile."
+      success: "Twitter connected successfully!"
+    youtube_connects:
+      access_token_failed: "Failed to get YouTube access token."
+      no_token: "No YouTube access token found. Please connect first."
+      fetch_failed: "Failed to fetch YouTube channel."
+      success: "YouTube connected successfully!"
+    auth:
+      login_failed: "Invalid email or password."
+      logged_out: "You have been logged out."
+    signup:
+        success: "Signed up with Google as %{email}"
+        failure: "Google sign-up failed: %{errors}"

@@ -30,6 +30,9 @@
   </head>
 
   <body class="bg-gray-100 min-h-screen flex">
+    <!-- alert -->
+    <%=render 'shared/flash'%>
+    <!-- navbar -->
     <%=render 'shared/influencer_navbar'%>
       <%= yield %>
         <div class="fixed right-0 bottom-8 flex justify-end z-50">

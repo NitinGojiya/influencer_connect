@@ -1,0 +1,8 @@
+<!-- shared/_flash.html.erb -->
+     <div data-controller="flash" class="toast toast-top toast-end z-[9999] mt-[100px]">
+      <% flash.each do |type, message| %>
+        <div class="alert <%= flash_class(type) %> shadow-lg">
+          <span><%= message %></span>
+        </div>
+      <% end %>
+    </div>

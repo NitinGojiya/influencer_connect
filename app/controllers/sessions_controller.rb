@@ -20,13 +20,15 @@ class SessionsController < ApplicationController
 
       if user.save
         start_new_session_for user
-        redirect_to after_authentication_url, notice: "Signed up with Google as #{user.email_address}"
+        redirect_to after_authentication_url,
+                    notice: I18n.t("alerts.signup.success", email: user.email_address)
       else
-        redirect_to new_user_path, alert: "Google sign-up failed: #{user.errors.full_messages.to_sentence}"
+        redirect_to new_user_path,
+                    alert: I18n.t("alerts.signup.failure", errors: user.errors.full_messages.to_sentence)
       end
     else
       start_new_session_for(user)
-      redirect_to after_authentication_url, notice: "Signed in with Google as #{user.email_address}"
+      redirect_to after_authentication_url, notice: I18n.t("alerts.signup.success", email: user.email_address)
     end
   rescue => e
     Rails.logger.error("Google auth failed: #{e.message}")
@@ -36,14 +38,14 @@ class SessionsController < ApplicationController
   def create
     if user = User.authenticate_by(params.permit(:email_address, :password))
       start_new_session_for user
-      redirect_to after_authentication_url
+      redirect_to after_authentication_url, notice: I18n.t("alerts.user.created")
     else
-      redirect_to new_session_path, alert: "Try another email address or password."
+      redirect_to new_session_path, alert: I18n.t("alerts.auth.login_failed")
     end
   end
 
   def destroy
     terminate_session
-    redirect_to new_session_path
+    redirect_to new_session_path, alert: I18n.t("alerts.auth.logged_out")
   end
 end

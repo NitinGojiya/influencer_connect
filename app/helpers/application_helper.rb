@@ -11,4 +11,16 @@ module ApplicationHelper
       number.to_s
     end
   end
+  def flash_class(type)
+    case type.to_sym
+    when :notice
+      "alert-success"
+    when :alert
+      "alert-warning"
+    when :error
+      "alert-error"
+    else
+      "alert-info"
+    end
+  end
 end

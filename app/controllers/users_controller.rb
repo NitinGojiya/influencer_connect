@@ -1,13 +1,14 @@
 class UsersController < ApplicationController
-  allow_unauthenticated_access only: [ :new, :create ]
+  allow_unauthenticated_access only: [:new, :create]
+
   def user_delete
     @user = Current.session.user
 
     if @user.destroy
       reset_session # log them out
-      redirect_to root_path, notice: "Your account has been permanently deleted."
+      redirect_to root_path, notice: t("alerts.users.deleted")
     else
-      redirect_to profile_path, alert: "There was a problem deleting your account."
+      redirect_to profile_path, alert: t("alerts.users.delete_failed")
     end
   end
 
@@ -18,16 +19,14 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      # assign role via Rolify
-      if params[:role].present?
-        @user.add_role(params[:role])
-      end
+      # Assign role via Rolify if provided
+      @user.add_role(params[:role]) if params[:role].present?
 
       start_new_session_for @user
-      redirect_to after_authentication_url, notice: "Welcome new user, #{@user.email_address}!"
+      redirect_to after_authentication_url, notice: t("alerts.users.created", email: @user.email_address)
     else
-      flash.now[:alert] = "Create account failed"
-      render :new, status: :unprocessable_content
+      flash.now[:alert] = t("alerts.users.create_failed")
+      render :new, status: :unprocessable_entity
     end
   end
 
