@@ -1,6 +1,7 @@
 en:
   alerts:
-    user:
+    users:
+      login: "Welcome back user, %{email}!"
       deleted: "Your account has been permanently deleted."
       delete_failed: "There was a problem deleting your account."
       created: "Welcome new user, %{email}!"

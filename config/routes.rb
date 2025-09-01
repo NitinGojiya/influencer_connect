@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
   root "landing_pages#index"
+  get "/service", to: "landing_pages#service"
+  get "/support", to: "landing_pages#support"
+  get "/policy", to: "landing_pages#policy"
+  get "/aboutus", to: "landing_pages#aboutus"
   get "messages/create"
   get "conversations/index"
   get "conversations/show"
   resource :session
   get "/auth/:provider/callback", to: "sessions#omniauth"
-   get "/auth/failure", to: redirect("/")
+  get "/auth/failure", to: redirect("/")
   resources :passwords, param: :token
   resources :users, only: [ :new, :create ]
   resources :business_owners
