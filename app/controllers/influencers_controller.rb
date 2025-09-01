@@ -7,6 +7,9 @@ class InfluencersController < ApplicationController
     @profile = @user.profile
     @business_new = User.with_role :business_owner
     # @campaigns = User.with_role(:business_owner).joins(:campaigns).count
+      if params[:city_id].present?
+        @campaigns = @campaigns.where( city_id: params[:city_id])
+      end
   end
 
   def profile

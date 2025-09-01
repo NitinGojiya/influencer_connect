@@ -12,6 +12,8 @@ class CampaignsController < ApplicationController
 
   def create
     @campaign = @user.campaigns.new(campaign_params)
+    @campaign.city_id = params[:city_id]  # assign city_id directly
+
     if @campaign.save
       redirect_to campaigns_path, notice: t("alerts.campaigns.created")
     else
@@ -19,6 +21,7 @@ class CampaignsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
 
   def edit; end
 

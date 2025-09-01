@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_29_053757) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_01_090126) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -50,6 +50,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_29_053757) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "city_id"
+    t.index ["city_id"], name: "index_campaigns_on_city_id"
     t.index ["user_id"], name: "index_campaigns_on_user_id"
   end
 
@@ -148,6 +150,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_29_053757) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "campaigns", "cities"
   add_foreign_key "campaigns", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"

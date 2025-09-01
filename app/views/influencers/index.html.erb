@@ -80,15 +80,39 @@
             <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-200 ">
             <div>
                 <div class="flex items-center justify-between pb-4 border-b border-gray-200">
-            <h2 class="text-2xl sm:text-3xl font-bold text-gray-800">
-                Live Campaign
-            </h2>
-            <span class="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-800 ring-1 ring-inset ring-green-600/20 shadow-md">
-                <svg class="w-2 h-2 mr-1 animate-pulse" fill="currentColor" viewBox="0 0 8 8">
-                    <circle cx="4" cy="4" r="3" />
-                </svg>
-                LIVE
-            </span>
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-gray-800">
+                        Live Campaign
+                         </h2>
+                    </div>
+                    <div>
+                     <span class="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-800 ring-1 ring-inset ring-green-600/20 shadow-md">
+                    <svg class="w-2 h-2 mr-1 animate-pulse" fill="currentColor" viewBox="0 0 8 8">
+                        <circle cx="4" cy="4" r="3" />
+                    </svg>
+                    LIVE
+                </span>
+                    </div>
+
+
+            <div class="flex items-center justify-center">
+           <%= form_with url: dashboard_path,
+              method: :get,
+              class: "",
+              data: { turbo_frame: "_top", turbo_action: "replace" } do |f| %>
+
+            <div class="relative w-full sm:w-auto">
+                <%= select_tag :city_id,
+                    options_from_collection_for_select(City.order(:name), :id, :name, params[:city_id]),
+                    prompt: "Select All City",
+                    class: "cursor-pointer block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-full leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                    onchange: "this.form.submit();" %>
+            </div>
+
+            <% end %>
+
+        </div>
+
         </div>
             </div>
 
