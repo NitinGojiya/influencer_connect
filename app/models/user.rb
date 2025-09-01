@@ -9,11 +9,24 @@ class User < ApplicationRecord
   normalizes :email_address, with: ->(e) { e.strip.downcase }
   has_many :messages
   has_many :conversations, foreign_key: :sender_id
-  # after_create :create_profile_record
+  before_create :generate_confirmation_token
 
-  # private
+   # Validations
+  validates :email_address, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
-  # def create_profile_record
-  #   create_profile unless profile.present?
-  # end
+   # Generate a unique token before creating the user
+  def generate_confirmation_token
+    self.confirmation_token = SecureRandom.hex(10)
+    self.confirmation_sent_at = Time.current
+  end
+
+  # Mark user as confirmed
+  def confirm!
+    update!(confirmed_at: Time.current, confirmation_token: nil)
+  end
+
+  # Check if confirmed
+  def confirmed?
+    confirmed_at.present?
+  end
 end

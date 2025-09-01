@@ -17,18 +17,35 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
-      # Assign role via Rolify if provided
-      @user.add_role(params[:role]) if params[:role].present?
+      @user = User.new(user_params)
+      if @user.save
+        # Assign role via Rolify
+        @user.add_role(params[:role]) if params[:role].present?
 
-      start_new_session_for @user
-      redirect_to after_authentication_url, notice: t("alerts.users.created", email: @user.email_address)
+        # Send confirmation email
+        UserMailer.confirmation_email(@user).deliver_later
+
+        redirect_to root_path, notice: "Please check your email to confirm your account."
+      else
+        flash.now[:alert] = t("alerts.users.create_failed")
+        render :new, status: :unprocessable_entity
+      end
+    end
+
+  def confirm
+    token = params[:token]
+    user = User.find_by(confirmation_token: token)
+
+    if user.nil? || user.confirmation_sent_at < 30.minutes.ago
+      user&.destroy  # delete if token expired
+      redirect_to root_path, alert: "Confirmation link expired. Please sign up again."
     else
-      flash.now[:alert] = t("alerts.users.create_failed")
-      render :new, status: :unprocessable_entity
+      user.confirm!
+      redirect_to new_session_path, notice: "Your account has been confirmed. Please log in."
     end
   end
+
+
 
   private
 

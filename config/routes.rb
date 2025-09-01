@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   get "/auth/:provider/callback", to: "sessions#omniauth"
   get "/auth/failure", to: redirect("/")
   resources :passwords, param: :token
-  resources :users, only: [ :new, :create ]
+  resources :users do
+    get 'confirm', on: :collection
+  end
   resources :business_owners
   resources :campaigns
 
