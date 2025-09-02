@@ -6,25 +6,36 @@ class ProfilesController < ApplicationController
     @profile = @user.profile
   end
 
-  def create
-    @profile = @user.build_profile(profile_params)
+def create
+  @profile = @user.build_profile(profile_params)
 
+  respond_to do |format|
     if @profile.save
-      redirect_to influencer_profile_path, notice: t("alerts.profiles.created")
+      format.turbo_stream do
+        redirect_to influencer_profile_path, notice: t("alerts.profiles.created")
+      end
+      format.html { redirect_to influencer_profile_path, notice: t("alerts.profiles.created") }
     else
-      flash.now[:alert] = t("alerts.profiles.create_failed")
-      render :index, status: :unprocessable_entity
+      format.turbo_stream { render "influencers/form", status: :unprocessable_entity }
+      format.html { render "influencers/form", status: :unprocessable_entity } # change from redirect_to
     end
   end
+end
 
-  def update
+def update
+  respond_to do |format|
     if @profile.update(profile_params)
-      redirect_to influencer_profile_path, notice: t("alerts.profiles.updated")
+      format.turbo_stream do
+        # Use turbo_stream to redirect or update a frame
+        redirect_to influencer_profile_path, notice: t("alerts.profiles.updated")
+      end
+      format.html { redirect_to influencer_profile_path, notice: t("alerts.profiles.updated") }
     else
-      flash.now[:alert] = t("alerts.profiles.update_failed")
-      render :index, status: :unprocessable_entity
+      format.turbo_stream { render "influencers/form", status: :unprocessable_entity }
+      format.html { render "influencers/form", status: :unprocessable_entity } # render instead of redirect
     end
   end
+end
 
   private
 
