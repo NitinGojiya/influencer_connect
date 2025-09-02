@@ -52,8 +52,67 @@
 
   <!-- City Dropdown -->
   <div>
-    <%= render 'shared/city_dropdown' %>
+    <%# render 'shared/city_dropdown' %>
   </div>
+  <div class="relative w-full max-w-md">
+    <details class="relative">
+      <summary class="cursor-pointer block w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 rounded-full leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+        <span id="selected-city"><%= params[:city_name].presence || "Select or type city" %></span>
+      </summary>
+      <div class="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
+        <!-- Search or type input -->
+        <input
+          type="text"
+          id="city-search"
+          placeholder="Search or type city..."
+          class="w-full px-3 py-2 border-b border-gray-200 focus:outline-none"
+          onkeyup="filterCities()"
+        >
+        <!-- City list -->
+        <ul id="city-list">
+          <% City.order(:name).each do |city| %>
+            <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                data-id="<%= city.id %>"
+                onclick="selectCity(this)">
+              <%= city.name %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </details>
+
+    <!-- Hidden field to submit either city_id or new city_name -->
+    <%= hidden_field_tag :city_id, params[:city_id], id: "city_id_field" %>
+    <%= text_field_tag :city_name, params[:city_name], id: "city_name_field", class: "hidden" %>
+  </div>
+
+  <!-- these js for testing change to stimulus -->
+  <script>
+    function filterCities() {
+      const input = document.getElementById('city-search');
+      const filter = input.value.toLowerCase();
+      const ul = document.getElementById('city-list');
+      const li = ul.getElementsByTagName('li');
+
+      for (let i = 0; i < li.length; i++) {
+        const text = li[i].textContent || li[i].innerText;
+        li[i].style.display = text.toLowerCase().includes(filter) ? "" : "none";
+      }
+
+      // Update hidden field for new city
+      document.getElementById('city_name_field').value = input.value;
+      document.getElementById('city_id_field').value = ""; // clear selected city_id
+      document.getElementById('selected-city').innerText = input.value || "Select or type city";
+    }
+
+    function selectCity(element) {
+      document.getElementById('selected-city').innerText = element.innerText;
+      document.getElementById('city_id_field').value = element.dataset.id;
+      document.getElementById('city_name_field').value = ""; // clear typed city_name
+      element.closest('details').removeAttribute('open');
+    }
+  </script>
+
 
   <!-- Approval Deadline & Posting Start Date -->
   <div class="grid sm:grid-cols-2 gap-4">

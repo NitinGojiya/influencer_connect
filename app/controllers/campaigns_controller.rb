@@ -12,7 +12,15 @@ class CampaignsController < ApplicationController
 
   def create
     @campaign = @user.campaigns.new(campaign_params)
-    @campaign.city_id = params[:city_id]  # assign city_id directly
+
+    if params[:city_id].present?
+      # Existing city selected
+      @campaign.city_id = params[:city_id]
+    elsif params[:city_name].present?
+      # New city typed, find or create it
+      city = City.find_or_create_by(name: params[:city_name].strip)
+      @campaign.city = city
+    end
 
     if @campaign.save
       redirect_to campaigns_path, notice: t("alerts.campaigns.created")
@@ -21,6 +29,7 @@ class CampaignsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
 
 
   def edit; end
