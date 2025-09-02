@@ -17,7 +17,7 @@
                 </div>
                 <div class="flex items-end">
                     <span class="text-3xl font-bold text-gray-800 mr-2">
-                        <% if @profile.social_platform&.ig_followers.present? %>
+                        <% if @profile&.social_platform&.ig_followers.present? %>
                             <%= human_count(@profile.social_platform.ig_followers) %>
                         <% else %>
                             N/A
@@ -35,7 +35,7 @@
                 </div>
                 <div class="flex items-end">
                     <span class="text-3xl font-bold text-gray-800 mr-2">
-                       <% if @profile.social_platform&.youtube_subscriber.present? %>
+                       <% if @profile&.social_platform&.youtube_subscriber.present? %>
                             <%= human_count(@profile.social_platform.youtube_subscriber) %>
                         <% else %>
                             N/A

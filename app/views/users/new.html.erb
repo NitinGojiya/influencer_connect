@@ -9,12 +9,17 @@
 
     <!-- role select -->
     <div class="mb-5">
-  <%= radio_button_tag :role, "influencer" %>
-  <%= label_tag :role_influencer, "Influencer" %>
+    <%= form.label :role, "Select Role", class: "block text-gray-700 text-sm font-medium mb-2" %>
 
-  <%= radio_button_tag :role, "business_owner" %>
-  <%= label_tag :role_business_owner, "Business Owner" %>
-</div>
+    <div class="flex items-center gap-4">
+      <%= form.radio_button :role, "influencer" %>
+      <%= form.label :role_influencer, "Influencer" %>
+
+      <%= form.radio_button :role, "business_owner" %>
+      <%= form.label :role_business_owner, "Business Owner" %>
+    </div>
+  </div>
+
 
       <!-- Email Field -->
       <div class="mb-5">

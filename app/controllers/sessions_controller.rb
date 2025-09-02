@@ -37,8 +37,12 @@ class SessionsController < ApplicationController
 
   def create
     if user = User.authenticate_by(params.permit(:email_address, :password))
-      start_new_session_for user
-      redirect_to after_authentication_url, notice: t("alerts.users.login", email: user.email_address)
+      if user.confirmed?  # <-- only allow if email confirmed
+        start_new_session_for user
+        redirect_to after_authentication_url, notice: t("alerts.users.login", email: user.email_address)
+      else
+        redirect_to new_session_path, alert: "Please confirm your email address before logging in."
+      end
     else
       redirect_to new_session_path, alert: I18n.t("alerts.auth.login_failed")
     end

@@ -17,20 +17,19 @@ class UsersController < ApplicationController
   end
 
   def create
-      @user = User.new(user_params)
-      if @user.save
-        # Assign role via Rolify
-        @user.add_role(params[:role]) if params[:role].present?
+    @user = User.new(user_params)
+    @user.role_to_assign = params[:user][:role] # virtual attribute for validation
 
-        # Send confirmation email
-        UserMailer.confirmation_email(@user).deliver_later
-
-        redirect_to root_path, notice: "Please check your email to confirm your account."
-      else
-        flash.now[:alert] = t("alerts.users.create_failed")
-        render :new, status: :unprocessable_entity
-      end
+    if @user.save
+      # Assign the role via Rolify
+      @user.add_role(@user.role_to_assign)
+      UserMailer.confirmation_email(@user).deliver_later
+      redirect_to root_path, notice: "Please check your email to confirm your account."
+    else
+      flash.now[:alert] = t("alerts.users.create_failed")
+      render :new, status: :unprocessable_entity
     end
+  end
 
   def confirm
     token = params[:token]
