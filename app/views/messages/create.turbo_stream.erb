@@ -2,9 +2,10 @@
   <%= render partial: "messages/message", locals: { message: @message } %>
 <% end %>
 
-<%= turbo_stream.replace dom_id(@message) do %>
+<%= turbo_stream.replace "new_message_form" do %>
   <%= render "messages/form", conversation: @conversation, message: Message.new %>
 <% end %>
+
 
 <%= turbo_stream.replace "chat_list" do %>
   <%= render partial: "conversations/list", locals: {
@@ -14,3 +15,4 @@
           .order_by_last_message,
         user: Current.session.user } %>
 <% end %>
+
