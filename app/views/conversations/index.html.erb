@@ -1,31 +1,40 @@
-<div class="text-black h-screen w-full p-8">
-  <div class="p-4 flex justify-between items-center border-b border-gray-700">
-    <div class="flex space-x-4">
-      <!-- <button class="text-sm font-medium">All</button>
-      <button class="text-sm font-medium">Unread</button>
-      <button class="text-sm font-medium">Archived</button> -->
+<!-- app/views/conversations/index.html.erb -->
+<div class="flex flex-col md:flex-row max-h-[700px] bg-gray-100 w-full px-4">
+
+  <!-- Left Sidebar (Conversations List) -->
+  <div class="w-full md:w-1/3 border-r border-gray-300 bg-white overflow-y-auto">
+    <div class="p-4 border-b font-bold text-lg">Chats</div>
+
+    <div id="conversations" data-controller="chat">
+      <%= turbo_frame_tag "chat_list" do %>
+        <% @conversations.each do |conversation| %>
+          <% other_user = (conversation.sender == @user ? conversation.receiver : conversation.sender) %>
+
+          <%= link_to conversation_path(conversation),
+                      data: { turbo_frame: "chat_window" },
+                      class: "flex items-center p-4 border-b hover:bg-gray-100 cursor-pointer" do %>
+            <div class="flex-shrink-0 w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm font-medium truncate"><%= other_user.email_address %></p>
+              <p class="text-xs text-gray-500 truncate w-40 md:w-40">
+                <%= conversation.messages.last&.content || "No messages yet" %>
+              </p>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
     </div>
-    <%# link_to "New Chat", new_conversation_path, class: "bg-blue-500 px-3 py-2 rounded-lg hover:bg-blue-600 text-sm" %>
   </div>
 
-  <ul class="divide-y divide-gray-700">
-    <% @conversations.each do |conv| %>
-      <% last_msg = conv.messages.last %>
-      <% other_user = (conv.sender == @user) ? conv.receiver : conv.sender %>
-
-      <%= link_to conversation_path(conv), class: "block hover:bg-gray-800" do %>
-        <li class="flex items-center p-4">
-          <img src="https://ui-avatars.com/api/?name=<%= other_user.email_address %>"
-               class="w-10 h-10 rounded-full mr-3">
-          <div class="flex-1 min-w-0">
-            <p class="font-semibold truncate"><%= other_user.email_address %></p>
-            <p class="text-sm text-gray-400 truncate"><%= last_msg&.content %></p>
-          </div>
-          <span class="text-xs text-gray-400 whitespace-nowrap">
-            <%= time_ago_in_words(last_msg&.created_at || Time.current) %> ago
-          </span>
-        </li>
-      <% end %>
+  <!-- Right Side (Chat Window) -->
+  <div class="flex-1 flex flex-col h-full">
+    <%= turbo_frame_tag "chat_window" do %>
+      <div class="flex items-center justify-center h-full text-gray-400 p-4">
+        Select a chat to start messaging
+      </div>
     <% end %>
-  </ul>
+  </div>
+
 </div>
