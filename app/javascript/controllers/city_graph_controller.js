@@ -1,7 +1,3 @@
-// app/javascript/controllers/city_graph_controller.js
-// CDN build – no `import { Chart, … } from "chart.js"` required
-// Chart.js registers itself on window.Chart when loaded via CDN
-
 import { Controller } from "@hotwired/stimulus"
 
 export default class CityGraphController extends Controller {
@@ -15,6 +11,12 @@ export default class CityGraphController extends Controller {
     const canvas = this.element.querySelector("canvas")
     if (!canvas) {
       console.warn("CityGraphController: No <canvas> found in element")
+      return
+    }
+
+    // If chart already exists, update it instead of creating a new one
+    if (this.chart) {
+      this.updateChart()
       return
     }
 
@@ -45,6 +47,15 @@ export default class CityGraphController extends Controller {
         }
       }
     })
+  }
+
+  // Optional: method to update chart data dynamically
+  updateChart() {
+    if (!this.chart) return
+    this.chart.data.labels = this.labelsValue
+    this.chart.data.datasets[0].data = this.dataValue
+    this.chart.data.datasets[0].backgroundColor = this.colorsValue
+    this.chart.update()
   }
 
   disconnect() {

@@ -1,20 +1,30 @@
- <div class="sidebar w-20 flex-shrink-0 rounded-r-3xl flex flex-col items-center py-6 space-y-8 h-screen sticky top-0">
-        <a href="/dashboard" class="text-black text-2xl p-3 bg-white bg-opacity-30 rounded-lg hover:text-black">
-            <i class="fas fa-th"></i>
-        </a>
-        <a href="#" class="text-white text-2xl p-3 rounded-lg hover:bg-white  hover:text-black hover:bg-opacity-30 transition-colors duration-200">
-            <i class="far fa-clock"></i>
-        </a>
-        <a href="/influencer/profile" class="text-white text-2xl p-3 rounded-lg hover:text-black hover:bg-white hover:bg-opacity-30 transition-colors duration-200">
-            <i class="far fa-user"></i>
-        </a>
-        <a href="/chat" class="text-white text-2xl p-3 rounded-lg hover:bg-white hover:text-black hover:bg-opacity-30 transition-colors duration-200">
-            <i class="far fa-comments"></i>
-        </a>
-        <a href="#" class="text-white text-2xl p-3 rounded-lg hover:bg-white hover:text-black hover:bg-opacity-30 transition-colors duration-200">
-            <i class="fas fa-cog"></i>
-        </a>
-        <%= button_to session_path, method: :delete, class:"text-white text-2xl p-3 rounded-lg hover:bg-white hover:text-black hover:bg-opacity-30 transition-colors duration-200" do %>
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-        <%end%>
+<div class="sidebar w-20 flex-shrink-0 rounded-r-3xl flex flex-col items-center py-6 space-y-8 h-screen sticky top-0">
+  <a href="/dashboard" class="text-2xl p-3 rounded-lg transition-colors duration-200
+    <%= 'bg-white text-black' if controller_name == 'influencers'  && action_name == 'index' %>">
+    <i class="fas fa-th"></i>
+  </a>
+
+  <a href="#" class="text-2xl p-3 rounded-lg transition-colors duration-200
+    <%= 'bg-white text-black' if controller_name == 'time_logs' %>">
+    <i class="far fa-clock"></i>
+  </a>
+
+  <a href="/influencer/profile" class="text-2xl p-3 rounded-lg transition-colors duration-200
+    <%= 'bg-white text-black' if controller_name == 'influencers' && action_name == 'profile' %>">
+    <i class="far fa-user"></i>
+  </a>
+
+  <a href="/chat" class="text-2xl p-3 rounded-lg transition-colors duration-200
+    <%= 'bg-white text-black' if controller_name == 'conversations'  %>">
+    <i class="far fa-comments"></i>
+  </a>
+
+  <a href="#" class="text-2xl p-3 rounded-lg transition-colors duration-200
+    <%= 'bg-white text-black' if controller_name == 'settings' %>">
+    <i class="fas fa-cog"></i>
+  </a>
+
+  <%= button_to session_path, method: :delete, class:"text-2xl p-3 rounded-lg hover:bg-white hover:text-black hover:bg-opacity-30 transition-colors duration-200" do %>
+    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+  <% end %>
 </div>
