@@ -21,7 +21,8 @@ class User < ApplicationRecord
             presence: true,
             format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}\z/, message: "must be at least 8 characters long and include one uppercase letter, one lowercase letter, and one symbol" },
             if: :password_required?
-  validate :role_to_assign_must_be_valid
+
+  validate :role_to_assign_must_be_valid, on: :create
 
   # Callbacks
   def generate_confirmation_token

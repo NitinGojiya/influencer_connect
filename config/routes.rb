@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get "conversations/show"
   resource :session
   get "/auth/:provider/callback", to: "sessions#omniauth"
+  get  '/complete_google_signup',  to: 'sessions#complete_google_signup',  as: :complete_google_signup
+  post '/finalize_google_signup',  to: 'sessions#finalize_google_signup',  as: :finalize_google_signup
+
   get "/auth/failure", to: redirect("/")
   resources :passwords, param: :token
   resources :users do

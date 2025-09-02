@@ -1,0 +1,38 @@
+<div class="min-h-screen flex items-center justify-center  p-4">
+  <div class="w-full max-w-md  shadow-lg rounded-lg p-6">
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Select Your Role</h2>
+
+    <%= form_with model: @user, url: finalize_google_signup_path, local: true do |form| %>
+      <%= form.hidden_field :email_address, value: @user.email_address %>
+
+      <div class="space-y-4 mb-6">
+        <label class="block text-gray-700 font-medium mb-2">Choose your role</label>
+        <div class="grid grid-cols-2 gap-4">
+
+          <!-- Influencer Card -->
+          <label class="cursor-pointer border rounded-lg p-4 flex flex-col items-center justify-center hover:shadow-lg transition duration-200
+            <%= 'border-blue-500 bg-blue-50' if @user.role_to_assign == 'influencer' %>">
+            <%= form.radio_button :role_to_assign, "influencer", class: "hidden" %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-blue-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A8.966 8.966 0 0112 15c2.21 0 4.21.896 5.879 2.344M12 12a3 3 0 100-6 3 3 0 000 6z" />
+            </svg>
+            <span class="font-medium text-gray-700">Influencer</span>
+          </label>
+
+          <!-- Business Owner Card -->
+          <label class="cursor-pointer border rounded-lg p-4 flex flex-col items-center justify-center hover:shadow-lg transition duration-200
+            <%= 'border-green-500 bg-green-50' if @user.role_to_assign == 'business_owner' %>">
+            <%= form.radio_button :role_to_assign, "business_owner", class: "hidden" %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-green-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18" />
+            </svg>
+            <span class="font-medium text-gray-700">Business Owner</span>
+          </label>
+
+        </div>
+      </div>
+
+      <%= form.submit "Complete Signup", class: "w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition duration-200" %>
+    <% end %>
+  </div>
+</div>
