@@ -11,32 +11,34 @@ class BusinessOwnersController < ApplicationController
 
     # --- 🔹 Build OpenStructs for View ---
     # Load influencers into OpenStructs first
-    @influencers = User.with_role(:influencer)
-                   .includes(profile: [ :city, :social_platform ])
+   @influencers = User.with_role(:influencer)
+                   .includes(profile: [:city, :social_platform])
+                   .select { |user| user.profile.present? }   # Only users with a profile
                    .map do |inf|
-          profile = inf.profile
-          social  = profile&.social_platform
+  profile = inf.profile
+  social  = profile.social_platform
 
-          OpenStruct.new(
-            email: profile&.user.email_address,
-            receiver_id: profile&.user.id,
-            photo_url: profile&.profile_pic&.attached? ? url_for(profile.profile_pic) : nil,
-            name: profile&.full_name,
-            bio: profile&.bio,
-            ig_link: social&.ig_link,
-            instagram_followers: social&.ig_followers,
-            youtube_subscribers: social&.youtube_subscriber,
-            twitter_followers: social&.youtube_subscriber,
-            youtube_link: social&.youtube_link,
-            twitter_link: social&.twitter_link,
-            content_quality: "9", # You can calculate this later if needed
-            language: profile&.language,
-            category: profile&.content_type,
-            mobile: profile&.mobile.present?,   # true/false depending on if number exists
-            mobile_number: profile&.mobile,
-            city: profile&.city&.id&.to_s
-          )
-        end
+  OpenStruct.new(
+    email: profile.user.email_address,
+    receiver_id: profile.user.id,
+    photo_url: profile.profile_pic.attached? ? url_for(profile.profile_pic) : nil,
+    name: profile.full_name,
+    bio: profile.bio,
+    ig_link: social&.ig_link,
+    instagram_followers: social&.ig_followers,
+    youtube_subscribers: social&.youtube_subscriber,
+    twitter_followers: social&.twitter_followers,
+    youtube_link: social&.youtube_link,
+    twitter_link: social&.twitter_link,
+    content_quality: "9", # Placeholder, calculate if needed
+    language: profile.language,
+    category: profile.content_type,
+    mobile: profile.mobile.present?,
+    mobile_number: profile.mobile,
+    city: profile.city&.id&.to_s
+  )
+end
+
 
 
     # Apply filters
