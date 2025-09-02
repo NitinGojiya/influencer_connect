@@ -1,6 +1,6 @@
 class CampaignsController < ApplicationController
   before_action :set_user
-  before_action :set_campaign, only: [:edit, :update, :show]
+  before_action :set_campaign, only: [ :edit, :update, :show, :destroy ]
 
   def index
     @campaigns = @user.campaigns.order(created_at: :desc)
@@ -35,6 +35,11 @@ class CampaignsController < ApplicationController
   end
 
   def show; end
+
+  def destroy
+    @campaign.destroy
+    redirect_to campaigns_path, notice: t("alerts.campaigns.deleted")
+  end
 
   private
 

@@ -21,6 +21,7 @@ en:
       updated: "Campaign updated successfully."
       create_failed: "Campaign could not be created."
       update_failed: "Campaign could not be updated."
+      deleted: "Campaign deleted successfully."
     meta_connects:
       access_token_failed: "Failed to get access token."
       no_token: "No access token found. Please connect again."

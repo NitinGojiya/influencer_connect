@@ -78,6 +78,7 @@
       <% if local_assigns[:owner] %>
       <%= link_to "View", campaign_path(campaign), class: "inline-flex items-center px-3 py-1.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700/50" %>
       <%= link_to "Edit", edit_campaign_path(campaign), class: "inline-flex items-center px-3 py-1.5 rounded-xl bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700" %>
+      <%= button_to "Delete", campaign_path(campaign), method: :delete, data: { confirm: "Are you sure?" }, class: "inline-flex items-center px-3 py-1.5 rounded-xl bg-red-600 text-white text-sm font-medium hover:bg-red-700" %>
       <% end %>
     </div>
 
