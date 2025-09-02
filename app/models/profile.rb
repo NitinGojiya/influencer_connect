@@ -13,6 +13,17 @@ class Profile < ApplicationRecord
   validates :mobile, presence: true,
                      format: { with: /\A[0-9]{10,15}\z/, message: "must be a valid number (10–15 digits)" }
 
+  def completeness_percentage
+    fields = [:full_name, :nickname, :gender, :country, :dist, :language, :content_type, :city_id, :bio, :mobile]
+    filled_count = fields.count { |field| self.send(field).present? }
+
+    # Include profile picture in completeness
+    filled_count += 1 if profile_pic.attached?
+
+    total_fields = fields.size + 1 # adding profile_pic
+    (filled_count.to_f / total_fields * 100).round
+  end
+
   private
 
   def assign_city
