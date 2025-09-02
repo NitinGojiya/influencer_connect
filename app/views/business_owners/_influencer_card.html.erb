@@ -51,13 +51,16 @@
   </div>
 
   <!-- Chat Form -->
+<% if local_assigns[:contact] %>
   <div class="mt-4 flex flex-col gap-2 w-full">
     <%= form_with url: conversations_path, method: :post, class: "space-y-2" do %>
-    <%= hidden_field_tag "conversation[receiver_id]", influencer.receiver_id %>
+      <%= hidden_field_tag "conversation[receiver_id]", influencer.receiver_id %>
 
-    <%= submit_tag "Get Contact & Start Chat",
-        class: "bg-indigo-500 text-white px-6 py-2 rounded-full hover:bg-indigo-600 transition-colors duration-300 w-full" %>
+      <%= submit_tag "Get Contact & Start Chat",
+          class: "bg-indigo-500 text-white px-6 py-2 rounded-full hover:bg-indigo-600 transition-colors duration-300 w-full" %>
     <% end %>
-
   </div>
+<% end %>
+
+
 </div>

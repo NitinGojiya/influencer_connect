@@ -126,11 +126,10 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                         <!-- Right chart: Traffic by Website -->
             <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-200">
-                <h2 class="text-lg font-bold text-gray-800 mb-4">profile</h2>
+                <h2 class="text-lg font-bold text-gray-800 mb-4">Influencer Profile Overview</h2>
                 <!-- List of websites with bar indicators -->
                 <div class="space-y-4">
-                 data
-
+                 <%= render partial: "business_owners/influencer_card", locals: { influencer: @influencer_card } %>
                 </div>
             </div>
             <!-- Right chart: Traffic by Location -->
