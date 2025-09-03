@@ -15,12 +15,18 @@
   </div>
 
   <!-- Right Side (Chat Window) -->
-  <div class="flex-1 flex flex-col h-full">
-    <%= turbo_frame_tag "chat_window" do %>
+ <div class="flex-1 flex flex-col h-full">
+  <%= turbo_frame_tag "chat_window" do %>
+    <% if @conversation %>
+    <%= render template: "conversations/show" %>
+
+    <% else %>
       <div class="flex items-center justify-center h-full text-gray-400 p-4">
         Select a chat to start messaging
       </div>
     <% end %>
-  </div>
+  <% end %>
+</div>
+
 
 </div>

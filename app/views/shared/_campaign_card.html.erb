@@ -61,11 +61,12 @@
         <div class="font-medium text-gray-700 dark:text-gray-200">Email</div>
         <div>
           <%= campaign.user.email_address %>
-          <%= form_with url: conversations_path, method: :post, class: "space-y-2 mt-1" do %>
+          <%= form_with url: conversations_path, method: :post, data: { turbo: false }, class: "space-y-2 mt-1" do %>
             <%= hidden_field_tag "conversation[receiver_id]", campaign.user.id %>
             <%= submit_tag "Start Chat",
                 class: "bg-indigo-500 text-white px-2 py-2 rounded-full hover:bg-indigo-600 transition-colors duration-300 w-full" %>
           <% end %>
+
         </div>
         <% end %>
       </div>
