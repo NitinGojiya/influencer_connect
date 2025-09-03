@@ -1,5 +1,6 @@
-<% conversations.each do |conversation| %>
+<%= turbo_frame_tag dom_id(conversation) do %>
   <% other_user = (conversation.sender == user ? conversation.receiver : conversation.sender) %>
+
   <%= link_to conversation_path(conversation),
               data: { turbo_frame: "chat_window" },
               class: "flex items-center p-4 border-b hover:bg-gray-100 cursor-pointer" do %>
@@ -7,9 +8,9 @@
       <i class="fa-solid fa-user"></i>
     </div>
     <div class="ml-3">
-      <p class="text-sm font-medium"><%= other_user.email_address %></p>
-      <p class="text-xs text-gray-500 truncate w-40">
-        <%= conversation.messages.last&.content || "No messages yet" %>
+      <p class="text-sm font-medium truncate"><%= other_user.email_address %></p>
+      <p class="text-xs text-gray-500 truncate w-40 md:w-40">
+        <%= conversation.last_message&.content || "No messages yet" %>
       </p>
     </div>
   <% end %>

@@ -6,25 +6,11 @@
     <div class="p-4 border-b font-bold text-lg">Chats</div>
 
     <div id="conversations" data-controller="chat">
-      <%= turbo_frame_tag "chat_list" do %>
-        <% @conversations.each do |conversation| %>
-          <% other_user = (conversation.sender == @user ? conversation.receiver : conversation.sender) %>
+      <%= turbo_stream_from @user %>
 
-          <%= link_to conversation_path(conversation),
-                      data: { turbo_frame: "chat_window" },
-                      class: "flex items-center p-4 border-b hover:bg-gray-100 cursor-pointer" do %>
-            <div class="flex-shrink-0 w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
-              <i class="fa-solid fa-user"></i>
-            </div>
-            <div class="ml-3">
-              <p class="text-sm font-medium truncate"><%= other_user.email_address %></p>
-              <p class="text-xs text-gray-500 truncate w-40 md:w-40">
-                <%= conversation.messages.last&.content || "No messages yet" %>
-              </p>
-            </div>
-          <% end %>
-        <% end %>
-      <% end %>
+    <% @conversations.order_by_last_message.each do |conversation| %>
+      <%= render "conversations/list", conversation: conversation, user: @user %>
+    <% end %>
     </div>
   </div>
 

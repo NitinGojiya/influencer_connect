@@ -6,36 +6,55 @@ class ProfilesController < ApplicationController
     @profile = @user.profile
   end
 
-def create
-  @profile = @user.build_profile(profile_params)
+  def create
+    @profile = @user.build_profile(profile_params)
 
-  respond_to do |format|
-    if @profile.save
-      format.turbo_stream do
-        redirect_to influencer_profile_path, notice: t("alerts.profiles.created")
+    respond_to do |format|
+      if @profile.save
+        format.turbo_stream do
+          redirect_to influencer_profile_path, notice: t("alerts.profiles.created")
+        end
+        format.html { redirect_to influencer_profile_path, notice: t("alerts.profiles.created") }
+      else
+        format.turbo_stream { render "influencers/form", status: :unprocessable_entity }
+        format.html { render "influencers/form", status: :unprocessable_entity } # change from redirect_to
       end
-      format.html { redirect_to influencer_profile_path, notice: t("alerts.profiles.created") }
-    else
-      format.turbo_stream { render "influencers/form", status: :unprocessable_entity }
-      format.html { render "influencers/form", status: :unprocessable_entity } # change from redirect_to
     end
   end
-end
 
-def update
-  respond_to do |format|
-    if @profile.update(profile_params)
-      format.turbo_stream do
-        # Use turbo_stream to redirect or update a frame
-        redirect_to influencer_profile_path, notice: t("alerts.profiles.updated")
+  def update
+    respond_to do |format|
+      if @profile.update(profile_params)
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace(
+              "profile_progress",
+              partial: "influencers/profile_progress",
+              locals: { profile: @profile }
+            ),
+            turbo_stream.replace(
+              "profile_form",
+              partial: "influencers/form",
+              locals: { profile: @profile }
+            )
+          ]
+        end
+
+        format.html { redirect_to influencer_profile_path, notice: t("alerts.profiles.updated") }
+      else
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "profile_form",
+            partial: "influencers/form",
+            locals: { profile: @profile }
+          ), status: :unprocessable_entity
+        end
+        format.html { render "influencers/form", status: :unprocessable_entity }
       end
-      format.html { redirect_to influencer_profile_path, notice: t("alerts.profiles.updated") }
-    else
-      format.turbo_stream { render "influencers/form", status: :unprocessable_entity }
-      format.html { render "influencers/form", status: :unprocessable_entity } # render instead of redirect
     end
   end
-end
+
+
 
   private
 

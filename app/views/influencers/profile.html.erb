@@ -4,23 +4,9 @@
             <!-- Header Section -->
             <div class="flex items-center justify-between flex-wrap mb-6">
                 <div class="flex items-center justify-center gap-5">
-                    <% completeness = @profile.completeness_percentage %>
-                    <% progress_color =
-                        if completeness == 100
-                            "bg-green-500 text-green-100 border-green-500"
-                        elsif completeness < 50
-                            "bg-red-500 text-red-100 border-red-500"
-                        else
-                            "bg-primary text-primary-content border-primary"
-                        end %>
-
-                    <div
-                    class="radial-progress border-4 <%= progress_color %>"
-                    style="--value:<%= completeness %>;"
-                    aria-valuenow="<%= completeness %>"
-                    role="progressbar">
-                    <%= completeness %>%
-                    </div>
+                <turbo-frame id="profile_progress">
+                    <%= render "influencers/profile_progress", profile: @profile %>
+                </turbo-frame>
 
                     <div>
                         <div>
@@ -55,7 +41,10 @@
             <hr class="border-t border-gray-200 my-8">
 
             <!-- Form Section -->
-            <%= render "influencers/form", profile: @profile, formats: [:html] %>
+             <turbo-frame id="profile_form">
+                <%= render "influencers/form", profile: @profile, formats: [:html] %>
+             </turbo-frame>
+
                     <hr class="border-t border-gray-200 my-8">
 
                     <!-- Email Section -->
