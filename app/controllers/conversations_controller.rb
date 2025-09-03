@@ -13,7 +13,7 @@ class ConversationsController < ApplicationController
 
     # If `open_conversation_id` param exists, preload that conversation
     if params[:open_conversation_id]
-      @conversation = Conversation.find(params[:open_conversation_id])
+      @conversation = Conversation.friendly.find(params[:open_conversation_id])
       if authorized_conversation?(@conversation)
         @messages = @conversation.messages.includes(:user)
         @message = Message.new
@@ -44,8 +44,8 @@ class ConversationsController < ApplicationController
       )
     end
 
-    # Always redirect to index with the conversation pre-selected
-    redirect_to conversations_path(open_conversation_id: @conversation.id)
+    # Always redirect to index with the conversation pre-selected using slug
+    redirect_to conversations_path(open_conversation_id: @conversation.slug)
   end
 
   private
@@ -55,13 +55,13 @@ class ConversationsController < ApplicationController
   end
 
   def set_conversation
-    @conversation = Conversation.find(params[:id])
+    @conversation = Conversation.friendly.find(params[:id])
   end
 
   # Ensure current user is either sender or receiver
   def authorize_conversation!
     unless authorized_conversation?(@conversation)
-      redirect_to conversations_path
+      redirect_to conversations_path, alert: "You are not authorized to view that conversation."
     end
   end
 
