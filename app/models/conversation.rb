@@ -14,11 +14,13 @@ class Conversation < ApplicationRecord
 
   def slug_candidates
     [
-      [parameterize_email(sender.email_address), parameterize_email(receiver.email_address)],
-      [parameterize_email(receiver.email_address), parameterize_email(sender.email_address)], # reversed order fallback
-      [parameterize_email(sender.email_address), parameterize_email(receiver.email_address), SecureRandom.hex(2)] # unique fallback
+      ["chat#{rand(100000..999999)}"],          # chat + 6-digit random
+      ["chat#{rand(100000..999999)}"],          # fallback if first exists
+      ["chat#{SecureRandom.random_number(1_000_000)}"] # final fallback
     ]
   end
+
+
 
   def last_message
     messages.order(created_at: :desc).first
