@@ -74,3 +74,13 @@ gem "faker", "~> 3.3"
 
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
+
+gem 'letter_opener'
+group :development, :test do
+  gem 'mail_view'
+end
+
+group :development do
+  gem 'letter_opener_web'
+end
+

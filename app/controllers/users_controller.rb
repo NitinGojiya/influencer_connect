@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  allow_unauthenticated_access only: [:new, :create]
+  allow_unauthenticated_access only: [:new, :create, :confirm]
 
   def user_delete
     @user = Current.session.user

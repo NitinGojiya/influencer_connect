@@ -82,4 +82,7 @@ config.action_mailer.smtp_settings = {
   enable_starttls_auto: true
 }
 
+config.action_mailer.delivery_method = :letter_opener_web
+config.action_mailer.perform_deliveries = true
+
 end
