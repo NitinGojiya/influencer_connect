@@ -4,14 +4,34 @@
   <%= link_to conversation_path(conversation),
               data: { turbo_frame: "chat_window" },
               class: "flex items-center p-4 border-b hover:bg-gray-100 cursor-pointer" do %>
+
     <div class="flex-shrink-0 w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
       <i class="fa-solid fa-user"></i>
     </div>
-    <div class="ml-3">
-      <p class="text-sm font-medium truncate"><%= other_user.email_address %></p>
-      <p class="text-xs text-gray-500 truncate w-40 md:w-40">
-        <%= conversation.last_message&.content || "No messages yet" %>
-      </p>
+
+    <div class="ml-3 flex-1 flex justify-between items-center">
+      <div class="mr-2">
+        <p class="text-sm font-medium truncate"><%= other_user.email_address %></p>
+        <p class="text-xs text-gray-500 truncate w-40 md:w-40">
+          <% last_msg = conversation.last_message %>
+          <% if last_msg.present? %>
+            <% if last_msg.image.attached? %>
+              📷 Image
+            <% else %>
+              <%= last_msg.content %>
+            <% end %>
+          <% else %>
+            No messages yet
+          <% end %>
+        </p>
+      </div>
+
+      <div class="flex-shrink-0 text-xs text-gray-400">
+        <% if last_msg.present? %>
+          <%= last_msg.created_at.strftime("%-I:%M %p") %>
+        <% end %>
+      </div>
     </div>
+
   <% end %>
 <% end %>

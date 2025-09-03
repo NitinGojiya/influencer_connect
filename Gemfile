@@ -86,4 +86,8 @@ end
 
 gem 'friendly_id'
 
+gem 'cloudinary'
+gem 'activestorage-cloudinary-service'
+
+
 
