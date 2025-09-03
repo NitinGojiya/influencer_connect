@@ -10,7 +10,7 @@
         <div class="grid grid-cols-2 gap-4">
 
           <!-- Influencer Card -->
-          <label class="cursor-pointer border rounded-lg p-4 flex flex-col items-center justify-center hover:shadow-lg transition duration-200
+          <label class="cursor-pointer border hover:border-green-500 rounded-lg p-4 flex flex-col items-center justify-center hover:shadow-lg transition duration-200
             <%= 'border-blue-500 bg-blue-50' if @user.role_to_assign == 'influencer' %>">
             <%= form.radio_button :role_to_assign, "influencer", class: "hidden" %>
             <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-blue-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -20,7 +20,7 @@
           </label>
 
           <!-- Business Owner Card -->
-          <label class="cursor-pointer border rounded-lg p-4 flex flex-col items-center justify-center hover:shadow-lg transition duration-200
+          <label class="cursor-pointer border hover:border-green-500 rounded-lg p-4 flex flex-col items-center justify-center hover:shadow-lg transition duration-200
             <%= 'border-green-500 bg-green-50' if @user.role_to_assign == 'business_owner' %>">
             <%= form.radio_button :role_to_assign, "business_owner", class: "hidden" %>
             <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-green-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
