@@ -1,22 +1,35 @@
 require 'faker'
 require 'open-uri'
 
+# Ensure roles exist
+["business_owner", "influencer", "admin"].each do |role_name|
+  Role.find_or_create_by!(name: role_name)
+end
+
 # Create Business Owner
 business_owner = User.find_or_create_by!(email_address: "business@gmail.com") do |u|
   u.password = "Password@123"
   u.password_confirmation = "Password@123"
+  u.role_to_assign = "business_owner"
 end
-business_owner.add_role :business_owner
+
+unless business_owner.confirmed?
+  business_owner.update_columns(confirmed_at: Time.current, confirmation_token: nil)
+end
+business_owner.add_role :business_owner unless business_owner.has_role?(:business_owner)
 
 # Create Influencers
 20.times do |i|
   user = User.find_or_create_by!(email_address: "influencer#{i + 1}@gmail.com") do |u|
     u.password = "Password@123"
     u.password_confirmation = "Password@123"
+    u.role_to_assign = "influencer"
   end
+
   user.add_role(:influencer) unless user.has_role?(:influencer)
   user.update_columns(confirmed_at: Time.current, confirmation_token: nil) unless user.confirmed?
-  # Generate a random city using Faker
+
+  # Generate a random city
   city_name = Faker::Address.city
   city = City.find_or_create_by!(name: city_name)
 
@@ -32,7 +45,7 @@ business_owner.add_role :business_owner
     content_type: %w[Fashion Tech Food Gaming Travel Lifestyle].sample,
     city: city,
     bio: Faker::Lorem.paragraph(sentence_count: 2),
-    mobile: Faker::PhoneNumber.cell_phone_in_e164
+    mobile: Faker::PhoneNumber.cell_phone_in_e164.gsub(/\D/, '')[0,15]
   )
 
   # Attach profile picture if not already attached
@@ -63,16 +76,7 @@ business_owner.add_role :business_owner
   end
 end
 
-
-content_types = [
-  "Fashion",
-  "Tech",
-  "Food",
-  "Gaming",
-  "Travel",
-  "Lifestyle"
-]
-
-content_types.each do |ct|
+# Seed Content Types
+["Fashion", "Tech", "Food", "Gaming", "Travel", "Lifestyle"].each do |ct|
   ContentType.find_or_create_by!(name: ct)
 end
