@@ -23,7 +23,9 @@
   <% unless authenticated? %>
     <div class="hidden lg:flex items-center space-x-4 font-medium">
       <%= link_to "Sign In", new_session_path, class: "text-gray-700 hover:text-blue-600" %>
-      <button class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors duration-300">Start Free</button>
+      <%= link_to new_user_path do %>
+        <button class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors duration-300">Start Free</button>
+      <% end %>
     </div>
   <% else %>
     <div class="hidden lg:flex items-center space-x-4 font-medium">
@@ -57,8 +59,10 @@
       <a href="/policy" class="hover:text-blue-600 text-blue-500">policy</a>
     </div>
   <% unless authenticated? %>
-    <%= link_to "Sign In", new_session_path, class: "block text-gray-700 hover:text-blue-600" %>
-    <button class="w-full bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors duration-300">Start Free</button>
+  <div class="flex flex-col items-center justify-center space-y-4 mt-4">
+        <%= link_to "Sign In", new_session_path, class: "w-full bg-blue-600 text-center text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors duration-300" %>
+  </div>
+
   <% else %>
     <%= button_to "Log out", session_path, method: :delete, class: "w-full bg-blue-600 text-white px-3 py-2 rounded-full hover:bg-blue-700 transition-colors duration-300" %>
 

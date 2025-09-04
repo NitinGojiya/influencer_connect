@@ -1,0 +1,12 @@
+<% unseen_count = Message
+      .joins(:conversation)
+      .where(conversations: { receiver_id: current_user.id })
+      .where.not(user_id: current_user.id)
+      .where(seen: false)
+      .count %>
+
+    <% if unseen_count.positive? %>
+      <span class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full px-2 py-0.5">
+        <%= unseen_count %>
+      </span>
+<% end %>
