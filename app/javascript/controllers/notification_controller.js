@@ -2,12 +2,12 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   connect() {
-    console.log("Notification controller connected")
-    console.log("Notification.permission =", Notification.permission)
+    // console.log("Notification controller connected")
+    // console.log("Notification.permission =", Notification.permission)
 
     if (Notification.permission === "default") {
       Notification.requestPermission().then(permission => {
-        console.log("Notification permission granted:", permission)
+        // console.log("Notification permission granted:", permission)
       })
     }
 
@@ -15,7 +15,7 @@ export default class extends Controller {
     if (!window.notificationListenerAdded) {
       document.addEventListener("turbo:before-stream-render", this.show.bind(this))
       window.notificationListenerAdded = true
-      console.log("Notification listener added")
+      // console.log("Notification listener added")
     }
   }
 show(event) {
@@ -32,7 +32,7 @@ show(event) {
   const body  = content.dataset.notificationBody || ""
   const url   = content.dataset.notificationUrl || "/"
 
-  console.log("Message notification data:", { title, body, url })
+  // console.log("Message notification data:", { title, body, url })
 
   if (Notification.permission === "granted") {
     const n = new Notification(title, { body })
