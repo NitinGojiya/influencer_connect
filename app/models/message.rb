@@ -7,9 +7,23 @@ class Message < ApplicationRecord
 
   validates :content, presence: true, unless: -> { image.attached? }
 
-  after_create_commit :broadcast_to_sender_and_receiver
+  after_create_commit :broadcast_to_sender_and_receiver, :broadcast_to_notification
+
 
   private
+
+  def broadcast_to_notification
+  message_with_image = Message.with_attached_image.find(id)
+  receiver = conversation.sender == user ? conversation.receiver : conversation.sender
+
+  # only receiver gets a notification
+  broadcast_prepend_to(
+    receiver,
+    target: "notifications",
+    partial: "messages/notification",
+    locals: { message: message_with_image }
+  )
+end
 
   def broadcast_to_sender_and_receiver
     # reload with attachment preloaded

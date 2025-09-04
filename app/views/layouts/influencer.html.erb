@@ -31,6 +31,15 @@
   </head>
 
   <body class="bg-gray-100 min-h-screen flex">
+    <!-- app/views/layouts/application.html.erb or chat view -->
+    <%# turbo_stream_from current_user if authenticated? %>
+    <!-- app/views/layouts/application.html.erb or chat view -->
+    <div id="notifications"
+     data-controller="notification"
+     style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
+</div>
+
+
     <!-- alert -->
     <%=render 'shared/flash'%>
     <!-- navbar -->

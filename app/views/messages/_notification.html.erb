@@ -1,0 +1,10 @@
+<div class="toast"
+     id="<%= dom_id(message) %>"
+     data-notification="message"
+     data-notification-title="New message from <%= message.user.email_address %>"
+     data-notification-body="<%= message.content.presence || 'Sent an image' %>"
+     data-notification-url="<%= conversation_path(message.conversation) %>"
+     style="background: #333; color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; margin-bottom: 0.5rem;">
+  <strong>New message from <%= message.user.email_address %>:</strong>
+  <%= message.content.presence || "Sent an image" %>
+</div>

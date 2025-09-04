@@ -89,5 +89,6 @@ gem 'friendly_id'
 gem 'cloudinary'
 gem 'activestorage-cloudinary-service'
 
+gem 'pry-rails'
 
 
