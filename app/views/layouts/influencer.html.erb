@@ -32,7 +32,7 @@
 
   <body class="bg-gray-100 min-h-screen flex">
     <!-- app/views/layouts/application.html.erb or chat view -->
-    <%# turbo_stream_from current_user if authenticated? %>
+    <% turbo_stream_from current_user if authenticated? %>
     <!-- app/views/layouts/application.html.erb or chat view -->
     <div id="notifications"
      data-controller="notification"

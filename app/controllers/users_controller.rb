@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    redirect_to after_authentication_url if authenticated?
     @user = User.new
   end
 

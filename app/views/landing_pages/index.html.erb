@@ -17,12 +17,28 @@
                     Partner with trusted influencers who amplify your brand’s voice, expand your reach, and drive real results. Together, we turn influence into lasting growth.
                 </p>
                 <div class="mt-8 flex items-center justify-center lg:justify-start space-x-4">
-                     <%= link_to new_user_path do %>
+                    <% if authenticated? %>
+                    <% if current_user.has_role?(:business_owner) %>
+                        <%= link_to business_owners_path do %>
+                            <button class="bg-indigo-600 text-white px-8 py-3 rounded-full font-medium flex items-center space-x-2 hover:bg-indigo-700 transition-colors duration-300">
+                                <span>Find Influencers</span>
+                            </button>
+                        <% end %>
+                        <%else%>
+                           <%= link_to dashboard_path do %>
+                               <button class="bg-indigo-600 text-white px-8 py-3 rounded-full font-medium flex items-center space-x-2 hover:bg-indigo-700 transition-colors duration-300">
+                                   <span>Go to Dashboard</span>
+                               </button>
+                           <% end %>
+                        <%end%>
+                    <% else %>
+                    <%= link_to new_user_path do %>
                     <button class="bg-indigo-600 text-white px-8 py-3 rounded-full font-medium flex items-center space-x-2 hover:bg-indigo-700 transition-colors duration-300">
                         <span>Get Started</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                     </button>
-                    <%end%>
+                    <% end %>
+                    <% end %>
                 </div>
                 <!-- Social proof images -->
                 <div class="mt-12 flex items-center justify-center lg:justify-start -space-x-3">

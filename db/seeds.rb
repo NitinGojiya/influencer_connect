@@ -1,6 +1,7 @@
 require 'faker'
 require 'open-uri'
 
+#  not required users
 # Ensure roles exist
 ["business_owner", "influencer", "admin"].each do |role_name|
   Role.find_or_create_by!(name: role_name)
@@ -76,6 +77,7 @@ business_owner.add_role :business_owner unless business_owner.has_role?(:busines
   end
 end
 
+# these create content types if not already present
 # Seed Content Types
 ["Fashion", "Tech", "Food", "Gaming", "Travel", "Lifestyle"].each do |ct|
   ContentType.find_or_create_by!(name: ct)

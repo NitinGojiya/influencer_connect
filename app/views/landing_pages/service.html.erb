@@ -11,9 +11,27 @@
                 Discover the perfect creators, manage your campaigns seamlessly, and track your success all in one place.
             </p>
             <div class="mt-8">
-                 <%= link_to new_user_path,class: "btn-primary bg-blue-600 inline-block px-8 py-4 text-lg text-white font-bold rounded-full shadow-xl hover:shadow-2xl" do %>
-                    Get Started
-                <% end %>
+                <% if authenticated? %>
+                    <% if current_user.has_role?(:business_owner) %>
+                        <%= link_to business_owners_path do %>
+                            <button class="btn-primary bg-blue-600 inline-block px-8 py-4 text-lg text-white font-bold rounded-full shadow-xl hover:shadow-2xl">
+                                <span>Find Influencers</span>
+                            </button>
+                        <% end %>
+                        <%else%>
+                           <%= link_to dashboard_path do %>
+                               <button class="btn-primary bg-blue-600 inline-block px-8 py-4 text-lg text-white font-bold rounded-full shadow-xl hover:shadow-2xl">
+                                   <span>Go to Dashboard</span>
+                               </button>
+                           <% end %>
+                        <%end%>
+                    <% else %>
+                    <%= link_to new_user_path do %>
+                    <button class="btn-primary bg-blue-600 inline-block px-8 py-4 text-lg text-white font-bold rounded-full shadow-xl hover:shadow-2xl">
+                        <span>Get Started</span>
+                    </button>
+                    <% end %>
+                    <% end %>
             </div>
         </div>
     </section>
