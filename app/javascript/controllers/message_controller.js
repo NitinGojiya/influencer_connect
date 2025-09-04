@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["input", "preview", "submitButton"]
+  static targets = ["input", "preview", "videoPreview", "submitButton"]
 
   connect() {
     this.inputTarget.addEventListener("change", this.showPreview.bind(this))
@@ -13,12 +13,12 @@ export default class extends Controller {
       this.form.addEventListener("turbo:submit-start", () => {
         this.showLoader()
         this.disableButton()
-        this.disableInput() // disable file input
+        this.disableInput()
       })
       this.form.addEventListener("turbo:submit-end", () => {
         this.hideLoader()
         this.enableButton()
-        this.enableInput() // enable file input
+        this.enableInput()
         this.clearPreview()
         this.form.reset()
       })
@@ -29,12 +29,23 @@ export default class extends Controller {
     const file = event.target.files[0]
 
     if (file) {
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        this.previewTarget.src = e.target.result
-        this.previewTarget.classList.remove("hidden")
+      if (file.type.startsWith("image/")) {
+        // Show image preview
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          this.previewTarget.src = e.target.result
+          this.previewTarget.classList.remove("hidden")
+          this.videoPreviewTarget.classList.add("hidden")
+        }
+        reader.readAsDataURL(file)
+      } else if (file.type.startsWith("video/")) {
+        // Show video icon only
+        this.previewTarget.classList.add("hidden")
+        this.previewTarget.src = ""
+        this.videoPreviewTarget.classList.remove("hidden")
+      } else {
+        this.clearPreview()
       }
-      reader.readAsDataURL(file)
     } else {
       this.clearPreview()
     }
@@ -43,6 +54,7 @@ export default class extends Controller {
   clearPreview() {
     this.previewTarget.src = ""
     this.previewTarget.classList.add("hidden")
+    this.videoPreviewTarget.classList.add("hidden")
   }
 
   showLoader() {

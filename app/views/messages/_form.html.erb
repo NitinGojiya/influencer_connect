@@ -28,9 +28,13 @@
       </div>
 
       <!-- Preview container -->
-      <div id="image_preview_container" class="flex justify-start md:justify-center">
+      <div id="image_preview_container" class="flex justify-start md:justify-center space-x-2">
         <img id="image_preview" class="max-h-20 rounded-lg hidden" data-message-target="preview" />
+        <div id="video_preview" class="hidden text-red-600 text-3xl" data-message-target="videoPreview">
+          <i class="fa-solid fa-video"></i>
+        </div>
       </div>
+
     </div>
 
   <% end %>

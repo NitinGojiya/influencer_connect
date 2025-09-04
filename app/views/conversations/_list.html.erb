@@ -14,16 +14,21 @@
         <p class="text-sm font-medium truncate"><%= other_user.email_address %></p>
         <p class="text-xs text-gray-500 truncate w-40 md:w-40">
           <% last_msg = conversation.last_message %>
-          <% if last_msg.present? %>
-            <% if last_msg.image.attached? %>
+          <% if last_msg.present? && last_msg.image.attached? %>
+            <% if last_msg.image.content_type.start_with?('image') %>
               <i class="fa-solid fa-image"></i> Image
+            <% elsif last_msg.image.content_type.start_with?('video') %>
+              <i class="fa-solid fa-video"></i> Video
             <% else %>
-              <%= last_msg.content %>
+              File
             <% end %>
+          <% elsif last_msg.present? %>
+            <%= last_msg.content %>
           <% else %>
             No messages yet
           <% end %>
         </p>
+
       </div>
 
       <div class="flex items-center space-x-2">
