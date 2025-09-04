@@ -16,7 +16,7 @@
           <% last_msg = conversation.last_message %>
           <% if last_msg.present? %>
             <% if last_msg.image.attached? %>
-              📷 Image
+              <i class="fa-solid fa-image"></i> Image
             <% else %>
               <%= last_msg.content %>
             <% end %>
@@ -26,9 +26,17 @@
         </p>
       </div>
 
-      <div class="flex-shrink-0 text-xs text-gray-400">
-        <% if last_msg.present? %>
-          <%= last_msg.created_at.strftime("%-I:%M %p") %>
+      <div class="flex items-center space-x-2">
+        <div class="flex-shrink-0 text-xs text-gray-400">
+          <% if last_msg.present? %>
+            <%= last_msg.created_at.strftime("%-I:%M %p") %>
+          <% end %>
+        </div>
+        <% unseen_count = conversation.messages.where(user: other_user, seen: false).count %>
+        <% if unseen_count > 0 %>
+          <span class="bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
+            <%= unseen_count %>
+          </span>
         <% end %>
       </div>
     </div>

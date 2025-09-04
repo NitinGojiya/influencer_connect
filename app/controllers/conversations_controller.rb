@@ -26,6 +26,14 @@ class ConversationsController < ApplicationController
   def show
     @messages = @conversation.messages.includes(:user)
     @message = Message.new
+
+    # Get the "other user" in the conversation
+    other_user = (@conversation.sender == @user ? @conversation.receiver : @conversation.sender)
+
+    # Mark all messages **sent by the other user** as seen
+    @conversation.messages.where(user: other_user, seen: false).find_each do |message|
+      message.update(seen: true)
+    end
   end
 
   def new
