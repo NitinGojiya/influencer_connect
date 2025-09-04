@@ -3,19 +3,19 @@ require 'open-uri'
 
 # Create Business Owner
 business_owner = User.find_or_create_by!(email_address: "business@gmail.com") do |u|
-  u.password = "password123"
-  u.password_confirmation = "password123"
+  u.password = "Password@123"
+  u.password_confirmation = "Password@123"
 end
 business_owner.add_role :business_owner
 
 # Create Influencers
 20.times do |i|
   user = User.find_or_create_by!(email_address: "influencer#{i + 1}@gmail.com") do |u|
-    u.password = "password123"
-    u.password_confirmation = "password123"
+    u.password = "Password@123"
+    u.password_confirmation = "Password@123"
   end
   user.add_role(:influencer) unless user.has_role?(:influencer)
-
+  user.update_columns(confirmed_at: Time.current, confirmation_token: nil) unless user.confirmed?
   # Generate a random city using Faker
   city_name = Faker::Address.city
   city = City.find_or_create_by!(name: city_name)
@@ -61,4 +61,18 @@ business_owner.add_role :business_owner
       twitter_followers: rand(1_000..50_000)
     )
   end
+end
+
+
+content_types = [
+  "Fashion",
+  "Tech",
+  "Food",
+  "Gaming",
+  "Travel",
+  "Lifestyle"
+]
+
+content_types.each do |ct|
+  ContentType.find_or_create_by!(name: ct)
 end

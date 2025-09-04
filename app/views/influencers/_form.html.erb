@@ -76,6 +76,7 @@
     <div>
       <%= f.label :city_name, "City", class: "block text-sm font-medium text-gray-700" %>
       <%= f.text_field :city_name, placeholder: "Your City",
+        value: (profile.city.name if profile.city),
             class: "mt-2 block w-full rounded-xl border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 py-3 px-4 placeholder-gray-400" %>
     </div>
 
@@ -88,13 +89,17 @@
 
     <!-- Content Type -->
     <div>
-      <%= f.label :content_type, "Content Type", class: "block text-sm font-medium text-gray-700" %>
-      <%= f.text_field :content_type, placeholder: "Your Content Type",
-            class: "mt-2 block w-full rounded-xl border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 py-3 px-4 placeholder-gray-400" %>
-      <% if profile.errors[:content_type].any? %>
-        <p class="text-sm text-red-600 mt-1"><%= profile.errors[:content_type].first %></p>
-      <% end %>
-    </div>
+    <%= f.label :content_type, "Content Type", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.select :content_type,
+          options_from_collection_for_select(ContentType.all, :name, :name, f.object.content_type),
+          { prompt: "Select a Content Type" },
+          class: "mt-2 block w-full rounded-xl border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 py-3 px-4 placeholder-gray-400" %>
+
+    <% if profile.errors[:content_type].any? %>
+      <p class="text-sm text-red-600 mt-1"><%= profile.errors[:content_type].first %></p>
+    <% end %>
+  </div>
+
 
     <!-- Mobile Number -->
     <div>
