@@ -23,7 +23,17 @@
                             N/A
                         <% end %>
                     </span>
-                    <span class="text-xs font-semibold text-green-500 bg-green-100 px-2 py-1 rounded-full">+11.02%</span>
+
+                    <% if @ig_change.is_a?(Hash) %>
+                    <span class="text-xs font-semibold text-<%= @ig_change[:color] %>-500 bg-<%= @ig_change[:color] %>-100 px-2 py-1 rounded-full">
+                        <%= @ig_change[:text] %>
+                    </span>
+                    <% else %>
+                    <span class="text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                        N/A
+                    </span>
+                    <% end %>
+
                 </div>
             </div>
 
@@ -41,28 +51,50 @@
                             N/A
                         <% end %>
                     </span>
-                    <span class="text-xs font-semibold text-red-500 bg-red-100 px-2 py-1 rounded-full">-0.56%</span>
+                    <% if @yt_change.is_a?(Hash) %>
+                     <span class="text-xs font-semibold text-<%= @yt_change[:color] %>-500 bg-<%= @yt_change[:color] %>-100 px-2 py-1 rounded-full">
+                        <%= @yt_change[:text] %>
+                    </span>
+                    <% else %>
+                    <span class="text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                        N/A
+                    </span>
+                    <% end %>
                 </div>
             </div>
 
-            <!-- Card 3: New Users -->
+            <!-- Card 3: twitter -->
             <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-200">
                 <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-sm font-semibold text-gray-500">New Brand</h2>
-                    <i class="fa-solid fa-code-branch text-yellow-500 text-xl"></i>
+                    <h2 class="text-sm font-semibold text-gray-500">Twitter</h2>
+                    <i class="fa-brands fa-twitter text-blue-500 text-xl hover:text-red-500"></i>
                 </div>
                 <div class="flex items-end">
                     <span class="text-3xl font-bold text-gray-800 mr-2">
-                        <%=@business_new.count%>
+                       <% if @profile&.social_platform&.twitter_followers.present? %>
+                            <%= human_count(@profile.social_platform.twitter_followers) %>
+                        <% else %>
+                            N/A
+                        <% end %>
                     </span>
-                    <span class="text-xs font-semibold text-green-500 bg-green-100 px-2 py-1 rounded-full">+15.02%</span>
+                    <% if @tw_change.is_a?(Hash) %>
+                     <span class="text-xs font-semibold text-<%= @tw_change[:color] %>-500 bg-<%= @tw_change[:color] %>-100 px-2 py-1 rounded-full">
+                        <%= @tw_change[:text] %>
+                    </span>
+                    <% else %>
+                    <span class="text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                        N/A
+                    </span>
+                    <% end %>
                 </div>
             </div>
+
+
 
             <!-- Card 4: New Users (similar to 3) -->
             <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-200">
                 <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-sm font-semibold text-gray-500">Increase Promotion</h2>
+                    <h2 class="text-sm font-semibold text-gray-500">Total  Promotion</h2>
                     <i class="fas fa-chart-line text-green-500 text-xl"></i>
                 </div>
                 <div class="flex items-end">

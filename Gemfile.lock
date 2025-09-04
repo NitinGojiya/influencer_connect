@@ -268,6 +268,9 @@ GEM
       oauth2 (>= 1.4, < 3)
       omniauth (~> 2.0)
     ostruct (0.6.3)
+    paper_trail (16.0.0)
+      activerecord (>= 6.1)
+      request_store (~> 1.4)
     parallel (1.27.0)
     parser (3.3.9.0)
       ast (~> 2.4.1)
@@ -342,6 +345,8 @@ GEM
     regexp_parser (2.11.2)
     reline (0.6.2)
       io-console (~> 0.5)
+    request_store (1.7.0)
+      rack (>= 1.4)
     rexml (3.4.2)
     rolify (6.0.1)
     rubocop (1.80.1)
@@ -489,6 +494,7 @@ DEPENDENCIES
   mail_view
   omniauth
   omniauth-google-oauth2
+  paper_trail
   propshaft
   pry-rails
   puma (>= 5.0)

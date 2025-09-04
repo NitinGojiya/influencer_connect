@@ -90,5 +90,6 @@ gem 'cloudinary'
 gem 'activestorage-cloudinary-service'
 
 gem 'pry-rails'
+gem 'paper_trail'
 
 
