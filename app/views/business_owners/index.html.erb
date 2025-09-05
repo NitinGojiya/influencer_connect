@@ -1,5 +1,11 @@
 <!-- Influencer Finder Section -->
-    <section class="container mx-auto px-6 py-12 lg:py-24">
+    <section class="container mx-auto px-6 py-12 lg:py-24" data-controller="loader">
+
+        <!-- Loader overlay (persistent) -->
+        <div data-loader-target="loader" class="hidden absolute inset-0 flex items-center justify-center bg-white/60 z-10">
+            <div class="animate-spin rounded-full h-10 w-10 border-t-4 border-blue-500"></div>
+        </div>
+
         <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-12">
             Find Your Perfect Influencer
         </h2>
@@ -8,7 +14,7 @@
         <%= form_with url: business_owners_path,
               method: :get,
               class: "flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-12",
-             data: { turbo_frame: "_top", turbo_action: "replace" } do %>
+             data: { turbo_frame: "results" } do %>
 
         <!-- Search box -->
         <div class="relative w-full max-w-md">
@@ -48,12 +54,14 @@
 
         <% end %>
         <!-- Placeholder Influencer Cards -->
-        <div id="results" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+         <div>
+           <turbo-frame id="results" data-loader-target="frame"  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 relative">
+            <!-- Influencers list -->
             <%= render partial: "influencer_card",
-           collection: @influencers,
-           as: :influencer,
-           locals: { contact: true } %>
-
-        </div>
+                        collection: @influencers,
+                        as: :influencer,
+                        locals: { contact: true } %>
+            </turbo-frame>
+            </div>
 
     </section>

@@ -1,50 +1,52 @@
 <%= turbo_frame_tag dom_id(conversation) do %>
   <% other_user = (conversation.sender == user ? conversation.receiver : conversation.sender) %>
 
-  <%= link_to conversation_path(conversation),
+<%= button_to conversation_path(conversation),
+              method: :get,
+              form: { class: "w-full" },
               data: { turbo_frame: "chat_window" },
-              class: "flex items-center p-4 border-b hover:bg-gray-100 cursor-pointer" do %>
+              class: "flex items-center w-full p-4 border-b hover:bg-gray-100 cursor-pointer" do %>
 
-    <div class="flex-shrink-0 w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
-      <i class="fa-solid fa-user"></i>
+  <div class="flex-shrink-0 w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
+    <i class="fa-solid fa-user"></i>
+  </div>
+
+  <div class="ml-3 flex-1 flex justify-between items-center">
+    <div class="mr-2">
+      <p class="text-sm font-medium truncate"><%= other_user.email_address %></p>
+      <p class="text-xs text-gray-500 truncate w-40 md:w-40">
+        <% last_msg = conversation.last_message %>
+        <% if last_msg.present? && last_msg.image.attached? %>
+          <% if last_msg.image.content_type.start_with?('image') %>
+            <i class="fa-solid fa-image"></i> Image
+          <% elsif last_msg.image.content_type.start_with?('video') %>
+            <i class="fa-solid fa-video"></i> Video
+          <% else %>
+            File
+          <% end %>
+        <% elsif last_msg.present? %>
+          <%= last_msg.content %>
+        <% else %>
+          No messages yet
+        <% end %>
+      </p>
     </div>
 
-    <div class="ml-3 flex-1 flex justify-between items-center">
-      <div class="mr-2">
-        <p class="text-sm font-medium truncate"><%= other_user.email_address %></p>
-        <p class="text-xs text-gray-500 truncate w-40 md:w-40">
-          <% last_msg = conversation.last_message %>
-          <% if last_msg.present? && last_msg.image.attached? %>
-            <% if last_msg.image.content_type.start_with?('image') %>
-              <i class="fa-solid fa-image"></i> Image
-            <% elsif last_msg.image.content_type.start_with?('video') %>
-              <i class="fa-solid fa-video"></i> Video
-            <% else %>
-              File
-            <% end %>
-          <% elsif last_msg.present? %>
-            <%= last_msg.content %>
-          <% else %>
-            No messages yet
-          <% end %>
-        </p>
-
-      </div>
-
-      <div class="flex items-center space-x-2">
-        <div class="flex-shrink-0 text-xs text-gray-400">
-          <% if last_msg.present? %>
-            <%= last_msg.created_at.strftime("%-I:%M %p") %>
-          <% end %>
-        </div>
-        <% unseen_count = conversation.messages.where(user: other_user, seen: false).count %>
-        <% if unseen_count > 0 %>
-          <span class="bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
-            <%= unseen_count %>
-          </span>
+    <div class="flex items-center space-x-2">
+      <div class="flex-shrink-0 text-xs text-gray-400">
+        <% if last_msg.present? %>
+          <%= last_msg.created_at.strftime("%-I:%M %p") %>
         <% end %>
       </div>
+      <% unseen_count = conversation.messages.where(user: other_user, seen: false).count %>
+      <% if unseen_count > 0 %>
+        <span class="bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
+          <%= unseen_count %>
+        </span>
+      <% end %>
     </div>
+  </div>
 
-  <% end %>
+<% end %>
+
 <% end %>
