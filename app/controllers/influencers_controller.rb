@@ -8,8 +8,8 @@ class InfluencersController < ApplicationController
     profile = @user.profile
 
     # start
-    @social = @user.profile.social_platform
-previous_version = @social.versions.last
+    @social = @user.profile&.social_platform
+previous_version = @social&.versions&.last
 
 previous_attributes = previous_version ? YAML.safe_load(
   previous_version.object,
@@ -28,9 +28,9 @@ previous_ig = previous_attributes["ig_followers"]
 previous_yt = previous_attributes["youtube_subscriber"]
 previous_tw = previous_attributes["twitter_followers"]
 
-@ig_change = change_indicator(@social.ig_followers, previous_ig)
-@yt_change = change_indicator(@social.youtube_subscriber, previous_yt)
-@tw_change = change_indicator(@social.twitter_followers, previous_tw)
+@ig_change = change_indicator(@social&.ig_followers, previous_ig)
+@yt_change = change_indicator(@social&.youtube_subscriber, previous_yt)
+@tw_change = change_indicator(@social&.twitter_followers, previous_tw)
 
     #end
 
@@ -54,7 +54,8 @@ previous_tw = previous_attributes["twitter_followers"]
         category: profile.content_type,
         mobile: profile.mobile.present?,
         mobile_number: profile.mobile,
-        city: profile.city&.id&.to_s
+        city: profile.city&.id&.to_s,
+        city_name: profile.city&.name
       )
     else
       @influencer_card = nil

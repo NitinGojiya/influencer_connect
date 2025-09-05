@@ -1,10 +1,10 @@
 <%= turbo_frame_tag "campaigns_list" do %>
-  <div class="overflow-x-auto -mx-4 px-4">
-    <div class="flex flex-col gap-4 min-w-max max-h-[500px]">
+  <div class="overflow-x-auto ">
+    <div class="flex flex-col gap-4  max-h-[500px]">
       <% if @campaigns.any? %>
         <%= render partial: 'shared/campaign_card', collection: @campaigns, as: :campaign %>
       <% else %>
-        <div class="p-6">
+        <div class="">
           <p class="text-gray-600">No campaigns found for this city.</p>
         </div>
       <% end %>

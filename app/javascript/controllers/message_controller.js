@@ -10,11 +10,18 @@ export default class extends Controller {
     this.loader = document.getElementById("message_loader")
 
     if (this.form) {
-      this.form.addEventListener("turbo:submit-start", () => {
+      this.form.addEventListener("turbo:submit-start", (event) => {
+        if (!this.hasContent()) {
+          event.preventDefault() // Stop form submission
+          // alert("Please add text or select an image/video before sending.")
+          return
+        }
+
         this.showLoader()
         this.disableButton()
         this.disableInput()
       })
+
       this.form.addEventListener("turbo:submit-end", () => {
         this.hideLoader()
         this.enableButton()
@@ -30,7 +37,6 @@ export default class extends Controller {
 
     if (file) {
       if (file.type.startsWith("image/")) {
-        // Show image preview
         const reader = new FileReader()
         reader.onload = (e) => {
           this.previewTarget.src = e.target.result
@@ -39,7 +45,6 @@ export default class extends Controller {
         }
         reader.readAsDataURL(file)
       } else if (file.type.startsWith("video/")) {
-        // Show video icon only
         this.previewTarget.classList.add("hidden")
         this.previewTarget.src = ""
         this.videoPreviewTarget.classList.remove("hidden")
@@ -51,7 +56,13 @@ export default class extends Controller {
     }
   }
 
+  hasContent() {
+    // Check if text input has content OR a file is selected
+    return (this.inputTarget.value.trim() !== "" || this.inputTarget.files.length > 0)
+  }
+
   clearPreview() {
+    this.inputTarget.value = ""
     this.previewTarget.src = ""
     this.previewTarget.classList.add("hidden")
     this.videoPreviewTarget.classList.add("hidden")

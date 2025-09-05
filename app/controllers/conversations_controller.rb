@@ -6,6 +6,7 @@ class ConversationsController < ApplicationController
   before_action :authorize_conversation!, only: [:show]
 
   def index
+    @profile = @user.profile
     @conversations = Conversation
       .includes(:messages, :sender, :receiver)
       .where("sender_id = :user_id OR receiver_id = :user_id", user_id: @user.id)

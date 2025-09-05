@@ -33,7 +33,8 @@ class BusinessOwnersController < ApplicationController
         category: profile.content_type,
         mobile: profile.mobile.present?,
         mobile_number: profile.mobile,
-        city: profile.city&.id&.to_s
+        city: profile.city&.id&.to_s,
+        city_name: profile.city&.name
       )
     end
 

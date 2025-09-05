@@ -1,5 +1,14 @@
 <div
   class="bg-gray-100 rounded-3xl p-6 flex flex-col items-center text-center shadow-lg w-full sm:w-80 md:w-3xs lg:w-[350px] mx-auto mb-6 h-full">
+  <% if local_assigns[:owner] %>
+    <div class="flex justify-end items-end">
+      <%= link_to influencer_profile_path, method: :get,
+          class: "text-indigo-600 hover:text-indigo-800" do %>
+        <i class="fas fa-edit fa-lg"></i>
+      <% end %>
+
+    </div>
+  <% end %>
 
   <!-- Profile Image -->
   <img src="<%= influencer.photo_url %>" alt="<%= influencer.name %>"
@@ -47,6 +56,7 @@
   <div class="mt-4 w-full text-left space-y-2 text-gray-700 text-sm">
     <p><span class="font-semibold">Language:</span> <%= influencer.language %></p>
     <p><span class="font-semibold">Category:</span> <%= influencer.category %></p>
+    <p><span class="font-semibold">City:</span> <%= influencer.city_name %></p>
     <!-- <p><span class="font-semibold">Mobile:</span> <%# influencer.mobile_number %></p> -->
   </div>
 

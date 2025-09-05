@@ -5,10 +5,20 @@
               method: :get,
               form: { class: "w-full" },
               data: { turbo_frame: "chat_window" },
-              class: "flex items-center w-full p-4 border-b hover:bg-gray-100 cursor-pointer" do %>
+              class: "flex items-center w-full p-4 border-b hover:bg-white cursor-pointer" do %>
 
   <div class="flex-shrink-0 w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
-    <i class="fa-solid fa-user"></i>
+          <% initial = if other_user&.profile&.full_name.present?
+                other_user.profile.full_name[0]
+              elsif other_user.email_address.present?
+                other_user.email_address[0]
+              else
+                "N"
+              end %>
+
+       <%= image_tag( other_user&.profile&.profile_pic&.attached? ?
+                      url_for(other_user.profile.profile_pic.variant(resize_to_fill: [150, 150]).processed) :
+                      "https://placehold.co/100x100/A020F0/FFFFFF?text=#{initial}", alt: "photo", class: "rounded-full") %>
   </div>
 
   <div class="ml-3 flex-1 flex justify-between items-center">

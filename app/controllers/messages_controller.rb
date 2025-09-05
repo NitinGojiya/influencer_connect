@@ -4,6 +4,20 @@ class MessagesController < ApplicationController
 
   def create
     @message = @conversation.messages.new(message_params.merge(user: current_user))
+    if @message.content.blank? && !@message.image.attached?
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "message_form",
+            partial: "messages/form",
+            locals: { conversation: @conversation, message: @message }
+          )
+        end
+        format.html { redirect_to @conversation, alert: "Cannot send empty message" }
+      end
+      return
+    end
+
     if @message.save
       head :ok # ✅ no extra reload, the model handles broadcasting
     else

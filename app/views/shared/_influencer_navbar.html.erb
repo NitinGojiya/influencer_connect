@@ -4,10 +4,10 @@
     <i class="fas fa-th"></i>
   </a>
 
-  <a href="#" class="text-2xl p-3 rounded-lg transition-colors duration-200
-    <%= 'bg-white text-black' if controller_name == 'time_logs' %>">
+  <!-- <a href="#" class="text-2xl p-3 rounded-lg transition-colors duration-200
+    <%# 'bg-white text-black' if controller_name == 'time_logs' %>">
     <i class="far fa-clock"></i>
-  </a>
+  </a> -->
 
   <a href="/influencer/profile" class="text-2xl p-3 rounded-lg transition-colors duration-200
     <%= 'bg-white text-black' if controller_name == 'influencers' && action_name == 'profile' %>">
@@ -19,10 +19,10 @@
     <i class="far fa-comments"></i>
   </a>
 
-  <a href="#" class="text-2xl p-3 rounded-lg transition-colors duration-200
-    <%= 'bg-white text-black' if controller_name == 'settings' %>">
+  <!-- <a href="#" class="text-2xl p-3 rounded-lg transition-colors duration-200
+    <%# 'bg-white text-black' if controller_name == 'settings' %>">
     <i class="fas fa-cog"></i>
-  </a>
+  </a> -->
 
   <%= button_to session_path, method: :delete, class:"text-2xl p-3 rounded-lg hover:bg-white hover:text-black hover:bg-opacity-30 transition-colors duration-200" do %>
     <i class="fa-solid fa-arrow-right-from-bracket"></i>

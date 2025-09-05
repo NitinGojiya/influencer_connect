@@ -1,7 +1,31 @@
-<div class="<%= message_user_alignment(message, current_user) %>">
-  <div class="inline-block px-4 py-2 rounded-2xl
-    <%= message_user_style(message, current_user) %>">
+<div class="chat <%= message.user == current_user ? 'chat-end' : 'chat-start' %>">
+  <div class="chat-image avatar">
+    <div class="w-10 rounded-full">
+     <% initial = if message.user&.profile&.full_name.present?
+                message.user.profile.full_name[0]
+              elsif message.user.email_address.present?
+                message.user.email_address[0]
+              else
+                "N"
+              end %>
 
+<%= image_tag(
+      message.user&.profile&.profile_pic&.attached? ?
+        url_for(message.user.profile.profile_pic.variant(resize_to_fill: [150, 150]).processed) :
+        "https://placehold.co/100x100/A020F0/FFFFFF?text=#{initial}",
+      alt: "photo"
+) %>
+
+    </div>
+  </div>
+
+  <div class="chat-header">
+    <%= "You" if message.user == current_user %>
+    <%= message.user.email_address unless message.user == current_user %>
+    <time class="text-xs opacity-50"><%= time_ago_in_words(message.created_at) if message&.created_at %> ago</time>
+  </div>
+
+  <div class="chat-bubble <%= message_user_style(message, current_user) %> inline-block px-4 py-2 rounded-2xl max-w-[300px]">
     <% if message.content.present? %>
       <p class="mb-2"><%= message.content %></p>
     <% end %>
@@ -9,7 +33,7 @@
     <% if message.image.attached? %>
       <% if message.image.content_type.starts_with?("image/") %>
         <%= link_to url_for(message.image), target: "_blank" do %>
-        <%= image_tag url_for(message.image), class: "rounded-lg mt-2 max-w-[300px] max-h-[300px]" %>
+          <%= image_tag url_for(message.image), class: "rounded-lg mt-2 max-w-[200px] max-h-[200px]" %>
         <% end %>
       <% else %>
         <%= link_to message.image.filename.to_s, url_for(message.image),
@@ -18,7 +42,13 @@
     <% end %>
   </div>
 
-  <div class="text-xs text-gray-400 mt-1">
+  <div class="chat-footer opacity-50">
+  <% if message.user == current_user %>
+    <%# Show status only for messages sent by current user %>
+    <%= message.seen? ? "Seen" : "Delivered" %>
+  <% else %>
     <%= time_ago_in_words(message.created_at) %> ago
-  </div>
+  <% end %>
+</div>
+
 </div>

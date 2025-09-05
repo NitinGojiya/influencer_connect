@@ -1,176 +1,171 @@
 <div class="max-w-7xl mx-auto p-5">
-        <!-- Dashboard Header -->
-        <header class="flex flex-col sm:flex-row justify-between items-center mb-6">
-            <h1 class="text-3xl font-bold text-gray-800 mb-2 sm:mb-0">Overview</h1>
-            <div class="flex items-center space-x-2 text-gray-600 text-sm">
+    <!-- Dashboard Header -->
+    <header class="flex flex-col sm:flex-row justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2 sm:mb-0">Overview</h1>
+        <div class="flex items-center space-x-2 text-gray-600 text-sm">
+        </div>
+    </header>
+
+    <!-- Top row of summary cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+        <!-- Card 1: Views -->
+        <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-200">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-sm font-semibold text-gray-500">IG Follower</h2>
+
+                <i class="fa-brands fa-instagram text-xl"></i>
             </div>
-        </header>
+            <div class="flex items-end">
+                <span class="text-3xl font-bold text-gray-800 mr-2">
+                    <% if @profile&.social_platform&.ig_followers.present? %>
+                        <%= human_count(@profile.social_platform.ig_followers) %>
+                            <% else %>
+                                N/A
+                                <% end %>
+                </span>
 
-        <!-- Top row of summary cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-            <!-- Card 1: Views -->
-            <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-200">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-sm font-semibold text-gray-500">IG Follower</h2>
-
-                    <i class="fa-brands fa-instagram text-xl"></i>
-                </div>
-                <div class="flex items-end">
-                    <span class="text-3xl font-bold text-gray-800 mr-2">
-                        <% if @profile&.social_platform&.ig_followers.present? %>
-                            <%= human_count(@profile.social_platform.ig_followers) %>
-                        <% else %>
-                            N/A
-                        <% end %>
-                    </span>
-
-                    <% if @ig_change.is_a?(Hash) %>
-                    <span class="text-xs font-semibold text-<%= @ig_change[:color] %>-500 bg-<%= @ig_change[:color] %>-100 px-2 py-1 rounded-full">
+                <% if @ig_change.is_a?(Hash) %>
+                    <span
+                        class="text-xs font-semibold text-<%= @ig_change[:color] %>-500 bg-<%= @ig_change[:color] %>-100 px-2 py-1 rounded-full">
                         <%= @ig_change[:text] %>
                     </span>
                     <% else %>
-                    <span class="text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-                        N/A
-                    </span>
-                    <% end %>
-
-                </div>
-            </div>
-
-            <!-- Card 2: Visits -->
-            <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-200">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-sm font-semibold text-gray-500">Youtube</h2>
-                    <i class="fa-brands fa-youtube text-purple-500 text-xl hover:text-red-500"></i>
-                </div>
-                <div class="flex items-end">
-                    <span class="text-3xl font-bold text-gray-800 mr-2">
-                       <% if @profile&.social_platform&.youtube_subscriber.present? %>
-                            <%= human_count(@profile.social_platform.youtube_subscriber) %>
-                        <% else %>
+                        <span class="text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
                             N/A
+                        </span>
                         <% end %>
-                    </span>
-                    <% if @yt_change.is_a?(Hash) %>
-                     <span class="text-xs font-semibold text-<%= @yt_change[:color] %>-500 bg-<%= @yt_change[:color] %>-100 px-2 py-1 rounded-full">
+
+            </div>
+        </div>
+
+        <!-- Card 2: Visits -->
+        <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-200">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-sm font-semibold text-gray-500">Youtube</h2>
+                <i class="fa-brands fa-youtube text-purple-500 text-xl hover:text-red-500"></i>
+            </div>
+            <div class="flex items-end">
+                <span class="text-3xl font-bold text-gray-800 mr-2">
+                    <% if @profile&.social_platform&.youtube_subscriber.present? %>
+                        <%= human_count(@profile.social_platform.youtube_subscriber) %>
+                            <% else %>
+                                N/A
+                                <% end %>
+                </span>
+                <% if @yt_change.is_a?(Hash) %>
+                    <span
+                        class="text-xs font-semibold text-<%= @yt_change[:color] %>-500 bg-<%= @yt_change[:color] %>-100 px-2 py-1 rounded-full">
                         <%= @yt_change[:text] %>
                     </span>
                     <% else %>
-                    <span class="text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-                        N/A
-                    </span>
-                    <% end %>
-                </div>
-            </div>
-
-            <!-- Card 3: twitter -->
-            <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-200">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-sm font-semibold text-gray-500">Twitter</h2>
-                    <i class="fa-brands fa-twitter text-blue-500 text-xl hover:text-red-500"></i>
-                </div>
-                <div class="flex items-end">
-                    <span class="text-3xl font-bold text-gray-800 mr-2">
-                       <% if @profile&.social_platform&.twitter_followers.present? %>
-                            <%= human_count(@profile.social_platform.twitter_followers) %>
-                        <% else %>
+                        <span class="text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
                             N/A
+                        </span>
                         <% end %>
-                    </span>
-                    <% if @tw_change.is_a?(Hash) %>
-                     <span class="text-xs font-semibold text-<%= @tw_change[:color] %>-500 bg-<%= @tw_change[:color] %>-100 px-2 py-1 rounded-full">
+            </div>
+        </div>
+
+        <!-- Card 3: twitter -->
+        <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-200">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-sm font-semibold text-gray-500">Twitter</h2>
+                <i class="fa-brands fa-twitter text-blue-500 text-xl hover:text-red-500"></i>
+            </div>
+            <div class="flex items-end">
+                <span class="text-3xl font-bold text-gray-800 mr-2">
+                    <% if @profile&.social_platform&.twitter_followers.present? %>
+                        <%= human_count(@profile.social_platform.twitter_followers) %>
+                            <% else %>
+                                N/A
+                                <% end %>
+                </span>
+                <% if @tw_change.is_a?(Hash) %>
+                    <span
+                        class="text-xs font-semibold text-<%= @tw_change[:color] %>-500 bg-<%= @tw_change[:color] %>-100 px-2 py-1 rounded-full">
                         <%= @tw_change[:text] %>
                     </span>
                     <% else %>
-                    <span class="text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-                        N/A
-                    </span>
-                    <% end %>
-                </div>
-            </div>
-
-
-
-            <!-- Card 4: New Users (similar to 3) -->
-            <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-200">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-sm font-semibold text-gray-500">Total  Promotion</h2>
-                    <i class="fas fa-chart-line text-green-500 text-xl"></i>
-                </div>
-                <div class="flex items-end">
-                    <span class="text-3xl font-bold text-gray-800 mr-2">
-                        <%= @campaigns.count %>
-                    </span>
-                    <span class="text-xs font-semibold text-green-500 bg-green-100 px-2 py-1 rounded-full">+6.07%</span>
-                </div>
+                        <span class="text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                            N/A
+                        </span>
+                        <% end %>
             </div>
         </div>
 
-        <!-- Middle row of charts -->
-        <div class="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-6">
-            <!-- Left chart: Total Users line graph -->
-            <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-200 ">
-            <div>
-                <div class="flex items-center justify-between pb-4 border-b border-gray-200">
+
+
+        <!-- Card 4: New Users (similar to 3) -->
+        <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-200">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-sm font-semibold text-gray-500">Total Promotion</h2>
+                <i class="fas fa-chart-line text-green-500 text-xl"></i>
+            </div>
+            <div class="flex items-end">
+                <span class="text-3xl font-bold text-gray-800 mr-2">
+                    <%= @campaigns.count %>
+                </span>
+                <span class="text-xs font-semibold text-green-500 bg-green-100 px-2 py-1 rounded-full">+6.07%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Middle row of charts -->
+    <div class="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-6">
+        <!-- Left chart: Total Users line graph -->
+        <div class="bg-white rounded-2xl shadow-md border border-gray-200 ">
+            <div >
+                <div class="p-3 flex md:flex-row flex-col items-start md:items-center md:justify-between justify-start gap-2 pb-4 border-b border-gray-200">
                     <div>
                         <h2 class="text-2xl sm:text-3xl font-bold text-gray-800">
-                        Live Campaign
-                         </h2>
+                            Live Campaign
+                        </h2>
                     </div>
                     <div>
-                     <span class="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-800 ring-1 ring-inset ring-green-600/20 shadow-md">
-                    <svg class="w-2 h-2 mr-1 animate-pulse" fill="currentColor" viewBox="0 0 8 8">
-                        <circle cx="4" cy="4" r="3" />
-                    </svg>
-                    LIVE
-                </span>
+                        <span
+                            class="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-800 ring-1 ring-inset ring-green-600/20 shadow-md">
+                            <svg class="w-2 h-2 mr-1 animate-pulse" fill="currentColor" viewBox="0 0 8 8">
+                                <circle cx="4" cy="4" r="3" />
+                            </svg>
+                            LIVE
+                        </span>
                     </div>
+                    <div class="flex items-center justify-center">
+                        <%= form_with url: dashboard_path, method: :get, class: "" , data: { turbo_frame: "_top" ,
+                            turbo_action: "replace" } do |f| %>
 
-
-            <div class="flex items-center justify-center">
-           <%= form_with url: dashboard_path,
-              method: :get,
-              class: "",
-              data: { turbo_frame: "_top", turbo_action: "replace" } do |f| %>
-
-            <div class="relative w-full sm:w-auto">
-                <%= select_tag :city_id,
-                    options_from_collection_for_select(City.order(:name), :id, :name, params[:city_id]),
-                    prompt: "Select All City",
-                    class: "cursor-pointer block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-full leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-                    onchange: "this.form.submit();" %>
-            </div>
-
-            <% end %>
-
-        </div>
-
-        </div>
+                            <div class="relative w-full sm:w-auto">
+                                <%= select_tag :city_id, options_from_collection_for_select(City.order(:name), :id,
+                                    :name, params[:city_id]), prompt: "Select All City" ,
+                                    class: "cursor-pointer block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-full leading-tight focus:outline-none focus:bg-white focus:border-gray-500", onchange: "this.form.submit();" %>
+                            </div>
+                            <% end %>
+                    </div>
+                </div>
             </div>
 
             <div class="flex items-center justify-center">
-                <%=render 'campaign'%>
-            </div>
+                <%=render 'campaign' %>
             </div>
         </div>
+    </div>
 
-        <!-- Bottom row of charts -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                        <!-- Right chart: Traffic by Website -->
-            <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-200">
-                <h2 class="text-lg font-bold text-gray-800 mb-4">Influencer Profile Overview</h2>
-                <!-- List of websites with bar indicators -->
-             <div class="space-y-4">
-            <% if @influencer_card.present? %>
-                <%= render partial: "business_owners/influencer_card", locals: { influencer: @influencer_card } %>
-            <% else %>
-                <p class="text-gray-500 text-center">No influencer data available.</p>
-            <% end %>
+    <!-- Bottom row of charts -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <!-- Right chart: Traffic by Website -->
+        <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-200">
+            <h2 class="text-lg font-bold text-gray-800 mb-4">Influencer Profile Overview</h2>
+            <!-- List of websites with bar indicators -->
+            <div class="space-y-4">
+                <% if @influencer_card.present? %>
+                    <%= render partial: "business_owners/influencer_card" , locals: { influencer:
+                        @influencer_card,owner:true } %>
+                        <% else %>
+                            <p class="text-gray-500 text-center">No influencer data available.</p>
+                            <% end %>
             </div>
 
-            </div>
-            <!-- Right chart: Traffic by Location -->
-            <%=render 'city_graph'%>
         </div>
+        <!-- Right chart: Traffic by Location -->
+        <%=render 'city_graph' %>
+    </div>
 </div>
-

@@ -1,6 +1,6 @@
 <%# _campaign_card.html.erb - expects local variable `campaign` %>
 
-<div class="w-full max-w-[780px] bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl shadow-sm p-5 flex flex-col md:flex-row items-start gap-4">
+<div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl shadow-sm p-5 flex flex-col md:flex-row items-start gap-4">
   <!-- left: image / icon -->
   <div class="flex-shrink-0">
     <!-- replace with real image if you have one -->
@@ -10,7 +10,7 @@
   </div>
 
   <!-- middle: details -->
-  <div class="flex-1 w-full">
+  <div class="flex-1">
     <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
       <div>
         <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100"><%= campaign.content_type.presence || "Campaign" %></h3>

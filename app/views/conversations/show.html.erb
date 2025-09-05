@@ -9,14 +9,24 @@
     <% other_user = (@conversation.sender == @user ? @conversation.receiver : @conversation.sender) %>
     <div class="p-4 border-b border-gray-300 bg-white flex items-center">
       <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
-        <i class="fa-solid fa-user"></i>
+        <% initial = if other_user&.profile&.full_name.present?
+                other_user.profile.full_name[0]
+              elsif other_user.email_address.present?
+                other_user.email_address[0]
+              else
+                "N"
+              end %>
+
+       <%= image_tag( other_user&.profile&.profile_pic&.attached? ?
+                      url_for(other_user.profile.profile_pic.variant(resize_to_fill: [150, 150]).processed) :
+                      "https://placehold.co/100x100/A020F0/FFFFFF?text=#{initial}", alt: "photo", class: "rounded-full") %>
       </div>
       <h2 class="ml-3 font-semibold text-black"><%= other_user.email_address %></h2>
     </div>
 
     <!-- Messages -->
     <div id="messages"
-         class="flex-1 overflow-y-auto p-4 space-y-2 bg-gray-50"
+         class="flex-1 overflow-y-auto p-4 space-y-2"
          data-controller="autoscroll">
       <%= render partial: 'messages/message', collection: @messages, as: :message %>
     </div>

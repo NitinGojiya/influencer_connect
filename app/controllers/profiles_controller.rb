@@ -25,6 +25,8 @@ class ProfilesController < ApplicationController
   def update
     respond_to do |format|
       if @profile.update(profile_params)
+        flash.now[:notice] = t("alerts.profiles.updated")
+
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace(
@@ -36,24 +38,36 @@ class ProfilesController < ApplicationController
               "profile_form",
               partial: "influencers/form",
               locals: { profile: @profile }
+            ),
+            turbo_stream.replace(
+              "flash",
+              partial: "shared/flash"
             )
           ]
         end
 
         format.html { redirect_to influencer_profile_path, notice: t("alerts.profiles.updated") }
       else
+        flash.now[:alert] = t("alerts.profiles.update_failed")
+
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(
-            "profile_form",
-            partial: "influencers/form",
-            locals: { profile: @profile }
-          ), status: :unprocessable_entity
+          render turbo_stream: [
+            turbo_stream.replace(
+              "profile_form",
+              partial: "influencers/form",
+              locals: { profile: @profile }
+            ),
+            turbo_stream.replace(
+              "flash",
+              partial: "shared/flash"
+            )
+          ], status: :unprocessable_entity
         end
+
         format.html { render "influencers/form", status: :unprocessable_entity }
       end
     end
   end
-
 
 
   private
