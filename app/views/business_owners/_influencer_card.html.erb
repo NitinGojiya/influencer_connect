@@ -1,5 +1,5 @@
 <div
-  class="bg-gray-100 rounded-3xl p-6 flex flex-col items-center text-center shadow-lg w-full sm:w-80 md:w-3xs lg:w-[350px] mx-auto mb-6 h-full">
+  class="card bg-gray-100 rounded-3xl p-6 flex flex-col items-center text-center shadow-lg w-full sm:w-80 md:w-3xs lg:w-[350px] mx-auto mb-6 h-full">
   <% if local_assigns[:owner] %>
     <div class="flex justify-end items-end">
       <%= link_to influencer_profile_path, method: :get,
@@ -63,11 +63,11 @@
   <!-- Chat Form -->
 <% if local_assigns[:contact] %>
   <div class="mt-4 flex flex-col gap-2 w-full">
-    <%= form_with url: conversations_path, method: :post, class: "space-y-2" do %>
+    <%= form_with url: conversations_path, method: :post, class: "space-y-2",data: { turbo: false } do %>
       <%= hidden_field_tag "conversation[receiver_id]", influencer.receiver_id %>
 
       <%= submit_tag "Get Contact & Start Chat",
-          class: "bg-indigo-500 text-white px-6 py-2 rounded-full hover:bg-indigo-600 transition-colors duration-300 w-full" %>
+          class: "card-button bg-indigo-500 text-white px-6 py-2 rounded-full hover:bg-indigo-600 transition-colors duration-300 w-full" %>
     <% end %>
   </div>
 <% end %>
