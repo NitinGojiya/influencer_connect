@@ -1,76 +1,116 @@
 <div
-  class="card bg-gray-100 rounded-3xl p-6 flex flex-col items-center text-center shadow-lg w-full sm:w-80 md:w-3xs lg:w-[350px] mx-auto mb-6 h-full">
+  class="hover:shadow-lg transition-shadow duration-300 shadow-blue-700 p-6 rounded-3xl border border-secondary shadow-card glass-card backdrop-blur-lg flex flex-col relative group w-full sm:w-80 lg:w-[350px] mx-auto mb-6 h-full overflow-hidden">
+
+  <!-- Glow Effect -->
+  <div class="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 opacity-0 group-hover:opacity-10 transition duration-500 rounded-3xl"></div>
+
   <% if local_assigns[:owner] %>
-    <div class="flex justify-end items-end">
+    <div class="flex justify-end mb-2 relative z-10">
       <%= link_to influencer_profile_path, method: :get,
-          class: "text-indigo-600 hover:text-indigo-800" do %>
+          class: "text-primary hover:text-primary-light transition-colors" do %>
         <i class="fas fa-edit fa-lg"></i>
       <% end %>
-
     </div>
   <% end %>
 
+  <!-- Category / Content Type Badge -->
+  <span class="absolute top-4 right-4 bg-secondary text-secondary-foreground text-xs font-medium px-2.5 py-0.5 rounded-full z-10">
+    <%= influencer.category %>
+  </span>
+
   <!-- Profile Image -->
-  <img src="<%= influencer.photo_url %>" alt="<%= influencer.name %>"
-    class="w-32 h-32 rounded-full mb-4 border-4 border-indigo-500">
+  <div class="relative z-10 flex flex-col items-center mb-4">
+    <div class="relative">
+      <img src="<%= influencer.photo_url %>" alt="<%= influencer.name %>"
+        class="w-20 h-20 rounded-full border-4 border-secondary shadow-lg object-cover">
+      <% if influencer.verified? %>
+        <div
+          class="absolute -top-2 -right-2 w-7 h-7 bg-indigo-600 text-white rounded-full flex items-center justify-center shadow">
+          <i class="fas fa-check fa-xs"></i>
+        </div>
+      <% end %>
+    </div>
 
-  <!-- Name & Username -->
-  <h3 class="text-xl font-bold text-gray-800">
-    <%= influencer.name %>
-  </h3>
-  <p class="text-gray-500 mb-2">
-    <a href="mailto:<%= influencer.email || '' %>">
-      <%= influencer.email || "unknown_user" %>
-    </a>
-  </p>
+    <!-- Name & Email -->
+    <h2 class="text-xl font-semibold text-card-foreground mt-3">
+      <%= influencer.name %>
+    </h2>
+    <p class="text-muted-foreground text-sm">
+      <a href="mailto:<%= influencer.email || '' %>">
+        <%= influencer.email || "unknown_user" %>
+      </a>
+    </p>
 
+    <!-- City -->
+    <div class="flex items-center text-muted-foreground text-sm mt-1">
+      <i class="fas fa-map-marker-alt mr-1 text-xs"></i>
+      <span><%= influencer.city_name %></span>
+    </div>
+  </div>
 
-  <!-- Description -->
-  <p class="mt-2 text-sm text-gray-600">
+  <!-- Bio -->
+  <p class="text-sm text-muted-foreground mb-4 line-clamp-2 relative z-10">
     <%= influencer.bio %>
   </p>
 
+  <!-- Social Stats -->
+  <div class="grid grid-cols-3 text-center border-t border-b border-muted-foreground/30 py-4 mb-4 relative z-10">
+    <div>
+      <p class="text-card-foreground font-bold">
+        <%= influencer.instagram_followers || "N/A" %>
+      </p>
+      <p class="text-xs text-muted-foreground">IG</p>
+    </div>
+    <div class="border-x border-muted-foreground/30">
+      <p class="text-card-foreground font-bold">
+        <%= influencer.youtube_subscribers || "N/A" %>
+      </p>
+      <p class="text-xs text-muted-foreground">YT</p>
+    </div>
+    <div>
+      <p class="text-card-foreground font-bold">
+        <%= influencer.twitter_followers || "N/A" %>
+      </p>
+      <p class="text-xs text-muted-foreground">X</p>
+    </div>
+  </div>
+
   <!-- Social Media Links -->
-  <div class="flex flex-col space-y-2 mt-3 text-gray-700 w-full">
-    <div class="flex items-center justify-center space-x-2">
-      <i class="fab fa-instagram text-pink-500 fa-lg"></i>
-      <a href="<%= influencer.ig_link %>" target="_blank" class="font-medium">
-        <%= influencer.instagram_followers || "N/A" %> Followers
+  <div class="flex justify-center gap-3 mb-4 relative z-10">
+    <% if influencer.ig_link.present? %>
+      <a href="<%= influencer.ig_link %>" target="_blank"
+        class="w-8 h-8 flex items-center justify-center rounded-full bg-pink-100 text-pink-600 hover:bg-pink-200 transition">
+        <i class="fab fa-instagram"></i>
       </a>
-    </div>
-    <div class="flex items-center justify-center space-x-2">
-      <i class="fab fa-youtube text-red-600 fa-lg"></i>
-      <a href="<%= influencer.youtube_link %>" target="_blank" class="font-medium">
-        <%= influencer.youtube_subscribers || "N/A" %> Subscribers
+    <% end %>
+    <% if influencer.youtube_link.present? %>
+      <a href="<%= influencer.youtube_link %>" target="_blank"
+        class="w-8 h-8 flex items-center justify-center rounded-full bg-red-100 text-red-600 hover:bg-red-200 transition">
+        <i class="fab fa-youtube"></i>
       </a>
-    </div>
-    <div class="flex items-center justify-center space-x-2">
-      <i class="fab fa-twitter text-blue-500 fa-lg"></i>
-      <a href="<%= influencer.twitter_link %>" target="_blank" class="font-medium">
-        <%= influencer.twitter_followers || "N/A" %> Followers
+    <% end %>
+    <% if influencer.twitter_link.present? %>
+      <a href="<%= influencer.twitter_link %>" target="_blank"
+        class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 transition">
+        <i class="fab fa-twitter"></i>
       </a>
-    </div>
+    <% end %>
   </div>
 
   <!-- Details -->
-  <div class="mt-4 w-full text-left space-y-2 text-gray-700 text-sm">
-    <p><span class="font-semibold">Language:</span> <%= influencer.language %></p>
-    <p><span class="font-semibold">Category:</span> <%= influencer.category %></p>
-    <p><span class="font-semibold">City:</span> <%= influencer.city_name %></p>
-    <!-- <p><span class="font-semibold">Mobile:</span> <%# influencer.mobile_number %></p> -->
+  <div class="mt-3 space-y-1 text-sm text-muted-foreground relative z-10">
+    <p><span class="font-semibold text-card-foreground">Language:</span> <%= influencer.language %></p>
+
   </div>
 
   <!-- Chat Form -->
-<% if local_assigns[:contact] %>
-  <div class="mt-4 flex flex-col gap-2 w-full">
-    <%= form_with url: conversations_path, method: :post, class: "space-y-2",data: { turbo: false } do %>
-      <%= hidden_field_tag "conversation[receiver_id]", influencer.receiver_id %>
-
-      <%= submit_tag "Get Contact & Start Chat",
-          class: "card-button bg-indigo-500 text-white px-6 py-2 rounded-full hover:bg-indigo-600 transition-colors duration-300 w-full" %>
-    <% end %>
-  </div>
-<% end %>
-
-
+  <% if local_assigns[:contact] %>
+    <div class="mt-5 relative z-10">
+      <%= form_with url: conversations_path, method: :post, data: { turbo: false }, class: "w-full" do %>
+        <%= hidden_field_tag "conversation[receiver_id]", influencer.receiver_id %>
+        <%= submit_tag "Get Contact & Start Chat",
+            class: "w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all font-semibold" %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
