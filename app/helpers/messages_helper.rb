@@ -5,6 +5,6 @@ module MessagesHelper
   end
 
   def message_user_style(message, current_user)
-    message.user == current_user ? 'bg-blue-500 text-white' : 'bg-gray-700 text-gray-200'
+    message.user == current_user ? 'bg-gradient-to-br from-purple-600 to-purple-800 text-white' : 'bg-gray-700 text-gray-200'
   end
 end

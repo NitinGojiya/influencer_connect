@@ -7,7 +7,7 @@
 
     <!-- Chat Header -->
     <% other_user = (@conversation.sender == @user ? @conversation.receiver : @conversation.sender) %>
-    <div class="p-4 border-b border-gray-300 bg-white flex items-center">
+    <div class="p-4 border-b border-gray-300 bg-slate-900/50 flex items-center">
       <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
         <% initial = if other_user&.profile&.full_name.present?
                 other_user.profile.full_name[0]
@@ -21,7 +21,7 @@
                       url_for(other_user.profile.profile_pic.variant(resize_to_fill: [150, 150]).processed) :
                       "https://placehold.co/100x100/A020F0/FFFFFF?text=#{initial}", alt: "photo", class: "rounded-full") %>
       </div>
-      <h2 class="ml-3 font-semibold text-black"><%= other_user.email_address %></h2>
+      <h2 class="ml-3 font-semibold text-gray-100"><%= other_user.email_address %></h2>
     </div>
 
     <!-- Messages -->

@@ -1,0 +1,53 @@
+ <main class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-8 md:p-12 lg:p-16">
+
+    <div class="text-center mb-10">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent-light mb-2">
+        Featured Creators
+      </h1>
+      <p class="text-lg sm:text-xl text-muted-foreground">
+        Discover top-performing influencers across all categories and platforms
+      </p>
+    </div>
+
+    <div class="swiper w-full max-w-7xl" data-controller="slider">
+    <div class="swiper-wrapper">
+        <%= render partial: "business_owners/influencer_card",
+                    collection: @influencers,
+                    as: :influencer,
+                    locals: { contact: true } %>
+    </div>
+
+    <!-- Pagination & Navigation -->
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    </div>
+
+
+    <div class="mt-10">
+
+             <% if authenticated? %>
+              <% if @user.has_role?(:business_owner) %>
+              <%= link_to business_owners_path, class: "" do %>
+                <button class="px-8 py-4 rounded-full font-bold text-lg text-white transition-transform transform hover:scale-105" style="background: linear-gradient(135deg, #9333ea, #6d28d9);">
+                View all Creators
+             </button>
+              <% end %>
+              <% end %>
+
+              <% if @user.has_role?(:influencer) %>
+              <%= link_to dashboard_path do %>
+              <button class="px-8 py-4 rounded-full font-bold text-lg text-white transition-transform transform hover:scale-105" style="background: linear-gradient(135deg, #9333ea, #6d28d9);">
+                View all Campaigns
+             </button>
+              <% end %>
+              <% end %>
+            <% else %>
+              <%= link_to new_session_path do %>
+                <button class="px-8 py-4 rounded-full font-bold text-lg text-white transition-transform transform hover:scale-105" style="background: linear-gradient(135deg, #9333ea, #6d28d9);">
+                  View Creators & Campaigns
+                </button>
+              <% end %>
+            <% end %>
+    </div>
+  </main>

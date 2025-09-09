@@ -29,7 +29,13 @@ class Profile < ApplicationRecord
   def assign_city
     return if city_name.blank?
 
-    found_city = City.find_or_create_by!(name: city_name.strip.titleize)
+    normalized = city_name.strip.titleize
+
+    # Case-insensitive lookup
+    found_city = City.where("LOWER(name) = ?", normalized.downcase).first_or_create!(name: normalized)
+
     self.city = found_city
   end
+
+
 end

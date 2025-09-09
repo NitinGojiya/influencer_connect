@@ -11,13 +11,11 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.save
-        format.turbo_stream do
-          redirect_to influencer_profile_path, notice: t("alerts.profiles.created")
-        end
+        format.turbo_stream { redirect_to influencer_profile_path, notice: t("alerts.profiles.created") }
         format.html { redirect_to influencer_profile_path, notice: t("alerts.profiles.created") }
       else
         format.turbo_stream { render "influencers/form", status: :unprocessable_entity }
-        format.html { render "influencers/form", status: :unprocessable_entity } # change from redirect_to
+        format.html { render "influencers/form", status: :unprocessable_entity }
       end
     end
   end
@@ -29,20 +27,9 @@ class ProfilesController < ApplicationController
 
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace(
-              "profile_progress",
-              partial: "influencers/profile_progress",
-              locals: { profile: @profile }
-            ),
-            turbo_stream.replace(
-              "profile_form",
-              partial: "influencers/form",
-              locals: { profile: @profile }
-            ),
-            turbo_stream.replace(
-              "flash",
-              partial: "shared/flash"
-            )
+            turbo_stream.replace("profile_progress", partial: "influencers/profile_progress", locals: { profile: @profile }),
+            turbo_stream.replace("profile_form", partial: "influencers/form", locals: { profile: @profile }),
+            turbo_stream.replace("flash", partial: "shared/flash")
           ]
         end
 
@@ -52,15 +39,8 @@ class ProfilesController < ApplicationController
 
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace(
-              "profile_form",
-              partial: "influencers/form",
-              locals: { profile: @profile }
-            ),
-            turbo_stream.replace(
-              "flash",
-              partial: "shared/flash"
-            )
+            turbo_stream.replace("profile_form", partial: "influencers/form", locals: { profile: @profile }),
+            turbo_stream.replace("flash", partial: "shared/flash")
           ], status: :unprocessable_entity
         end
 

@@ -11,8 +11,8 @@
 
                     <div>
                         <div>
-                            <span class="text-lg font-semibold text-gray-800">Profile Completion</span>
-                            <div class="text-gray-600 text-sm"><%= @profile.completeness_percentage %> completed</div>
+                            <span class="text-lg font-semibold text-gray-100">Profile Completion</span>
+                            <div class="text-gray-300 text-sm"><%= @profile.completeness_percentage %> completed</div>
                         </div>
                     </div>
                 </div>
@@ -26,10 +26,10 @@
                                     src="https://placehold.co/100x100/A020F0/FFFFFF?text=A" alt="User profile photo">
                                 <% end %>
                                     <div>
-                                        <h2 class="text-2xl font-semibold text-gray-900">
+                                        <h2 class="text-2xl font-semibold text-gray-100">
                                             <%= @user.profile&.full_name %>
                                         </h2>
-                                        <p class="text-gray-500 text-base">
+                                        <p class="text-gray-300 text-base">
                                             <%= @user.email_address %>
                                         </p>
                                     </div>
@@ -50,11 +50,11 @@
 
                     <!-- Email Section -->
                     <div>
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">My email Address</h3>
-                        <div class="flex items-center space-x-4 bg-gray-50 rounded-xl p-4 border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-100 mb-4">My email Address</h3>
+                        <div class="flex items-center space-x-4 bg-slate-900/50 rounded-xl p-4 border border-gray-200">
                             <i class="fas fa-envelope text-blue-600 text-xl"></i>
                             <div>
-                                <p class="font-medium text-gray-800">
+                                <p class="font-medium text-gray-100">
                                     <%= @user.email_address %>
                                 </p>
                                 <p class="text-gray-500 text-sm">

@@ -1,11 +1,11 @@
 <div
-  class="hover:shadow-lg transition-shadow duration-300 shadow-blue-700 p-6 rounded-3xl border border-secondary shadow-card glass-card backdrop-blur-lg flex flex-col relative group w-full sm:w-80 lg:w-[350px] mx-auto mb-6 h-full overflow-hidden">
+  class="swiper-slide hover:shadow-lg transition-shadow duration-300 shadow-blue-700 p-6 rounded-3xl border border-slate-500 shadow-card glass-card backdrop-blur-lg flex flex-col relative group w-full sm:w-80 lg:w-[350px] mx-auto mb-6 h-full overflow-hidden">
 
   <!-- Glow Effect -->
   <div class="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 opacity-0 group-hover:opacity-10 transition duration-500 rounded-3xl"></div>
 
   <% if local_assigns[:owner] %>
-    <div class="flex justify-end mb-2 relative z-10">
+    <div class="flex justify-end mt-5 relative z-10">
       <%= link_to influencer_profile_path, method: :get,
           class: "text-primary hover:text-primary-light transition-colors" do %>
         <i class="fas fa-edit fa-lg"></i>
@@ -14,7 +14,7 @@
   <% end %>
 
   <!-- Category / Content Type Badge -->
-  <span class="absolute top-4 right-4 bg-secondary text-secondary-foreground text-xs font-medium px-2.5 py-0.5 rounded-full z-10">
+  <span class="absolute top-4 right-4 bg-slate-900 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full z-10">
     <%= influencer.category %>
   </span>
 
@@ -22,7 +22,7 @@
   <div class="relative z-10 flex flex-col items-center mb-4">
     <div class="relative">
       <img src="<%= influencer.photo_url %>" alt="<%= influencer.name %>"
-        class="w-20 h-20 rounded-full border-4 border-secondary shadow-lg object-cover">
+        class="w-30 h-30 rounded-full border-4 border-slate-300 shadow-lg object-cover">
       <% if influencer.verified? %>
         <div
           class="absolute -top-2 -right-2 w-7 h-7 bg-indigo-600 text-white rounded-full flex items-center justify-center shadow">

@@ -4,4 +4,8 @@
 <%= select_tag :city_id,
       options_from_collection_for_select(City.order(:name), :id, :name, params[:city_id]),
       prompt: "Select City",
-      class: "cursor-pointer block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-full leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+      class: "w-full rounded-2xl border-gray-300 dark:border-gray-700
+              bg-slate-900 text-white
+              dark:bg-slate-900 dark:text-white
+              px-4 py-4 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+       %>

@@ -7,7 +7,7 @@
             <div class="animate-spin rounded-full h-10 w-10 border-t-4 border-blue-500"></div>
         </div>
 
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-12">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-200 mb-12">
             Find Your Perfect Influencer
         </h2>
 
@@ -30,7 +30,10 @@
         [["Select Content Type", ""]] + ContentType.pluck(:name).map { |name| [name, name] },
         params[:type]
       ),
-      class: "cursor-pointer block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-full leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+      class: "w-full rounded-2xl border-gray-300 dark:border-gray-700
+              bg-slate-900 text-white
+              dark:bg-slate-900 dark:text-white
+              px-4 py-4 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 %>
 
 
@@ -63,6 +66,6 @@
                         as: :influencer,
                         locals: { contact: true } %>
             </turbo-frame>
-            </div>
+        </div>
 
     </section>

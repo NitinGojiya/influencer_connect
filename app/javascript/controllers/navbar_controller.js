@@ -17,7 +17,7 @@ export default class extends Controller {
   toggleBackground() {
     if (window.scrollY > 50) {
       Object.assign(this.headerTarget.style, {
-        backgroundColor: "hsl(var(--background))",
+        backgroundColor: "hsl(var(--background-secondary))",
         color: "hsl(var(--foreground))",
         fontFamily: "system-ui, -apple-system, sans-serif",
         lineHeight: "1.6",

@@ -1,12 +1,12 @@
 <div class="max-w-4xl mx-auto space-y-4 p-4">
 
   <!-- Instagram Item -->
-  <div class="p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-xl shadow-md bg-white">
+  <div class="p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-xl shadow-md bg-slate-900/50">
     <div class="flex items-center space-x-4">
       <i class="fab fa-instagram text-4xl text-instagram"></i>
-      <span class="text-lg font-medium text-gray-800">Instagram</span>
+      <span class="text-lg font-medium text-gray-300">Instagram</span>
     </div>
-    <div class="text-gray-700">
+    <div class="text-gray-200">
       <% if @profile.social_platform&.ig_followers.present? %>
         <%= human_count(@profile.social_platform.ig_followers) %> Followers
       <% else %>
@@ -19,12 +19,12 @@
   </div>
 
   <!-- X (Twitter) Item -->
-  <div class="p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-xl shadow-md bg-white">
+  <div class="p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-xl shadow-md bg-slate-900/50">
     <div class="flex items-center space-x-4">
       <i class="fab fa-x-twitter text-4xl text-x"></i>
-      <span class="text-lg font-medium text-gray-800">X (Twitter)</span>
+      <span class="text-lg font-medium text-gray-300">X (Twitter)</span>
     </div>
-    <div class="text-gray-700">
+    <div class="text-gray-200">
       <% if @profile.social_platform&.twitter_followers.present? %>
         <%= human_count(@profile.social_platform.twitter_followers) %> Followers
       <% else %>
@@ -37,12 +37,12 @@
   </div>
 
   <!-- YouTube Item -->
-  <div class="p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-xl shadow-md bg-white">
+  <div class="p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-xl shadow-md bg-slate-900/50">
     <div class="flex items-center space-x-4">
       <i class="fab fa-youtube text-4xl text-youtube"></i>
-      <span class="text-lg font-medium text-gray-800">YouTube</span>
+      <span class="text-lg font-medium text-gray-300">YouTube</span>
     </div>
-    <div class="text-gray-700">
+    <div class="text-gray-200">
       <% if @profile.social_platform&.youtube_subscriber.present? %>
         <%= human_count(@profile.social_platform.youtube_subscriber) %> Subscribers
       <% else %>

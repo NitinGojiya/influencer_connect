@@ -23,6 +23,9 @@
     <!-- Optional: Font Awesome JS (for dynamic features) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
@@ -46,14 +49,16 @@
     </main>
     <!-- footer -->
     <%=render 'shared/footer'%>
+    <div class="flex gap-3 fixed bottom-5 right-5 flex-col items-end">
+      <% if authenticated? %>
+      <div class="z-50">
+        <%= render "shared/chat_icon" %>
+      </div>
+      <%end%>
+      <div class=" z-50">
+        <%= render "shared/up_scroll" %>
+      </div>
+    </div>
 
-    <div class="fixed right-0 bottom-8 flex justify-end z-50">
-      <%= render "shared/up_scroll" %>
-    </div>
-    <% if authenticated? %>
-    <div class="fixed right-0 bottom-20 flex justify-end z-50">
-      <%= render "shared/chat_icon" %>
-    </div>
-    <%end%>
   </body>
 </html>

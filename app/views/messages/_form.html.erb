@@ -1,4 +1,4 @@
-<div id="new_message_form" class="bg-white border-t border-gray-300" data-controller="message">
+<div id="new_message_form" class="bg-slate-900/50 border-t border-gray-300" data-controller="message">
   <%= form_with model: [conversation, message],
                 data: { turbo_stream: true },
                 html: { multipart: true },
@@ -7,7 +7,7 @@
     <!-- Text input -->
     <%= f.text_field :content,
         placeholder: "Type a message...",
-        class: "flex-grow rounded-lg bg-gray-100 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full mb-2 md:mb-0" %>
+        class: "flex-grow rounded-lg bg-slate-900 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full mb-2 md:mb-0" %>
 
     <!-- Button, preview, loader -->
     <div class="flex flex-col md:flex-row md:items-center md:space-x-2 w-full md:w-auto">
@@ -20,11 +20,11 @@
 
 
         <label for="message_image_input"
-               class="ml-2 cursor-pointer bg-gray-200 px-3 py-2 rounded-lg hover:bg-gray-300 flex items-center justify-center">
+               class="ml-2 cursor-pointer bg-slate-900/50 px-3 py-2 rounded-lg hover:bg-slate-900/100 flex items-center justify-center">
          <i class="fa-solid fa-photo-film"></i>
         </label>
 
-        <%= f.submit "Send", class: "bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600 text-white" , data: { message_target: "submitButton" } %>
+        <%= f.submit "Send", class: "px-4 py-2 rounded-lg text-lg text-white transition-transform transform hover:scale-105", style: "background: linear-gradient(135deg, #9333ea, #6d28d9);" , data: { message_target: "submitButton" } %>
 
         <div id="message_loader" class="hidden">
           <span class="loading loading-dots bg-blue-500 loading-md"></span>

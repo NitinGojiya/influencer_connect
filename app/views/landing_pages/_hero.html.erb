@@ -1,0 +1,102 @@
+<main class="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden px-6 py-12 lg:py-24">
+
+  <!-- Animated Background Elements -->
+  <div class="absolute inset-0 opacity-20">
+    <div class="absolute top-20 left-20 w-32 h-32 bg-primary/30 rounded-full animate-float"></div>
+    <div class="absolute bottom-32 right-20 w-48 h-48 bg-accent/20 rounded-full animate-float" style="animation-delay: -3s;"></div>
+    <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-primary-light/40 rounded-full animate-float" style="animation-delay: -1.5s;"></div>
+  </div>
+
+  <div class="relative z-10 container mx-auto text-center">
+    <div class="max-w-4xl mx-auto">
+
+      <!-- Main Heading -->
+      <div class="mb-8">
+  <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary-light via-yellow-400 to-accent bg-clip-text text-transparent">
+    Connect Brands <br>
+    <span class="text-accent">with Influencers</span>
+  </h1>
+  <p class="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+    The premium marketplace for authentic brand collaborations. Find the perfect creators for your campaigns with advanced analytics and seamless communication.
+  </p>
+</div>
+
+
+      <!-- Search Section -->
+      <div class="mb-12">
+        <div class="glass-card p-8 rounded-2xl max-w-3xl mx-auto shadow-premium">
+          <div class="flex flex-col md:flex-row gap-4">
+            <div class="flex-1 relative">
+              <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+              <input type="text" placeholder="Search influencers by niche, location, or handle..."
+                class="pl-12 h-14 w-full rounded-lg border border-border bg-background/50 text-lg focus:ring-2 focus:ring-primary focus:outline-none">
+            </div>
+            <% if authenticated? %>
+              <% if @user.has_role?(:business_owner) %>
+              <%= link_to business_owners_path, class: " px-8 h-14 cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-xl" do %>
+                Find Creators
+              <% end %>
+              <% end %>
+
+              <% if @user.has_role?(:influencer) %>
+              <%= link_to dashboard_path, class: " px-8 h-14 cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-xl" do %>
+               Find Campaigns
+              <% end %>
+              <% end %>
+            <% else %>
+              <%= link_to new_session_path, class: " px-8 h-14 cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-xl" do %>
+                Find Creators & Campaigns
+              <% end %>
+            <% end %>
+
+
+          </div>
+
+          <!-- Quick Filters -->
+          <div class="flex flex-wrap gap-3 mt-6 justify-center">
+            <div class="flex items-center gap-2 px-4 py-2 bg-primary/20 rounded-full text-primary-foreground text-sm">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5 9 6.343 9 8s1.343 3 3 3zm0 0c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5z"/>
+              </svg>
+              Location
+            </div>
+            <div class="flex items-center gap-2 px-4 py-2 bg-accent/20 rounded-full text-accent-foreground text-sm">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5V4H2v16h5m10 0v-6H9v6h8z"/>
+              </svg>
+              Followers
+            </div>
+            <div class="flex items-center gap-2 px-4 py-2 bg-green-100 rounded-full text-green-600 text-sm">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12l5 5L20 7"/>
+              </svg>
+              Engagement
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto">
+        <div class="text-center">
+          <div class="text-3xl md:text-4xl font-bold text-primary mb-2">50K+</div>
+          <div class="text-muted-foreground">Active Creators</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl md:text-4xl font-bold text-yellow-500 mb-2">1M+</div>
+          <div class="text-muted-foreground">Campaigns</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl md:text-4xl font-bold text-primary mb-2">500+</div>
+          <div class="text-muted-foreground">Brands</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl md:text-4xl font-bold text-yellow-500 mb-2">98%</div>
+          <div class="text-muted-foreground">Success Rate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

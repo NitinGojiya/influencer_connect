@@ -15,39 +15,44 @@
   <% end %>
 
   <!-- Content Type -->
-  <div>
-    <%= f.label :content_type, "Content Type", class: "block text-sm font-medium mb-1" %>
-    <%= f.select :content_type,
-        ["Instagram Reel", "Instagram Story", "Instagram Carousel", "TikTok Video", "YouTube: Dedicated Review", "YouTube: Integrated Mention", "Blog Post", "Podcast Ad Read", "Other"],
-        { prompt: "Select a content type" },
-        class: "w-full rounded-2xl border-gray-300 dark:border-gray-700 px-4 py-2.5" %>
-    <% if @campaign.errors[:content_type].any? %>
-      <p class="text-sm text-red-600 mt-1"><%= @campaign.errors[:content_type].first %></p>
-    <% end %>
-  </div>
+<div>
+  <%= f.label :content_type, "Content Type", class: "block text-sm font-medium mb-1" %>
+  <%= f.select :content_type,
+      ["Instagram Reel", "Instagram Story", "Instagram Carousel", "TikTok Video", "YouTube: Dedicated Review", "YouTube: Integrated Mention", "Blog Post", "Podcast Ad Read", "Other"],
+      { prompt: "Select a content type" },
+      class: "w-full rounded-2xl border-gray-300 dark:border-gray-700
+              bg-slate-900 text-white
+              dark:bg-slate-900 dark:text-white
+              px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+
+  <% if @campaign.errors[:content_type].any? %>
+    <p class="text-sm text-red-600 mt-1"><%= @campaign.errors[:content_type].first %></p>
+  <% end %>
+</div>
+
 
   <!-- Deliverable Details -->
   <div>
     <%= f.label :deliverable_details, "Deliverable Details", class: "block text-sm font-medium mb-1" %>
-    <%= f.text_field :deliverable_details, class: "w-full rounded-2xl border-gray-300 dark:border-gray-700 px-4 py-2.5", placeholder: "e.g., 1 Reel + 2 Stories" %>
+    <%= f.text_field :deliverable_details, class: "w-full  rounded-2xl border-2 border-gray-300 dark:border-gray-700 px-4 py-2.5", placeholder: "e.g., 1 Reel + 2 Stories" %>
   </div>
 
   <!-- Key Messages -->
   <div>
     <%= f.label :key_messages, "Key Messages", class: "block text-sm font-medium mb-1" %>
-    <%= f.text_area :key_messages, rows: 4, class: "w-full rounded-2xl border-gray-300 dark:border-gray-700 px-4 py-2.5", placeholder: "Comma-separated points, e.g., 100% organic, safe for sensitive skin, use code SKIN15" %>
+    <%= f.text_area :key_messages, rows: 4, class: "w-full rounded-2xl border-2 border-gray-300 dark:border-gray-700 px-4 py-2.5", placeholder: "Comma-separated points, e.g., 100% organic, safe for sensitive skin, use code SKIN15" %>
   </div>
 
   <!-- Tags Required -->
   <div>
     <%= f.label :tags_require, "Tags Required (handles & hashtags)", class: "block text-sm font-medium mb-1" %>
-    <%= f.text_field :tags_require, class: "w-full rounded-2xl border-gray-300 dark:border-gray-700 px-4 py-2.5", placeholder: "e.g., @BrandName, #GlowWithNature, #OrganicBeauty" %>
+    <%= f.text_field :tags_require, class: "w-full rounded-2xl border-2 border-gray-300 dark:border-gray-700 px-4 py-2.5", placeholder: "e.g., @BrandName, #GlowWithNature, #OrganicBeauty" %>
   </div>
 
   <!-- Creative Guidelines -->
   <div>
     <%= f.label :creative_guidelines, "Creative Guidelines", class: "block text-sm font-medium mb-1" %>
-    <%= f.text_area :creative_guidelines, rows: 4, class: "w-full rounded-2xl border-gray-300 dark:border-gray-700 px-4 py-2.5", placeholder: "Tone, aesthetic, do’s & don’ts" %>
+    <%= f.text_area :creative_guidelines, rows: 4, class: "w-full rounded-2xl border-2 border-gray-300 dark:border-gray-700 px-4 py-2.5", placeholder: "Tone, aesthetic, do’s & don’ts" %>
   </div>
 
   <!-- City Dropdown -->
@@ -56,10 +61,10 @@
   </div>
   <div class="relative w-full max-w-md">
     <details class="relative">
-      <summary class="cursor-pointer block w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 rounded-full leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+      <summary class="cursor-pointer block w-full bg-slate-900/50 border border-gray-300 text-gray-200 py-3 px-4 rounded-full leading-tight focus:outline-none focus:bg-slate-900/50 focus:border-gray-500">
         <span id="selected-city"><%= params[:city_name].presence || "Select or type city" %></span>
       </summary>
-      <div class="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
+      <div class="absolute z-10 mt-1 w-full bg-slate-900 border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
         <!-- Search or type input -->
         <input
           type="text"
@@ -71,7 +76,7 @@
         <!-- City list -->
         <ul id="city-list">
           <% City.order(:name).each do |city| %>
-            <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+            <li class="px-4 py-2 hover:bg-slate-800 cursor-pointer"
                 data-id="<%= city.id %>"
                 onclick="selectCity(this)">
               <%= city.name %>
@@ -118,14 +123,14 @@
   <div class="grid sm:grid-cols-2 gap-4">
     <div>
       <%= f.label :approval_deadline, "Approval Deadline", class: "block text-sm font-medium mb-1" %>
-      <%= f.datetime_local_field :approval_deadline, class: "w-full rounded-2xl border-gray-300 dark:border-gray-700 px-4 py-2.5" %>
+      <%= f.datetime_local_field :approval_deadline, class: "w-full rounded-2xl border-gray-300 bg-slate-900 dark:border-gray-700 px-4 py-2.5" %>
       <% if @campaign.errors[:approval_deadline].any? %>
         <p class="text-sm text-red-600 mt-1"><%= @campaign.errors[:approval_deadline].first %></p>
       <% end %>
     </div>
     <div>
       <%= f.label :posting_start_date, "Posting Start Date", class: "block text-sm font-medium mb-1" %>
-      <%= f.datetime_local_field :posting_start_date, class: "w-full rounded-2xl border-gray-300 dark:border-gray-700 px-4 py-2.5" %>
+      <%= f.datetime_local_field :posting_start_date, class: "w-full rounded-2xl border-gray-300 bg-slate-900 focus:bg-slate-900 dark:border-gray-700 px-4 py-2.5" %>
       <% if @campaign.errors[:posting_start_date].any? %>
         <p class="text-sm text-red-600 mt-1"><%= @campaign.errors[:posting_start_date].first %></p>
       <% end %>
@@ -134,9 +139,9 @@
 
   <!-- Actions -->
   <div class="flex gap-3 pt-2">
-    <%= f.submit  class: "inline-flex items-center justify-center rounded-2xl bg-blue-600 hover:bg-blue-700 px-5 py-2.5 text-white font-medium shadow-soft" %>
-    <%= link_to "Reset", new_campaign_path, class: "inline-flex items-center justify-center rounded-2xl border border-gray-300 dark:border-gray-700 px-5 py-2.5 font-medium hover:bg-gray-100 dark:hover:bg-gray-700/50" %>
-    <%= link_to "Back", campaigns_path, class: "px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200" %>
+    <%= f.submit  class: "inline-flex items-center justify-center rounded-2xl px-2  text-lg text-white transition-transform transform hover:scale-105", style: "background: linear-gradient(135deg, #9333ea, #6d28d9);" %>
+    <%= link_to "Reset", new_campaign_path, class: "inline-flex items-center justify-center rounded-2xl border border-gray-300 dark:border-gray-700 px-5 py-2.5 font-medium hover:bg-yellow-500 dark:hover:bg-gray-700/50" %>
+    <%= link_to "Back", campaigns_path, class: "inline-flex items-center justify-center rounded-2xl border border-gray-300 dark:border-gray-700 px-5 py-2.5 font-medium hover:bg-yellow-500 dark:hover:bg-gray-700/50" %>
   </div>
 
 <% end %>
