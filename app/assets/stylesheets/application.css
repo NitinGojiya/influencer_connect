@@ -254,3 +254,18 @@
      display: none;
    }
  }
+
+
+/* Swiper Pagination Dots Styling */
+
+/* Inactive dots */
+.swiper-pagination-bullet {
+  /* @apply bg-gray-400 opacity-70; */
+  background-color: #4e88ff
+}
+
+/* Active dot */
+.swiper-pagination-bullet-active {
+  /* @apply bg-gradient-to-r from-purple-600 to-violet-800 opacity-100; */
+  background: linear-gradient(135deg, #9333ea, #6d28d9);
+}
