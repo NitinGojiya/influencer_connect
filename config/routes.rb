@@ -54,4 +54,7 @@ end
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 
+   match '*path', to: 'application#not_found', via: :all, constraints: lambda { |req|
+    !req.path.starts_with?('/rails/active_storage')
+  }
 end
