@@ -11,6 +11,7 @@ module ApplicationHelper
       number.to_s
     end
   end
+
   def flash_class(type)
     case type.to_sym
     when :notice
@@ -23,6 +24,7 @@ module ApplicationHelper
       "alert-info"
     end
   end
+
   def percentage_change(current, previous)
     return nil if current.nil? || previous.nil? || previous == 0
     (((current.to_f - previous.to_f) / previous.to_f) * 100).round(2)

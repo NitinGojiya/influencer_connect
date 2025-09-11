@@ -9,7 +9,7 @@ class BusinessOwnersController < ApplicationController
 
     # --- 🔹 Build OpenStructs for View ---
     # Load influencers into OpenStructs first
-   @influencers = User.with_role(:influencer)
+    @influencers = User.with_role(:influencer)
                    .includes(profile: [:city, :social_platform])
                    .select { |user| user.profile.present? }   # Only users with a profile
                    .map do |inf|

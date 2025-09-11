@@ -1,5 +1,5 @@
 class InfluencersController < ApplicationController
-   include ApplicationHelper
+  include ApplicationHelper
   before_action :require_influencer, only: [ :index, :profile ]
   require "ostruct"
   layout "influencer"
@@ -9,28 +9,28 @@ class InfluencersController < ApplicationController
 
     # start
     @social = @user.profile&.social_platform
-previous_version = @social&.versions&.last
+    previous_version = @social&.versions&.last
 
-previous_attributes = previous_version ? YAML.safe_load(
-  previous_version.object,
-  permitted_classes: [
-    Symbol,
-    Date,
-    Time,
-    BigDecimal,
-    ActiveSupport::TimeWithZone,
-    ActiveSupport::TimeZone
-  ],
-  aliases: true  # <--- enable aliases
-) : {}
+    previous_attributes = previous_version ? YAML.safe_load(
+      previous_version.object,
+      permitted_classes: [
+        Symbol,
+        Date,
+        Time,
+        BigDecimal,
+        ActiveSupport::TimeWithZone,
+        ActiveSupport::TimeZone
+      ],
+      aliases: true  # <--- enable aliases
+    ) : {}
 
-previous_ig = previous_attributes["ig_followers"]
-previous_yt = previous_attributes["youtube_subscriber"]
-previous_tw = previous_attributes["twitter_followers"]
+    previous_ig = previous_attributes["ig_followers"]
+    previous_yt = previous_attributes["youtube_subscriber"]
+    previous_tw = previous_attributes["twitter_followers"]
 
-@ig_change = change_indicator(@social&.ig_followers, previous_ig)
-@yt_change = change_indicator(@social&.youtube_subscriber, previous_yt)
-@tw_change = change_indicator(@social&.twitter_followers, previous_tw)
+    @ig_change = change_indicator(@social&.ig_followers, previous_ig)
+    @yt_change = change_indicator(@social&.youtube_subscriber, previous_yt)
+    @tw_change = change_indicator(@social&.twitter_followers, previous_tw)
 
     #end
 

@@ -30,8 +30,6 @@ class CampaignsController < ApplicationController
     end
   end
 
-
-
   def edit; end
 
   def update

@@ -4,13 +4,13 @@
   class="container mx-auto px-6 py-4 font-sans flex justify-between items-center sticky top-5 z-50 bg-transparent transition-colors duration-300">
 
   <!-- Logo -->
-<div class="flex items-center space-x-2 ">
-  <div class="h-8 w-8 rounded-full bg-gradient-to-r from-primary via-yellow-400 to-accent-light"></div>
-  <a href="/"
-     class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-yellow-400 to-accent-light">
-    INFLUENCERTRACK
-  </a>
-</div>
+  <div class="flex items-center space-x-2 ">
+    <div class="h-8 w-8 rounded-full bg-gradient-to-r from-primary via-yellow-400 to-accent-light"></div>
+    <a href="/"
+      class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-yellow-400 to-accent-light">
+      INFLUENCERTRACK
+    </a>
+  </div>
 
 
   <!-- Desktop Navigation -->
@@ -55,30 +55,30 @@
   </button>
 
 
-<!-- Mobile Menu -->
-<div data-navbar-target="menu" class="hidden lg:hidden flex-col space-y-4 px-6 py-4 bg-slate-900 shadow-md absolute top-20 left-0 right-0 z-40">
-    <div class="flex flex-col items-center justify-center">
-      <a href="/service" class="hover:text-blue-600 text-blue-500">Service</a>
-      <a href="/support" class="hover:text-blue-600 text-blue-500">Support</a>
-      <a href="/aboutus" class="hover:text-blue-600 text-blue-500">About Us</a>
-      <a href="/policy" class="hover:text-blue-600 text-blue-500">policy</a>
+  <!-- Mobile Menu -->
+  <div data-navbar-target="menu" class="hidden lg:hidden flex-col space-y-4 px-6 py-4 bg-slate-900 shadow-md absolute top-20 left-0 right-0 z-40">
+      <div class="flex flex-col items-center justify-center">
+        <a href="/service" class="hover:text-blue-600 text-blue-500">Service</a>
+        <a href="/support" class="hover:text-blue-600 text-blue-500">Support</a>
+        <a href="/aboutus" class="hover:text-blue-600 text-blue-500">About Us</a>
+        <a href="/policy" class="hover:text-blue-600 text-blue-500">policy</a>
+      </div>
+    <% unless authenticated? %>
+    <div class="flex flex-col items-center justify-center space-y-4 mt-4">
+          <%= link_to "Sign In", new_session_path, class: "w-full cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-xl" %>
     </div>
-  <% unless authenticated? %>
-  <div class="flex flex-col items-center justify-center space-y-4 mt-4">
-        <%= link_to "Sign In", new_session_path, class: "w-full cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-xl" %>
+
+    <% else %>
+      <%= button_to "Log out", session_path, method: :delete, class: "w-full cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-xl" %>
+
+      <% if @user.has_role?(:business_owner) %>
+        <%= button_to "Find Influencers", business_owners_path, method: :get, class: "w-full cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-xl" %>
+        <%= button_to "Campaign", campaigns_path, method: :get, class: "w-full cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-xl" %>
+      <% end %>
+
+      <% if @user.has_role?(:influencer) %>
+        <%= button_to "Dashboard", dashboard_path, method: :get, class: "w-full cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-xl" %>
+      <% end %>
+    <% end %>
   </div>
-
-  <% else %>
-    <%= button_to "Log out", session_path, method: :delete, class: "w-full cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-xl" %>
-
-    <% if @user.has_role?(:business_owner) %>
-      <%= button_to "Find Influencers", business_owners_path, method: :get, class: "w-full cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-xl" %>
-      <%= button_to "Campaign", campaigns_path, method: :get, class: "w-full cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-xl" %>
-    <% end %>
-
-    <% if @user.has_role?(:influencer) %>
-      <%= button_to "Dashboard", dashboard_path, method: :get, class: "w-full cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-xl" %>
-    <% end %>
-  <% end %>
-</div>
 </header>
