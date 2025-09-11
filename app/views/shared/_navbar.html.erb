@@ -36,12 +36,12 @@
       method: :delete,
       class: "cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 border border-input bg-background hover:bg-yellow-500 hover:text-white-foreground" %>
 
-      <% if @user.has_role?(:business_owner) %>
+      <% if @user&.has_role?(:business_owner) %>
         <%= button_to "Find Influencers", business_owners_path, method: :get, class: "cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-xl" %>
         <%= button_to "Campaign", campaigns_path, method: :get, class: "cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-xl" %>
       <% end %>
 
-      <% if @user.has_role?(:influencer) %>
+      <% if @user&.has_role?(:influencer) %>
         <%= button_to "Dashboard", dashboard_path, method: :get, class: "cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-xl" %>
       <% end %>
     </div>
@@ -71,12 +71,12 @@
     <% else %>
       <%= button_to "Log out", session_path, method: :delete, class: "w-full cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-xl" %>
 
-      <% if @user.has_role?(:business_owner) %>
+      <% if @user&.has_role?(:business_owner) %>
         <%= button_to "Find Influencers", business_owners_path, method: :get, class: "w-full cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-xl" %>
         <%= button_to "Campaign", campaigns_path, method: :get, class: "w-full cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-xl" %>
       <% end %>
 
-      <% if @user.has_role?(:influencer) %>
+      <% if @user&.has_role?(:influencer) %>
         <%= button_to "Dashboard", dashboard_path, method: :get, class: "w-full cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-xl" %>
       <% end %>
     <% end %>

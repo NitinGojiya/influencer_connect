@@ -51,6 +51,7 @@ class LandingPagesController < ApplicationController
   end
 
   def support
+    @contact ||= Contact.new
   end
 
   def aboutus
