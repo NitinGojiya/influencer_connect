@@ -32,8 +32,9 @@ class UserDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
+    email_address
+    roles
     campaigns
-    city
     confirmation_sent_at
   ].freeze
 

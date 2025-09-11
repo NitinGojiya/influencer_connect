@@ -1,12 +1,11 @@
 require "administrate/base_dashboard"
+require "administrate/field/active_storage"
 
 class ProfileDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
-  # a hash that describes the type of each of the model's fields.
-  #
-  # Each different type represents an Administrate::Field object,
-  # which determines how the attribute is displayed
-  # on pages throughout the dashboard.
+  # A hash that describes the type of each of the model's fields.
+  # Each type represents an Administrate::Field object, determining how
+  # the attribute is displayed throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     bio: Field::String,
@@ -19,42 +18,37 @@ class ProfileDashboard < Administrate::BaseDashboard
     language: Field::String,
     mobile: Field::String,
     nickname: Field::String,
-    profile_pic_attachment: Field::HasOne,
-    profile_pic_blob: Field::HasOne,
+    profile_pic: Field::ActiveStorage, # Handles file uploads and previews
     social_platform: Field::HasOne,
     user: Field::BelongsTo,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
-  # an array of attributes that will be displayed on the model's index page.
-  #
-  # By default, it's limited to four items to reduce clutter on index pages.
-  # Feel free to add, remove, or rearrange items.
+  # Attributes displayed on the index page.
   COLLECTION_ATTRIBUTES = %i[
     id
-    bio
+    full_name
     city
-    content_type
+    profile_pic
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
-  # an array of attributes that will be displayed on the model's show page.
+  # Attributes displayed on the show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
+    full_name
+    nickname
     bio
-    city
+    gender
     content_type
     country
     dist
-    full_name
-    gender
     language
     mobile
-    nickname
-    profile_pic_attachment
-    profile_pic_blob
+    city
+    profile_pic
     social_platform
     user
     created_at
@@ -62,41 +56,30 @@ class ProfileDashboard < Administrate::BaseDashboard
   ].freeze
 
   # FORM_ATTRIBUTES
-  # an array of attributes that will be displayed
-  # on the model's form (`new` and `edit`) pages.
+  # Attributes displayed on the new/edit forms.
   FORM_ATTRIBUTES = %i[
+    full_name
+    nickname
     bio
-    city
+    gender
     content_type
     country
     dist
-    full_name
-    gender
     language
     mobile
-    nickname
-    profile_pic_attachment
-    profile_pic_blob
+    city
+    profile_pic
     social_platform
     user
   ].freeze
 
   # COLLECTION_FILTERS
-  # a hash that defines filters that can be used while searching via the search
-  # field of the dashboard.
-  #
-  # For example to add an option to search for open resources by typing "open:"
-  # in the search field:
-  #
-  #   COLLECTION_FILTERS = {
-  #     open: ->(resources) { resources.where(open: true) }
-  #   }.freeze
+  # Custom filters for searching in the admin dashboard.
   COLLECTION_FILTERS = {}.freeze
 
   # Overwrite this method to customize how profiles are displayed
   # across all pages of the admin dashboard.
-  #
-  # def display_resource(profile)
-  #   "Profile ##{profile.id}"
-  # end
+  def display_resource(profile)
+    profile.full_name.presence || "Profile ##{profile.id}"
+  end
 end

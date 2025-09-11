@@ -16,7 +16,6 @@ class SocialPlatformDashboard < Administrate::BaseDashboard
     twitter_followers: Field::String,
     twitter_id: Field::String,
     twitter_link: Field::String,
-    versions: Field::HasMany,
     youtube_id: Field::String,
     youtube_link: Field::String,
     youtube_subscriber: Field::String,
@@ -31,9 +30,12 @@ class SocialPlatformDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    ig_followers
     ig_id
-    ig_link
+    twitter_followers
+    twitter_id
+    youtube_id
+    youtube_link
+    youtube_subscriber
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -47,7 +49,6 @@ class SocialPlatformDashboard < Administrate::BaseDashboard
     twitter_followers
     twitter_id
     twitter_link
-    versions
     youtube_id
     youtube_link
     youtube_subscriber
@@ -66,7 +67,6 @@ class SocialPlatformDashboard < Administrate::BaseDashboard
     twitter_followers
     twitter_id
     twitter_link
-    versions
     youtube_id
     youtube_link
     youtube_subscriber

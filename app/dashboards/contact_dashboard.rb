@@ -25,6 +25,7 @@ class ContactDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     email
+    subject
     message
     name
   ].freeze

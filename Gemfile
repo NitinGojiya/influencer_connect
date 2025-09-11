@@ -95,3 +95,5 @@ gem 'paper_trail'
 gem "administrate"
 
 
+
+gem "administrate-field-active_storage", "~> 1.0"
