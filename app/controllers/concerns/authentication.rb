@@ -29,6 +29,12 @@ module Authentication
       end
     end
 
+    def require_admin
+      unless current_user&.has_role?(:admin)
+        redirect_to root_path, alert: "Access denied"
+      end
+    end
+
     def authenticated?
       resume_session
     end

@@ -1,7 +1,7 @@
 class CampaignsController < ApplicationController
   before_action :set_user
   before_action :set_campaign, only: [ :edit, :update, :show, :destroy ]
-
+  before_action :require_business_owner
   def index
     @campaigns = @user.campaigns.order(created_at: :desc)
   end
