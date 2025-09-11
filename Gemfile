@@ -92,4 +92,6 @@ gem 'activestorage-cloudinary-service'
 gem 'pry-rails'
 gem 'paper_trail'
 
+gem "administrate"
+
 

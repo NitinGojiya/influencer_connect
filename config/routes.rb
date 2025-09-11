@@ -1,4 +1,19 @@
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :campaigns
+      resources :cities
+      resources :contacts
+      resources :content_types
+      resources :conversations
+      resources :messages
+      resources :profiles
+      resources :roles
+      resources :sessions
+      resources :social_platforms
+      resources :users
+
+      root to: "campaigns#index"
+    end
 
   root "landing_pages#index"
   get "/service", to: "landing_pages#service"
