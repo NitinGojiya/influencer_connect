@@ -1,0 +1,35 @@
+<%= form_with(model: @contact, url: contacts_path, local: true, class: "space-y-6") do |form| %>
+
+  <% if @contact.errors.any? %>
+    <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
+      <p class="font-bold"><%= pluralize(@contact.errors.count, "error") %> prevented this form from being submitted:</p>
+      <ul class="list-disc pl-5">
+        <% @contact.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.text_field :name, class: "mt-1 block w-full rounded-md border-2 border-blue-900 shadow-sm focus:border-indigo-500 focus:ring-[#6d28d9] transition-colors duration-300" %>
+  </div>
+
+  <div>
+    <%= form.label :email, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.email_field :email, class: "mt-1 block w-full rounded-md border-2 border-blue-900 shadow-sm focus:border-indigo-500 focus:ring-[#6d28d9] transition-colors duration-300" %>
+  </div>
+
+  <div>
+    <%= form.label :subject, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.text_field :subject, class: "mt-1 block w-full rounded-md border-2 border-blue-900 shadow-sm focus:border-indigo-500 focus:ring-[#6d28d9] transition-colors duration-300" %>
+  </div>
+
+  <div>
+    <%= form.label :message, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.text_area :message, rows: 4, class: "mt-1 block w-full rounded-md border-2 border-blue-900 shadow-sm focus:border-indigo-500 focus:ring-[#6d28d9] transition-colors duration-300" %>
+  </div>
+
+  <%= form.submit "Submit", class: "w-full rounded-md px-6 py-3 font-bold text-lg text-white transition-transform transform hover:scale-105", style: "background: linear-gradient(135deg, #9333ea, #6d28d9);" %>
+<% end %>

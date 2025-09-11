@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root "landing_pages#index"
   get "/service", to: "landing_pages#service"
   get "/support", to: "landing_pages#support"
@@ -49,6 +50,8 @@ end
   end
 
   get "chat", to: "conversations#index", as: :chat
+
+  resources :contacts, only: [:new, :create]
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

@@ -1,19 +1,59 @@
-<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; color: #333333;">
-  <div style="max-width: 600px; margin: 40px auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
-    <div style="background-color: #4a90e2; padding: 20px; text-align: center;">
-      <h1 style="margin: 0; font-size: 24px; color: #ffffff;">Welcome to Influencer Connect</h1>
-    </div>
-    <div style="padding: 30px; line-height: 1.6;">
-      <p style="margin: 0 0 20px; font-size: 16px;">Hello <%= @user.email_address %>,</p>
-      <p style="margin: 0 0 20px; font-size: 16px;">Thank you for joining Influencer Connect! To get started, please confirm your account by clicking the button below:</p>
-      <p style="text-align: center; margin: 0 0 20px;">
-        <a href="<%= @url %>" style="display: inline-block; padding: 12px 24px; background-color: #4a90e2; color: #ffffff; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px;">Confirm My Account</a>
-      </p>
-      <p style="margin: 0 0 20px; font-size: 16px;">If you did not sign up for an Influencer Connect account, please ignore this email.</p>
-    </div>
-    <div style="background-color: #f4f4f4; padding: 20px; text-align: center; font-size: 14px; color: #666666;">
-      <p style="margin: 0 0 10px;">&copy; <%= Time.now.year %> Influencer Connect. All rights reserved.</p>
-      <p style="margin: 0;">If you have any questions, contact us at support@influencerconnect.com.</p>
-    </div>
-  </div>
-</div>
+<table role="presentation" align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #0A0014;">
+    <tr>
+        <td style="padding: 40px 20px;">
+            <!-- Main Content Area -->
+            <table role="presentation" align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+                <tr>
+                    <td style="padding-bottom: 30px; text-align: center;">
+                        <!-- Logo with gradient text effect -->
+                        <h1 style="
+                            font-size: 24px;
+                            font-weight: bold;
+                            margin: 0;
+                            line-height: 1.2;
+                            background-image: linear-gradient(to right, #FEE75E, #3DCC91);
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                            text-align: center;
+                        ">INFLUENCERTRACK</h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-bottom: 20px;">
+                        <!-- Main heading with gradient text effect -->
+                        <h1 style="
+                            font-size: 32px;
+                            font-weight: bold;
+                            color: #ffffff;
+                            margin: 0;
+                            line-height: 1.2;
+                            background-image: linear-gradient(to right, #FEE75E, #3DCC91);
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                            text-align: center;
+                        ">Welcome to Influencer Connect</h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 20px; background-color: #1c0d29; border-radius: 8px;">
+                        <!-- Main body content with user details and confirmation link -->
+                        <p style="margin: 0 0 20px; font-size: 16px; color: #ffffff;">Hello <%= @user.email_address %>,</p>
+                        <p style="margin: 0 0 20px; font-size: 16px; color: #ffffff;">Thank you for joining Influencer Connect! To get started, please confirm your account by clicking the button below:</p>
+                        <p style="text-align: center; margin: 0 0 20px;">
+                            <a href="<%= @url %>" style="display: inline-block; padding: 12px 24px; background-color: #3DCC91; color: #ffffff; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px;">Confirm My Account</a>
+                        </p>
+                        <p style="margin: 0 0 20px; font-size: 16px; color: #ffffff;">If you did not sign up for an Influencer Connect account, please ignore this email.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-top: 20px; text-align: center; font-size: 14px; color: #666666;">
+                        <!-- Footer -->
+                        <p style="margin: 0 0 10px;">&copy; <%= Time.now.year %> Influencer Connect. All rights reserved.</p>
+                        <p style="margin: 0;">If you have any questions, contact us at <a href="mailto:support@influencerconnect.com" style="color: #666666; text-decoration: none;">support@influencerconnect.com</a>.</p>
+                    </td>
+                </tr>
+            </table>
+            <!-- End Main Content Area -->
+        </td>
+    </tr>
+</table>

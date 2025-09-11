@@ -31,25 +31,26 @@
                             -webkit-background-clip: text;
                             -webkit-text-fill-color: transparent;
                             text-align: center;
-                        ">Influencer Connect Password Reset</h1>
+                        ">New Contact Request</h1>
                     </td>
                 </tr>
                 <tr>
-                    <td style="padding: 20px; background-color: #1c0d29; border-radius: 8px;">
-                        <!-- Main body content with user details and password reset link -->
-                        <p style="margin: 0 0 20px; font-size: 16px; color: #ffffff;">Hello,</p>
-                        <p style="margin: 0 0 20px; font-size: 16px; color: #ffffff;">You have requested to reset your password for your Influencer Connect account. You can reset your password within the next 15 minutes by clicking the button below:</p>
-                        <p style="text-align: center; margin: 0 0 20px;">
-                            <a href="<%= edit_password_url(@user.password_reset_token) %>" style="display: inline-block; padding: 12px 24px; background-color: #3DCC91; color: #ffffff; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px;">Reset My Password</a>
+                    <td style="padding-top: 10px; color: #ffffff; font-size: 16px; line-height: 1.6;">
+                        <!-- Contact details -->
+                        <p style="margin: 0 0 10px 0;">
+                            <strong style="color: #ffffff;">Name:</strong> <span style="color: #ffffff;"><%= @contact.name %></span>
                         </p>
-                        <p style="margin: 0 0 20px; font-size: 16px; color: #ffffff;">If you did not request a password reset, please ignore this email. Your account remains secure.</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding-top: 20px; text-align: center; font-size: 14px; color: #666666;">
-                        <!-- Footer -->
-                        <p style="margin: 0 0 10px;">&copy; <%= Time.now.year %> Influencer Connect. All rights reserved.</p>
-                        <p style="margin: 0;">If you have any questions, contact us at <a href="mailto:support@influencerconnect.com" style="color: #666666; text-decoration: none;">support@influencerconnect.com</a>.</p>
+                        <p style="margin: 0 0 10px 0;">
+                            <strong style="color: #ffffff;">Email:</strong> <span style="color: #ffffff;"><%= @contact.email %></span>
+                        </p>
+                        <p style="margin: 0 0 10px 0;">
+                            <strong style="color: #ffffff;">Subject:</strong> <span style="color: #ffffff;"><%= @contact.subject %></span>
+                        </p>
+                        <p style="margin: 0 0 10px 0;">
+                            <strong style="color: #ffffff;">Message:</strong>
+                        </p>
+                        <p style="margin: 0 0 20px 0; color: #ffffff;"><%= @contact.message %></p>
+                        <p style="margin: 0; color: #ffffff;">Thank you for reaching out to us. We will get back to you shortly.</p>
                     </td>
                 </tr>
             </table>
