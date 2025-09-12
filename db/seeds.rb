@@ -7,6 +7,19 @@ require 'open-uri'
   Role.find_or_create_by!(name: role_name)
 end
 
+# create admin user if not exists
+admin = User.find_or_create_by!(email_address: "admin@gmail.com") do |u|
+  u.password = "Password@123"
+  u.password_confirmation = "Password@123"
+  u.role_to_assign = "admin"
+end
+
+unless admin.confirmed?
+  admin.update_columns(confirmed_at: Time.current, confirmation_token: nil)
+end
+admin.add_role :admin unless admin.has_role?(:admin)
+
+
 # Create Business Owner
 business_owner = User.find_or_create_by!(email_address: "business@gmail.com") do |u|
   u.password = "Password@123"
@@ -18,6 +31,7 @@ unless business_owner.confirmed?
   business_owner.update_columns(confirmed_at: Time.current, confirmation_token: nil)
 end
 business_owner.add_role :business_owner unless business_owner.has_role?(:business_owner)
+
 
 # Create Influencers
 20.times do |i|

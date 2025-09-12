@@ -28,7 +28,10 @@
 
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+
     <%= javascript_importmap_tags %>
   </head>
 
@@ -50,7 +53,7 @@
     <!-- footer -->
     <%=render 'shared/footer'%>
     <div class="flex gap-3 fixed bottom-5 right-5 flex-col items-end">
-      <% if authenticated? %>
+      <% if authenticated? && @user&.has_role?(:influencer) || @user&.has_role?(:business_owner) %>
       <div class="z-50">
         <%= render "shared/chat_icon" %>
       </div>

@@ -92,4 +92,8 @@ gem 'activestorage-cloudinary-service'
 gem 'pry-rails'
 gem 'paper_trail'
 
+gem "administrate"
 
+
+
+gem "administrate-field-active_storage", "~> 1.0"

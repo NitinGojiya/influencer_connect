@@ -1,6 +1,8 @@
 class ConversationsController < ApplicationController
-  layout :choose_layout
+  before_action :require_business_owner_or_influencer, only: [:index, :new, :create]
 
+
+  layout :choose_layout
   before_action :set_user
   before_action :set_conversation, only: [:show]
   before_action :authorize_conversation!, only: [:show]
@@ -85,6 +87,12 @@ class ConversationsController < ApplicationController
       "influencer"
     else
       "application"
+    end
+  end
+
+  def require_business_owner_or_influencer
+    unless current_user&.has_role?(:business_owner) || current_user&.has_role?(:influencer)
+      redirect_to root_path, alert: "You are not authorized to access this page."
     end
   end
 end
